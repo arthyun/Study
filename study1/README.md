@@ -1,3 +1,3 @@
-# Study for FrontEnd
+# React Study1
 
-1. React.js (현재 진행형)
+1번째 폴더
