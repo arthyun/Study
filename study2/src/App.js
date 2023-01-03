@@ -111,12 +111,21 @@ class ClassComp extends Component {
   }
 }
 
-function App() {
+function App(){
+  var [funcShow, setFuncShow] = useState(true);
+  var [classShow, setClassShow] = useState(true);
+
   return (
     <div className="App">
       <h1>Hello World</h1>
-      <FuncComp initNumber={2} />
-      <ClassComp initNumber={2} />
+      <input type='button' value='remove func' onClick={function(){
+        setFuncShow(funcShow => !funcShow); //toggle버튼
+      }} />
+      <input type='button' value='remove class' onClick={function(){
+        setClassShow(classShow => !classShow); //toggle버튼
+      }} />
+      {funcShow ? <FuncComp initNumber={2} /> : null}
+      {classShow ? <ClassComp initNumber={2} /> : null}
     </div>
   );
 }
