@@ -1,0 +1,17 @@
+body {
+    background: rgb(55, 81, 130);
+}
+div, h1, h2, h3, a, p, span {
+    color: #fff;
+}
+ol, ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    padding-left: 1rem;
+}
+.active {
+    background: tomato;
+    color: yellow;
+    text-decoration: none;
+}

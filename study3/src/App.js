@@ -3,27 +3,28 @@ import React from 'react';
 import Home from './components/Home';
 import Topics from './components/Topics';
 import Contact from './components/Contact';
-import { Routes, Route, Link } from 'react-router-dom';
+import { Routes, Route, Link, NavLink } from 'react-router-dom';
+//Link와 NavLink의 차이는 active 클래스를 생성해주냐 마냐의 차이
 
 
 function App() {
   return (
-
       <div className="App">
-        <h1>Hello React Router DOM</h1>
+        <h1>React Router DOM</h1>
         <ul>
-          <li><Link to='/'>Home</Link></li>
-          <li><Link to='/topics'>Topics</Link></li>
-          <li><Link to='/contact'>Contact</Link></li>
+          <li><NavLink to='/'>Home</NavLink></li>
+          <li><NavLink to='/Topics'>Topics</NavLink></li>
+          <li><NavLink to='/Contact'>Contact</NavLink></li>
         </ul>
 
         <Routes>
-            <Route exact path='/' element={<Home/>} />
-            <Route path='/topics' element={<Topics/>} />
-            <Route path='/contact' element={<Contact/>} />
+            <Route path='/' element={<Home/>} />
+            <Route path='/Topics/*' element={<Topics/>}>
+              {/* <Route path='1' element={<p>HTML is ...</p>} /> */}
+            </Route>
+            <Route path='/Contact' element={<Contact/>} />
         </Routes>
       </div>
-
   );
 }
 
