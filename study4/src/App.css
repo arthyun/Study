@@ -1,0 +1,9 @@
+ol, ul {
+    list-style: none;
+}
+h1 {
+    margin: 20px;
+}
+nav, article {
+    margin: 20px;
+}
