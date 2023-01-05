@@ -1,20 +1,35 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
-const Nav = () => {
+const Nav = (props) => {
+    //json을 담을 state변수 생성
+    const [json1, setJson1] = useState([]);
+
+    //json파일 fetch로 호출하기
     useEffect(() => {
         fetch('./list.json')
         .then(response => 
             response.json())
         .then(data => 
-            console.log(data));
-    });
+            setJson1(data));
+    }, []);
+
+    //출력할 태그 만들기
+    const lists = json1.map((el, i) =>
+        <li key={i}>
+            <a href={el.id} data-id={el.id} onClick={function(e){
+                e.preventDefault();
+                console.log('trigger ' + el.id);
+                props.onClick(e.target.dataset.id);
+            }}>
+                {el.title}
+            </a>
+        </li>
+        );
 
     return (
         <nav>
             <ul>
-                <li><a href='1'>HTML5</a></li>
-                <li><a href='2'>CSS3</a></li>
-                <li><a href='3'>Javascript</a></li>
+                {lists}
             </ul>
         </nav>
     );
