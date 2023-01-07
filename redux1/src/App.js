@@ -42,7 +42,9 @@ function DisplayNumberRoot(){
 function App(){
   return (
     <div className="App">
-      <h1 style={ {color:'red', fontSize: '50px'} }>Root</h1>
+      <h1 style={ {width:'60%', margin:'30px auto', color:'#764ABC', fontSize: '50px', border: '5px solid #764ABC'} }>
+        Redux1
+      </h1>
       <AddNumberRoot />
       <br/>
       <hr/>
