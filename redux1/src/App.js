@@ -1,43 +1,8 @@
 import './App.css';
 import React from 'react';
+import AddNumberRoot from './components/AddNumberRoot';
+import DisplayNumberRoot from './components/DisplayNumberRoot';
 
-
-function AddNumber(){
-  return(
-    <div>
-      <h1>Add Number</h1>
-      <input type='button' value='+' />
-      <input type='text' value='0' />
-    </div>
-  );
-}
-
-function AddNumberRoot(){
-  return(
-    <div>
-      <h1>Add Number Root</h1>
-      <AddNumber />
-    </div>
-  );
-}
-
-function DisplayNumber(){
-  return(
-    <div>
-      <h1>Display Number</h1>
-      <input type='text' value='0' readOnly />
-    </div>
-  );
-}
-
-function DisplayNumberRoot(){
-  return(
-    <div>
-      <h1>Display Number Root</h1>
-      <DisplayNumber />
-    </div>
-  );
-}
 
 function App(){
   return (
