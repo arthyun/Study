@@ -2,11 +2,9 @@ import './App.css';
 import React from 'react';
 import AddNumberRoot from './components/AddNumberRoot';
 import DisplayNumberRoot from './components/DisplayNumberRoot';
-import { useState } from 'react';
-
+import Store from './store';
 
 function App(){
-  const [number, setNumber] = useState(10);
 
   return (
     <div className="App">
