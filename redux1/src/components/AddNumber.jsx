@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import Store from '../store';
+import store from '../store';
 
 function AddNumber(){
     const [size, setSize] = useState(0);
@@ -10,13 +10,13 @@ function AddNumber(){
         <div>
             <h1>Add Number</h1>
             <input type='button' value='+' onClick={() => {
-                Store.dispatch({type:'INCREMENT', size:size})
+                store.dispatch({type:'INCREMENT', size:size})
             }} />
             <input type='button' value='-' onClick={() => {
-                Store.dispatch({type:'DECREMENT', size:size})
+                store.dispatch({type:'DECREMENT', size:size})
             }} />
             <input type='button' value='Text출력' onClick={() => {
-                Store.dispatch({type:'testText', text: text0})
+                store.dispatch({type:'testText', text: text0})
             }} /> <br/>
             <input type='text' value={size} onChange={(e) => {
                 setSize(Number(e.target.value));

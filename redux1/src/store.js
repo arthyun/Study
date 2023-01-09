@@ -1,6 +1,6 @@
 import {createStore} from 'redux';
 
-let Store =  createStore(function(state, action){
+let store =  createStore(function(state, action){
     if(state === undefined){
         return {number: 0, text: ''}
     }
@@ -17,4 +17,4 @@ let Store =  createStore(function(state, action){
 }, window.__REDUX_DEVTOOLS_EXTENSION__ && 
     window.__REDUX_DEVTOOLS_EXTENSION__());
 
-export default Store;
+export default store;

@@ -1,17 +1,17 @@
 import React from "react";
 import { useState } from "react";
-import Store from '../store';
+import store from '../store';
 
 function DisplayNumber(){
     const [number, setNumber] = useState(
-        Store.getState().number
+        store.getState().number
     )
     const [text, setText] = useState(
-        Store.getState().text
+        store.getState().text
     )
-    Store.subscribe(() => {
-        setNumber(Store.getState().number);
-        setText(Store.getState().text);
+    store.subscribe(() => {
+        setNumber(store.getState().number);
+        setText(store.getState().text);
     })
     console.log(number); //초기값은 store.js에서 정한대로 0이다.
 
