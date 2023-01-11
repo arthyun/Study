@@ -21,10 +21,9 @@ function App() {
       <div className='formTag'>
         <form>
           <input type='text' value={text1} onChange={textChange} required />
-          <button onClick={(e) => {
-            e.preventDefault();
+          <input type='button' value='작성' onClick={() => {
             store.dispatch( {type:'INCREMENT', text: text1} );
-          }}>작성</button>
+          }}></input>
         </form>
 
         <ul className='textZone'>
