@@ -5,9 +5,9 @@ let store = createStore((state, action) => {
         return {para: []}
     }
     if(action.type === 'INCREMENT'){
-        return { ...state, para: action.text };
+        return {...state.push({'id': action.id, 'text': action.para}) }
     }
-
+    
     return state;
 }, window.__REDUX_DEVTOOLS_EXTENSION__ && 
     window.__REDUX_DEVTOOLS_EXTENSION__());

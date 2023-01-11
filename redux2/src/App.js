@@ -4,15 +4,17 @@ import store from './Store';
 import { useState } from 'react';
 
 function App() {
-  const [text1, setText1] = useState([]);
+  const [text, setText] = useState('');
+  let [cnt, setCnt] = useState(0);
 
   const textChange = (e) => {
-    setText1([e.target.value]);
-    console.log(text1);
+    setText(e.target.value);
   }
 
-  const list = store.getState().para;
-  // console.log(list);
+  store.subscribe(() => {
+    setText(store.getState().para[0].text);
+    setCnt(store.getState().para[0].id);
+  });
 
   return (
     <div className="App">
@@ -20,27 +22,21 @@ function App() {
 
       <div className='formTag'>
         <form>
-          <input type='text' value={text1} onChange={textChange} required />
+          <input type='text' value={text} onChange={textChange} required />
           <input type='button' value='작성' onClick={() => {
-            store.dispatch( {type:'INCREMENT', text: text1} );
-          }}></input>
+                setCnt(cnt++);
+                store.dispatch( {type:'INCREMENT', id: cnt, para: text} );
+          }} />
         </form>
 
         <ul className='textZone'>
           {/* {
-            text.map((el, i) => 
-              <li key={i}>
-                {el}
-              </li>
-            )
-          } */}
-          {
             list.map((el, i) => 
               <li key={i}>
                 {el}
               </li>
             )
-          }
+          } */}
         </ul>
       </div>
     </div>
