@@ -2,9 +2,9 @@
 
 useReducer(reducer, initialState); <br/>
 reducer(state, action); <br/>
-switch(action.type){
-    case '':
-     return state + action.payload;
-    default:
-     return state;
+switch(action.type){ <br/>
+    case '': <br/>
+     return state + action.payload; <br/>
+    default: <br/>
+     return state; <br/>
 }
