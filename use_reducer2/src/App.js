@@ -6,7 +6,7 @@ import List from './components/List.jsx';
 
 const initialState = {
   count: 0,
-  content: [],
+  content: [{id: Date.now(), text: '금쪽이보면슬퍼'}],
 };
 
 const reducer = (state, action) => {
