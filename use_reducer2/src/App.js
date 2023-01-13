@@ -21,7 +21,7 @@ const reducer = (state, action) => {
     case 'delete':
       return {
         count: state.count - 1,
-        content: state.content.filter(el => el.id !== action.payload.id),
+        content: state.content.filter(list => list.id !== action.payload.id),
       };
     default:
       return state;
@@ -31,6 +31,7 @@ const reducer = (state, action) => {
 function App() {
   const [text, setText] = useState('');
   const [arr1, dispatch] = useReducer(reducer, initialState);
+  // useReducer -> reducer, state, action, dispatch, payload를 사용
 
   return (
     <div className="App">
