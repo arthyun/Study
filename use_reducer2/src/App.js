@@ -19,7 +19,10 @@ const reducer = (state, action) => {
         content: [...state.content, newContent],
       };
     case 'delete':
-      return
+      return {
+        count: state.count - 1,
+        content: state.content.filter(el => el.id !== action.payload.id),
+      };
     default:
       return state;
   }
@@ -45,7 +48,8 @@ function App() {
 
           {
             arr1.content.map((list) => {
-              return <List key={list.id} para={list.text} />;
+              return <List key={list.id} para={list.text}
+              dispatch={dispatch} id={list.id} />;
             })
           }
     </div>
