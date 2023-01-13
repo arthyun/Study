@@ -1,4 +1,4 @@
-# useReducer Hook 사용하기
+# useReducer Hook을 사용한 Bank
 
 useReducer(reducer, initialState); <br/>
 reducer(state, action); <br/>
