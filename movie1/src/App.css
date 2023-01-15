@@ -51,17 +51,19 @@ header nav {
   padding: 5px 0;
 }
 
+.visual {
+  width: 200%;
+  margin-bottom: 3rem;
+}
 .visual ul {
-  width: 300%;
+  /* width: 100%; */
   display: flex;
-  /* transform: translateX(-33.33%); */
+  /* transform: translateX(-50%); */
 }
 .visual ul li {
-  width: 100%;
+  width: 50%;
+  height: 100%;
 }
 .visual ul li img {
   width: 100%;
-}
-.visual ul li:nth-child(3) img {
-  height: 84%;
 }
