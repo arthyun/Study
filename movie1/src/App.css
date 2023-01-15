@@ -1,0 +1,67 @@
+.active {
+  color: red;
+  font-weight: 700 !important;
+  animation: fontTwinkle 1s infinite;
+}
+@keyframes fontTwinkle {
+  0% {
+    color: red;
+  }
+  50% {
+    color: #fff;
+  }
+  100% {
+    color: red;
+  }
+}
+header {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+  border-bottom: 1px solid #fff;
+}
+header h1 {
+  width: 50%;
+}
+header h1 > a {
+  display: block;
+  width: 43px;
+  height: 43px;
+  background: url(./logo.svg) 50% 50% no-repeat;
+  background-size: cover;
+  text-indent: -9999px;
+  overflow: hidden;
+}
+header nav {
+  width: 35%;
+}
+.navList {
+  width: 100%;
+  display: flex;
+  /* gap: 1.5rem; */
+}
+.navList li {
+  width: 33.33%;
+}
+.navList li a {
+  display: block;
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 500;
+  padding: 5px 0;
+}
+
+.visual ul {
+  width: 300%;
+  display: flex;
+  /* transform: translateX(-33.33%); */
+}
+.visual ul li {
+  width: 100%;
+}
+.visual ul li img {
+  width: 100%;
+}
+.visual ul li:nth-child(3) img {
+  height: 84%;
+}
