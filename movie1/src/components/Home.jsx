@@ -3,7 +3,7 @@ import React from 'react';
 
 const Home = () => {
     function test(){
-        console.log('text!');
+        console.log('test!');
     }
     return (
         <div className='home'>
@@ -17,6 +17,7 @@ const Home = () => {
                 <input id='made' type='text' required />
                 <button onClick={test}>제출</button>
             </div>
+            <p>* 제출한 영화 정보는 상단 Share탭에서 확인 가능합니다.</p>
         </div>
     );
 };

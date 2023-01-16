@@ -4,7 +4,7 @@ import { Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
 import Visual from './components/Visual';
 import Home from './components/Home';
-import About from './components/About';
+import Share from './components/Share';
 import Contact from './components/Contact';
 
 
@@ -16,7 +16,7 @@ function App() {
 
       <Routes>
         <Route path='/' element={<Home />} />
-        <Route path='/about' element={<About />} />
+        <Route path='/share' element={<Share />} />
         <Route path='/contact' element={<Contact />} />
       </Routes>
     </div>

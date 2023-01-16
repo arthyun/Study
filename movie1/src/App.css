@@ -103,6 +103,10 @@ header nav {
   color: #61dafb;
   margin-bottom: 2rem;
 }
+.home p:last-child {
+  margin-top: 1rem;
+  font-size: .75rem;
+}
 
 .home .formZone {
   text-align: start;
