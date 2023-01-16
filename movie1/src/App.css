@@ -46,7 +46,7 @@ header nav {
 .navList li a {
   display: block;
   text-align: center;
-  font-size: 1.5rem;
+  font-size: 1vh;
   font-weight: 500;
   padding: 5px 0;
 }
@@ -54,11 +54,11 @@ header nav {
 .visual {
   width: 200%;
   margin-bottom: 7%;
+  position: relative;
 }
 .visual ul {
-  /* width: 100%; */
   display: flex;
-  /* transform: translateX(-50%); */
+  transition: all .3s;
 }
 .visual ul li {
   width: 50%;
@@ -66,4 +66,29 @@ header nav {
 }
 .visual ul li img {
   width: 100%;
+}
+.visual > span {
+  display: block;
+  width: 20px;
+  height: 20px;
+  color: #fff;
+  background: orange;
+  text-align: center;
+  cursor: pointer;
+}
+.visual > span:hover {
+  color: #fff;
+  background: blue;
+}
+.visual > span:nth-of-type(1) {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.visual > span:nth-of-type(2) {
+  position: absolute;
+  left: 49.5%;
+  top: 50%;
+  transform: translate(-60%,-50%);
 }
