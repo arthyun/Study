@@ -1,0 +1,28 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  width: 70px;
+  height: 70px;
+  pointer-events: none;
+  /* height: 40vmin; */
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+.App-header {
+  border-bottom: 1px solid #61dafb;
+  padding: 0 0 1rem 0;
+}

@@ -1,0 +1,8 @@
+* {margin: 0; padding: 0;}
+body {
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  background-color: #282c34;
+  color: #fff;
+}
+h1, h2, h3, h4 {color: #61dafb;}
