@@ -1,5 +1,6 @@
 import './App.css';
 import Header from './components/Header';
+import Content from './components/Content';
 import { useDispatch, useSelector } from 'react-redux';
 
 
@@ -14,6 +15,9 @@ function App() {
   return (
     <div className="App">
       <Header />
+      <br/>
+      <Content />
+      <br/>
       <button onClick={() => {
         dispatch(
           {type:'increment', payload: {id: 1, subject: '두번째 제목', content: '두번째 내용', date: `${new Date().toLocaleDateString()}`}});
