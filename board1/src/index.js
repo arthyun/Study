@@ -7,14 +7,20 @@ import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import rootReducer from './reducers';
 import { composeWithDevTools } from 'redux-devtools-extension'; // 리덕스 개발자 도구
+import { persistStore } from 'redux-persist';
+import { PersistGate } from 'redux-persist/integration/react';
+
 
 const store = createStore(rootReducer, composeWithDevTools());
 // console.log(store.getState().test1.board);
+const persistor = persistStore(store);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <Provider store={store}>
-    <App />
+        <PersistGate loading={null} persistor={persistor}>
+        <App />
+        </PersistGate>
     </Provider>
 );
 
