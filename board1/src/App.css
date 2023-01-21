@@ -27,28 +27,57 @@
   padding: 0 0 1rem 0;
 }
 
+.boardHeader {
+  display: flex;
+  width: 80%;
+  margin: 0 auto;
+  list-style: none;
+  background-color: #ccc;
+  border-bottom: 2px solid #fff;
+}
+.boardHeader li {
+  /* width: 33.33%; */
+  padding: 7px 0;
+  color: #333;
+  font-weight: 700;
+  border-right: 1px solid #333;
+}
+.boardHeader li:nth-child(1){
+  width: 15%;
+}
+.boardHeader li:nth-child(2){
+  width: 60%;
+}
+.boardHeader li:last-child{
+  border-right: none;
+  width: 25%;
+}
+
 .boardlist {
-  width: 100%;
+  width: 80%;
+  margin: 0 auto;
+  background-color: #aaa;
   list-style: none;
 }
 .boardlist li {
-  width: 50%;
-  border: 2px solid #61dafb;
-  margin: 1rem auto;
-  padding: 1rem 0;
-  box-sizing: border-box;
-  background: #111;
-}
-.boardlist li p:nth-child(1) {
-  text-align: start;
-  font-weight: 700;
-  font-size: 1.25rem;
-  color: yellow;
-  padding-left: 2rem;
-  margin-bottom: 1rem;
+  display: flex;
+  width: auto;
+  border-bottom: 1px solid #333;
 }
 .boardlist li p {
-  margin: 5px 0;
-  text-align: start;
-  padding-left: 3.25rem;
+  /* width: 33.33%; */
+  border-right: 1px solid #333;
+  font-size: 14px;
+  color: darkblue;
+  padding: 1rem 0;
+}
+.boardlist li p:nth-child(1){
+  width: 15%;
+}
+.boardlist li p:nth-child(2){
+  width: 60%;
+}
+.boardlist li p:last-child{
+  border-right: none;
+  width: 25%;
 }

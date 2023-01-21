@@ -9,15 +9,21 @@ const Content = () => {
 
     return(
         <>
-            <h2>게시물이 보일 자리</h2>
+            <h2>게시물 목록</h2>
+            <br/>
+            <ul className='boardHeader'>
+                <li>번호</li>
+                <li>제목</li>
+                <li>날짜</li>
+            </ul>
 
             <ul className='boardlist'>
             {
-                list.map((list) => {
-                    return <li key={list.id}>
-                            <p>{list.id}번째 게시물</p>
+                list.map((list, i) => {
+                    return <li key={list.id} data-id={(i+1)}>
+                            <p>{list.id}</p>
                             <p>{list.subject}</p>
-                            <p>{list.content}</p>
+                            {/* <p>{list.content}</p> */}
                             <p>{list.date}</p>
                            </li>
                 })

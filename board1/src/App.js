@@ -1,6 +1,7 @@
 import './App.css';
 import Header from './components/Header';
 import Content from './components/Content';
+import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 
 
@@ -12,16 +13,25 @@ function App() {
   //React Hook은 호출 시 무조건 컴포넌트 내에서 호출해야한다.
   const dispatch = useDispatch();
 
+  //입력란에 사용될 state변수
+  const [cnt, setCnt] = useState(1);
+  const [text, setText] = useState('');
+
   return (
     <div className="App">
       <Header />
       <br/>
       <Content />
       <br/>
+      <label htmlFor='text'>글작성</label> &nbsp;
+      <input id='text' type='text' value={text} onChange={(e) => {
+        setText(e.target.value);
+      }} /> &nbsp;
       <button onClick={() => {
+        setCnt(cnt + 1);
         dispatch(
-          {type:'increment', payload: {id: 1, subject: '두번째 제목', content: '두번째 내용', date: `${new Date().toLocaleDateString()}`}});
-      }}>클릭해 보시오</button>
+          {type:'increment', payload: {id: cnt, subject: text, content: `내용:${text}`, date: `${new Date().toLocaleDateString()}`}});
+      }}>&nbsp;등록&nbsp;</button>
     </div>
   );
 }
