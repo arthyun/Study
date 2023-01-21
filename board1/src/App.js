@@ -14,7 +14,7 @@ function App() {
   const dispatch = useDispatch();
 
   //입력란에 사용될 state변수
-  const [cnt, setCnt] = useState(1);
+  const [count, setCount] = useState(1);
   const [text, setText] = useState('');
 
   return (
@@ -28,9 +28,9 @@ function App() {
         setText(e.target.value);
       }} /> &nbsp;
       <button onClick={() => {
-        setCnt(cnt + 1);
+        setCount(cnt + 1);
         dispatch(
-          {type:'increment', payload: {id: cnt, subject: text, content: `내용:${text}`, date: `${new Date().toLocaleDateString()}`}});
+          {type:'increment', payload: {id: count, subject: text, content: `내용:${text}`, date: `${new Date().toLocaleDateString()}`}});
       }}>&nbsp;등록&nbsp;</button>
     </div>
   );
