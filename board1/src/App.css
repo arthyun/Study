@@ -81,3 +81,48 @@
   border-right: none;
   width: 25%;
 }
+
+.writeZone {
+  text-align: start;
+  width: 80%;
+  margin: 0 auto;
+  padding: 1rem 1rem;
+  background-color: #fff;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+.writeZone > label {
+  color: #333;
+  font-size: 20px;
+  font-weight: 700;
+  display: block;
+  border-bottom: 1px solid #333;
+  margin-bottom: 1rem;
+  padding: 5px 0;
+}
+.writeZone > label > span {
+  color: #333;
+  display: inline-block;
+  margin-left: 5px;
+  font-size: 14px;
+  font-weight: 500;
+}
+.writeZone > input {
+  display: block;
+  width: 100%;
+  padding-bottom: 2rem;
+  box-sizing: border-box;
+  background-color: #f9f9f9;
+  border: 1px solid #ccc;
+  outline: 0;
+}
+.writeZone > button {
+  float: right;
+  margin: 1rem 0 0 0;
+  padding: 1rem;
+  width: 100px;
+  height: 15px;
+  line-height: 0;
+  border: 0;
+  background-color: #61dafb;
+}

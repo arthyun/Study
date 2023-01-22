@@ -2,10 +2,10 @@ import './App.css';
 import Header from './components/Header';
 import Content from './components/Content';
 import React, { useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 
-function App() {
+function App(){
   // useSelector는 리덕스 스토어의 상태를 조회하는 Hook입니다.
   // state의 값은 store.getState() 함수를 호출했을 때 나타나는 결과물과 동일합니다.
   // console.log(useSelector(state => state.test1));
@@ -21,17 +21,31 @@ function App() {
     <div className="App">
       <Header />
       <br/>
+      <br/>
       <Content />
       <br/>
-      <label htmlFor='text'>글작성</label> &nbsp;
-      <input id='text' type='text' value={text} onChange={(e) => {
-        setText(e.target.value);
-      }} /> &nbsp;
-      <button onClick={() => {
-        setCount(count + 1);
-        dispatch(
-          {type:'increment', payload: {id: count, subject: text, content: `내용:${text}`, date: `${new Date().toLocaleDateString()}`}});
-      }}>&nbsp;등록&nbsp;</button>
+      <br/>
+
+      <div className='writeZone'>
+        <label htmlFor='text'>
+          글쓰기
+          <span>(게시물을 등록해 보세요.)</span>
+        </label>
+        <input id='text' type='text' value={text} onChange={(e) => {
+          setText(e.target.value);
+        }} />
+        <button onClick={() => {
+          setCount(count + 1);
+          dispatch({type:'increment', payload: {
+            id: count, 
+            subject: text, 
+            content: `내용:${text}`, 
+            date: `${new Date().toLocaleDateString()}`
+            }
+          });
+        }}>등록</button>
+      </div>
+
     </div>
   );
 }
