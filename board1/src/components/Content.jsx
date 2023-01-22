@@ -1,8 +1,10 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 
 const Content = () => {
+    const dispatch = useDispatch();
+
     const list = useSelector(state => { 
         return state.list1.board;
     });
@@ -20,9 +22,11 @@ const Content = () => {
             <ul className='boardlist'>
             {
                 list.map((list, i) => {
-                    return <li key={list.id} data-id={(i+1)}>
+                    return <li key={i} data-id={(i+1)}>
                             <p>{list.id}</p>
-                            <p>{list.subject}</p>
+                            <p>{list.subject} <span onClick={() => {
+                                dispatch({ type:'delete', payload: {id: list.id} })
+                            }}>❌</span></p>
                             {/* <p>{list.content}</p> */}
                             <p>{list.date}</p>
                            </li>

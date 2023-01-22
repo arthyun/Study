@@ -28,7 +28,7 @@ function App() {
         setText(e.target.value);
       }} /> &nbsp;
       <button onClick={() => {
-        setCount(cnt + 1);
+        setCount(count + 1);
         dispatch(
           {type:'increment', payload: {id: count, subject: text, content: `내용:${text}`, date: `${new Date().toLocaleDateString()}`}});
       }}>&nbsp;등록&nbsp;</button>

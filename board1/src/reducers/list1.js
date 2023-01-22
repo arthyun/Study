@@ -33,7 +33,11 @@ const test1 = (state = initialState, action) => {
             return {
                 board: [...state.board, newArr],
             };
-        default :
+        case 'delete':
+            return {
+                board: [...state.board.filter(list => list.id !== action.payload.id)]
+            }
+        default:
             return state;
     }
 };
