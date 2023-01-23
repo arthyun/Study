@@ -1,0 +1,39 @@
+.headerArea {
+    background-color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: .5rem 0;
+}
+.headerArea h1 {
+    width: 100px;
+    height: 50px;
+    background: url(./logo.svg) 50% 50% no-repeat;
+    background-size: contain;
+    text-indent: -9999px;
+    overflow: hidden;
+    color: #fff;
+}
+.headerArea nav {
+    padding-right: 1.5rem;
+}
+.headerArea nav ul {
+    display: flex;
+    gap: 1rem;
+}
+.headerArea nav li {
+    /* background-color: beige; */
+    border: 1px solid #bbb;
+    border-radius: 10px;
+    overflow: hidden;
+}
+.headerArea nav li a {
+    display: block;
+    padding: .75rem 2rem;
+    color: #333;
+}
+.headerArea nav li a.active {
+    background-color: #61dafb;
+    font-weight: 600;
+}
