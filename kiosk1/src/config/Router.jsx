@@ -20,8 +20,8 @@ const Router = () => {
     return (
         <Routes>
             {
-                router.map((el) => {
-                    return <Route path={el.path} element={el.element} />
+                router.map((el, i) => {
+                    return <Route key={i} path={el.path} element={el.element} />
                 })
             }
             {/* <Route path='/' element={<h1>분식이다!</h1>} />
