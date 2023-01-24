@@ -13,7 +13,10 @@ const Boonsik = (props) => {
                     json.map((list, i) => {
                         return (
                         <li key={i}>
-                            <a href='/'>
+                            <a href='/' onClick={(e) => {
+                                e.preventDefault();
+                                console.log(e.target);
+                            }} >
                             <img src={list.src} alt={list.name} width='50%' />
                             {list.name}
                             </a>

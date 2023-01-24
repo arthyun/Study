@@ -1,3 +1,7 @@
+.App {
+    overflow: hidden;
+    /* width: 100%; */
+}
 .headerArea {
     background-color: #fff;
     display: flex;
@@ -36,4 +40,27 @@
 .headerArea nav li a.active {
     background-color: #61dafb;
     font-weight: 600;
+}
+
+.totalZone {
+    /* width: 100%; */
+    border: 1px solid #61dafb;
+    display: flex;
+}
+.totalZone ul {
+    width: 70%;
+    height: 150px;
+    overflow-y: scroll;
+    background: #f5f5f5;
+    box-sizing: border-box;
+}
+.totalZone ul li {
+    background-color: #ccc;
+    padding: .5rem 0 .5rem 1rem;
+}
+.totalZone button {
+    width: 30%;
+    background-color: #61dafb;
+    outline: 0;
+    font-size: 2rem;
 }
