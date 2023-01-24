@@ -1,0 +1,62 @@
+{
+    "KR": [
+        {
+            "id" : 1,
+            "src" : "./images/kimbap.jpg",
+            "name" : "김밥",
+            "price" : "4500"
+        },
+        {
+            "id" : 2,
+            "src" : "./images/ramen.jpg",
+            "name" : "라면",
+            "price" : "5000"
+        },
+        {
+            "id" : 3,
+            "src" : "./images/tteokbokgi.webp",
+            "name" : "떡볶이",
+            "price" : "4000"
+        }
+    ],
+    "US": [
+        {
+            "id" : 1,
+            "src" : "./images/hamburger.jpeg",
+            "name" : "햄버거",
+            "price" : "6000"
+        },
+        {
+            "id" : 2,
+            "src" : "./images/pizza.jpg",
+            "name" : "치킨",
+            "price" : "15000"
+        },
+        {
+            "id" : 3,
+            "src" : "./images/chicken.jpeg",
+            "name" : "피자",
+            "price" : "18000"
+        }
+    ],
+    "CN": [
+        {
+            "id" : 1,
+            "src" : "./images/zzazangmen.jpeg",
+            "name" : "짜장면",
+            "price" : "6000"
+        },
+        {
+            "id" : 2,
+            "src" : "./images/zzambbong.jpeg",
+            "name" : "짬뽕",
+            "price" : "6500"
+        },
+        {
+            "id" : 3,
+            "src" : "./images/bbokeumbap.jpg",
+            "name" : "볶음밥",
+            "price" : "7000"
+        }
+    ]
+}

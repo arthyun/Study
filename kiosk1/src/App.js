@@ -5,7 +5,6 @@ import Header from './components/Header.jsx';
 import Router from './config/Router.jsx';
 
 
-
 function App() {
   const dispatch = useDispatch();
 
