@@ -15,7 +15,10 @@ const Boonsik = (props) => {
                         <li key={i}>
                             <a href='/' onClick={(e) => {
                                 e.preventDefault();
-                                console.log(e.target);
+                                var zone = document.querySelector('.totalZone ul');
+                                var li = document.createElement('li');
+                                li.innerHTML = `<span class='num'>${list.id}.</span> ${list.name} = 가격: <strong class='pc'>${list.price}</strong>`;
+                                zone.appendChild(li);
                             }} >
                             <img src={list.src} alt={list.name} width='50%' />
                             {list.name}

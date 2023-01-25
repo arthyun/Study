@@ -20,10 +20,12 @@ function App() {
             <li>이곳에 추가될 예정</li>
           </ul>
           <button onClick={() => {
-            var zone = document.querySelector('.totalZone ul');
-            var li = document.createElement('li');
-            li.innerText = '나는 바보천재!!!';
-            zone.appendChild(li);
+            let price = document.querySelectorAll('.totalZone .pc');
+            let total = 0;
+            price.forEach(el => {
+              total += Number(el.innerText);
+            })
+            console.log(total);
           }}>주문</button>
         </div>
       </div>
