@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 
 const Boonsik = (props) => {
     const json = props.food;
-    const [cnt, setCnt] = useState(1);
+    // const [cnt, setCnt] = useState(1);
 
     return (
         <div className='Boonsik'>
@@ -19,12 +19,8 @@ const Boonsik = (props) => {
                                 var zone = document.querySelector('.totalZone ul');
                                 var li = document.createElement('li');
                                 li.classList.add(`list${i+1}`)
-                                li.innerHTML = `<span class='num'>${cnt}</span>, ${list.name} = 가격: <strong class='pc${i}'>${list.price}</strong>`;
+                                li.innerHTML = `${list.name}🔥 가격: <strong class='pc${i}'>${list.price}</strong>`;
                                 zone.appendChild(li);
-
-                                var compare1 = document.querySelector('.totalZone .list1');
-                                console.log(compare1)
-
                             }} >
                             <img src={list.src} alt={list.name} width='50%' />
                             {list.name}
