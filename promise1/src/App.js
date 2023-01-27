@@ -34,12 +34,10 @@ function App() {
     await delay();
     return "banana";
   }
-  function getFruites() {
-    getApple()
-        .then((a) => { // 리턴값이 promise의 resolve()이므로 then 가능
-        getBanana()
-        .then((b) => console.log(`${a} and ${b}`));
-    })
+  async function getFruites() {
+    let a = await getApple(); // 리턴값이 promise의 resolve()이므로 대입 가능
+    let b = await getBanana(); // getApple()이 처리되고 getBanana()가 처리됩니다.
+    console.log(`${a} and ${b}`);
   }
   getFruites();
 
