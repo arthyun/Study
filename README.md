@@ -5,4 +5,6 @@
 2. 할일 목록 App (useReducer Hook 활용)
 3. 영화 정보 공유 App (Router, Redux 활용)
 4. 게시판 App (Redux-Persist 활용)
-5. Kiosk App (Router, Redux, Redux-Persist 활용 / 현재 진행중...)
+5. Kiosk App (Router, Redux, Redux-Persist 활용)
+
+-> Typescript...
