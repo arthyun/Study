@@ -99,3 +99,19 @@ let strLength1: number = (someValue1 as string).length;
 // - React에서는 as 방식을 선호한다.(꺽쇠는 태그와 혼동될 수 있기때문)
 let someValue2: unknown = "this is a string";
 let strLength2: number = (<string>someValue2).length;
+
+// 3. 제네릭 방식 (화살표 함수에선 안돼네...)
+function identity<T> (x: T): T {
+    return x;
+};
+console.log(identity<string>('심바'));
+
+//열거형 enum
+enum Response1 {
+    name = '심바',
+    age = 4,
+}
+const respond = (who: Response1, life: Response1): void => {
+    console.log(`이름: ${who} / 나이: ${life}살`);
+};
+respond(Response1.name, Response1.age);

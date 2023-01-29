@@ -72,3 +72,19 @@ let strLength1 = someValue1.length;
 // - React에서는 as 방식을 선호한다.(꺽쇠는 태그와 혼동될 수 있기때문)
 let someValue2 = "this is a string";
 let strLength2 = someValue2.length;
+// 3. 제네릭 방식 (화살표 함수에선 안돼네...)
+function identity(x) {
+    return x;
+}
+;
+console.log(identity('심바'));
+//열거형 enum
+var Response1;
+(function (Response1) {
+    Response1["name"] = "\uC2EC\uBC14";
+    Response1[Response1["age"] = 4] = "age";
+})(Response1 || (Response1 = {}));
+const respond = (who, life) => {
+    console.log(`이름: ${who} / 나이: ${life}살`);
+};
+respond(Response1.name, Response1.age);
