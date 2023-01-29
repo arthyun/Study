@@ -1,20 +1,20 @@
 "use strict";
-//tsc에서 DOM의 타입을 지정할 때
+// tsc에서 DOM의 타입을 지정할 때
 var para1 = document.querySelector('.innerZone1');
 var para2 = document.querySelector('.innerZone2');
-//변수명 뒤에 타입 지정할 때
+// 변수명 뒤에 타입 지정할 때
 var age = 20;
-//배열의 타입을 지정할 때
+// 배열의 타입을 지정할 때
 var arr = [1, 2, 3, 4, 5];
 arr.map(val => {
     document.write(`${String(val)} `);
 });
-//매개변수에 타입 지정할 때
+// 매개변수에 타입 지정할 때
 function first(language, age) {
     return `<span>언어: ${language}, 내나이: ${age}</span>`;
 }
 para1.innerHTML = first('Typescript', age);
-//함수 리턴값의 타입을 지정할 때
+// 함수 리턴값의 타입을 지정할 때
 function second() {
     return 200;
 }
@@ -42,7 +42,7 @@ info1.map((list, i) => {
     para2.appendChild(span).classList.add(`span${i + 1}`);
     span.innerText = `이름: ${list.name} / 나이: ${list.age} / 성별: ${list.gender} / 주소: ${list.address}`;
 });
-//sp는 그냥 element로 인식되기 때문에 HTMLElement로 표명을 해주어야 함*
+// sp는 그냥 element로 인식되기 때문에 HTMLElement로 표명을 해주어야 함*
 const spans = document.querySelectorAll('.innerZone2 > span');
 spans.forEach(sp => {
     sp.style.display = 'block';
@@ -50,7 +50,7 @@ spans.forEach(sp => {
 const tupleZone = ['튜플아니고 터플이라 불러라', 2, false];
 // tupleZone.push('바보들'); -> readonly로 인해 사용 불가능!
 console.log(tupleZone);
-//Narrowing 방식
+// Narrowing 방식**
 function Nar(x) {
     //매개변수가 넘버타입일때
     if (typeof x === "number") {
@@ -62,3 +62,13 @@ function Nar(x) {
     }
 }
 Nar(120);
+// Type Assertion (타입 단언/표명)**
+// - 타입스크립트가 추론하지 못하는 타입을 as키워드 or 꺽쇠를 통해 명시해주는 것
+// 1. as 방식
+let someValue1 = "this is a string";
+let strLength1 = someValue1.length;
+// 2. 꺾쇠(Angle bracket) 방식
+// - unknown 타입이지만 Type Assertion을 통해서 타입 추론을 가능하게 해준다.
+// - React에서는 as 방식을 선호한다.(꺽쇠는 태그와 혼동될 수 있기때문)
+let someValue2 = "this is a string";
+let strLength2 = someValue2.length;
