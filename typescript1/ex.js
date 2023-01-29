@@ -18,14 +18,11 @@ para1.innerHTML = first('Typescript', age);
 function second() {
     return 200;
 }
-console.log(second());
 let a = [300, false];
-console.log(a);
 let b = {
     browser: 'chrome',
     car: 'seltos'
 };
-console.log(b);
 const info1 = [
     {
         name: '손현호',
@@ -50,3 +47,6 @@ const spans = document.querySelectorAll('.innerZone2 > span');
 spans.forEach(sp => {
     sp.style.display = 'block';
 });
+const tupleZone = ['튜플아니고 터플이라 불러라', 2, false];
+// tupleZone.push('바보들'); -> readonly로 인해 사용 불가능!
+console.log(tupleZone);

@@ -21,22 +21,23 @@ para1.innerHTML = first('Typescript', age);
 function second():number{
     return 200;
 }
-console.log(second());
+// console.log(second());
 
 //튜플(Tuple) 방식
 type Member1 = [number, boolean];
 let a: Member1 = [300, false];
-console.log(a);
+// console.log(a);
 
 //[key in string]: string - 객체에 타입을 지정해야할 속성이 너무 많을때(interface에서는 불가!)
 type Member2 = {
-    [key: string]: string
+    // [key: string]: string
+    [key in string]: string
 }
 let b: Member2 = {
     browser: 'chrome',
     car: 'seltos'
 }
-console.log(b);
+// console.log(b);
 
 //type 사용해보기 (type는 각각 콤마로 구분)
 type Third = {
@@ -69,3 +70,9 @@ const spans = document.querySelectorAll('.innerZone2 > span');
 spans.forEach(sp => {
     (sp as HTMLElement).style.display = 'block';
 });
+
+//tuple 사용중 push를 통해 순리를 깰 수 있음 그리하여 -> readonly를 사용해야한다!!!
+type Tuple1 = readonly [string, number, boolean];
+const tupleZone: Tuple1 = ['튜플아니고 터플이라 불러라', 2, false];
+// tupleZone.push('바보들'); -> readonly로 인해 사용 불가능!
+console.log(tupleZone);
