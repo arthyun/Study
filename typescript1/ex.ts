@@ -76,3 +76,15 @@ type Tuple1 = readonly [string, number, boolean];
 const tupleZone: Tuple1 = ['튜플아니고 터플이라 불러라', 2, false];
 // tupleZone.push('바보들'); -> readonly로 인해 사용 불가능!
 console.log(tupleZone);
+
+//Narrowing 방식
+function Nar(x :number | string){
+    //매개변수가 넘버타입일때
+    if(typeof x === "number"){
+        console.log(x + 3);
+    } else {
+        //매개변수가 문자타입일때
+        console.log(x);
+    }
+}
+Nar(120);
