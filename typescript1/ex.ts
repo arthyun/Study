@@ -115,3 +115,17 @@ const respond = (who: Response1, life: Response1): void => {
     console.log(`이름: ${who} / 나이: ${life}살`);
 };
 respond(Response1.name, Response1.age);
+
+// 유틸리니를 사용하는 법
+interface User {
+    name: string;
+    age: number;
+}
+let seletedUser: User | null = null //선택된 항목은 있을수도 없을수도 있음
+
+//seletedUser.doSomthing(); // null이라고 읽지않도록 if문을 추가해보자
+// 이렇게 if문을 작성해주면 null이 아닌 User라고 인식해준다.
+// if(!seletedUser){
+//     seletedUser.doSomthing();
+
+// 면접준비하러...
