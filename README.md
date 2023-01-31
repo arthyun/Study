@@ -1,4 +1,4 @@
-# React, Redux, TypeScript Study
+# React, Redux, TypeScript, Vue Study
 
 <React를 활용한 미니 프로젝트>
 1. 잔고 확인 App (useReducer Hook 활용)
