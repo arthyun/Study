@@ -49,16 +49,16 @@ spans.forEach(sp => {
 });
 const tupleZone = ['튜플아니고 터플이라 불러라', 2, false];
 // tupleZone.push('바보들'); -> readonly로 인해 사용 불가능!
-console.log(tupleZone);
+// console.log(tupleZone);
 // Narrowing 방식**
 function Nar(x) {
     //매개변수가 넘버타입일때
     if (typeof x === "number") {
-        console.log(x + 3);
+        // console.log(x + 3);
     }
     else {
         //매개변수가 문자타입일때
-        console.log(x);
+        // console.log(x);
     }
 }
 Nar(120);
@@ -77,7 +77,7 @@ function identity(x) {
     return x;
 }
 ;
-console.log(identity('심바'));
+// console.log(identity<string>('심바'));
 //열거형 enum
 var Response1;
 (function (Response1) {
@@ -85,12 +85,51 @@ var Response1;
     Response1[Response1["age"] = 4] = "age";
 })(Response1 || (Response1 = {}));
 const respond = (who, life) => {
-    console.log(`이름: ${who} / 나이: ${life}살`);
+    // console.log(`이름: ${who} / 나이: ${life}살`);
 };
 respond(Response1.name, Response1.age);
 let seletedUser = null; //선택된 항목은 있을수도 없을수도 있음
-//seletedUser.doSomthing(); // null이라고 읽지않도록 if문을 추가해보자
-// 이렇게 if문을 작성해주면 null이 아닌 User라고 인식해준다.
-// if(!seletedUser){
-//     seletedUser.doSomthing();
-// 면접준비하러...
+function getStudentDetatils1(x) {
+    // console.log(x);
+}
+getStudentDetatils1(10);
+function getStudentDetatils2() {
+    return {
+        id: 2,
+        name: 'hyun',
+        age: 30,
+        gender: 'male',
+        subject: '남자다',
+        courseCompleted: true
+    };
+}
+function getStudentDetatils3() {
+    return {
+        gender: 'male',
+        subject: '남자다',
+        courseCompleted: true
+    };
+}
+function getStudentDetatils4(student) {
+    // student.gender = 'female'; -> readeonly이기 때문에 재 할당 할 수 없음
+}
+getStudentDetatils4({
+    id: 2,
+    name: 'hyun',
+    age: 30,
+    gender: 'male',
+    subject: '남자다',
+    courseCompleted: true
+});
+//화살표 함수로는 어떻게 표현하나?
+const getStudentDetatils5 = () => {
+    return {
+        id: 3,
+        name: 'hyun',
+        age: 30,
+        gender: 'male',
+        subject: '남자다',
+        courseCompleted: true
+    };
+};
+console.log(getStudentDetatils5());

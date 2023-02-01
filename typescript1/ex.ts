@@ -1,6 +1,6 @@
 // tsc에서 DOM의 타입을 지정할 때
 var para1 = document.querySelector('.innerZone1') as HTMLParagraphElement;
-var para2 = document.querySelector('.innerZone2') as HTMLElement;
+var para2 = document.querySelector('.innerZone2') as HTMLParagraphElement;
 
 // 변수명 뒤에 타입 지정할 때
 var age: number = 20;
@@ -75,16 +75,16 @@ spans.forEach(sp => {
 type Tuple1 = readonly [string, number, boolean];
 const tupleZone: Tuple1 = ['튜플아니고 터플이라 불러라', 2, false];
 // tupleZone.push('바보들'); -> readonly로 인해 사용 불가능!
-console.log(tupleZone);
+// console.log(tupleZone);
 
 // Narrowing 방식**
 function Nar(x :number | string){
     //매개변수가 넘버타입일때
     if(typeof x === "number"){
-        console.log(x + 3);
+        // console.log(x + 3);
     } else {
         //매개변수가 문자타입일때
-        console.log(x);
+        // console.log(x);
     }
 }
 Nar(120);
@@ -104,7 +104,7 @@ let strLength2: number = (<string>someValue2).length;
 function identity<T> (x: T): T {
     return x;
 };
-console.log(identity<string>('심바'));
+// console.log(identity<string>('심바'));
 
 //열거형 enum
 enum Response1 {
@@ -112,7 +112,7 @@ enum Response1 {
     age = 4,
 }
 const respond = (who: Response1, life: Response1): void => {
-    console.log(`이름: ${who} / 나이: ${life}살`);
+    // console.log(`이름: ${who} / 나이: ${life}살`);
 };
 respond(Response1.name, Response1.age);
 
@@ -140,7 +140,7 @@ interface Student1 {
     courseCompleted: boolean;
 }
 function getStudentDetatils1(x: Student1['id']){
-    console.log(x);
+    // console.log(x);
 }
 getStudentDetatils1(10);
 
@@ -163,3 +163,56 @@ function getStudentDetatils2():Student2{
         courseCompleted: true
     }
 }
+
+//물음표를 사용한다면?
+interface Student3 {
+    id?: number;
+    name?: string;
+    age?: number;
+    gender: string;
+    subject: string;
+    courseCompleted: boolean;
+}
+function getStudentDetatils3():Student3{
+    return {
+        gender: 'male',
+        subject: '남자다',
+        courseCompleted: true
+    }
+}
+
+//인터페이스를 매개변수 자리에 넣어보자 (리턴값이 없으므로 void)
+interface Student4 {
+    id: number;
+    name: string;
+    age: number;
+    readonly gender: string;
+    subject: string;
+    courseCompleted: boolean;
+}
+function getStudentDetatils4(student: Student4): void{
+    // student.gender = 'female'; -> readeonly이기 때문에 재 할당 할 수 없음
+}
+getStudentDetatils4(
+    {
+        id: 2,
+        name: 'hyun',
+        age: 30,
+        gender: 'male',
+        subject: '남자다',
+        courseCompleted: true
+    }
+);
+
+//화살표 함수로는 어떻게 표현하나?
+const getStudentDetatils5 = (): Student4 => {
+    return {
+        id: 3,
+        name: 'hyun',
+        age: 30,
+        gender: 'male',
+        subject: '남자다',
+        courseCompleted: true
+    }
+}
+console.log(getStudentDetatils5());
