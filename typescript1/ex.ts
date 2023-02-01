@@ -129,3 +129,37 @@ let seletedUser: User | null = null //선택된 항목은 있을수도 없을수
 //     seletedUser.doSomthing();
 
 // 면접준비하러...
+
+// 인터페이스를 좀더 자세히 사용하려면...
+interface Student1 {
+    id: number;
+    name: string;
+    age: number;
+    gender: string;
+    subject: string;
+    courseCompleted: boolean;
+}
+function getStudentDetatils1(x: Student1['id']){
+    console.log(x);
+}
+getStudentDetatils1(10);
+
+//인터페이스를 함수에 지정했다면 똑같은 객체값을 반환해야 오류가 없음
+interface Student2 {
+    id: number;
+    name: string;
+    age: number;
+    gender: string;
+    subject: string;
+    courseCompleted: boolean;
+}
+function getStudentDetatils2():Student2{
+    return {
+        id: 2,
+        name: 'hyun',
+        age: 30,
+        gender: 'male',
+        subject: '남자다',
+        courseCompleted: true
+    }
+}
