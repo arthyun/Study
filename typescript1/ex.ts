@@ -215,4 +215,29 @@ const getStudentDetatils5 = (): Student4 => {
         courseCompleted: true
     }
 }
-console.log(getStudentDetatils5());
+// console.log(getStudentDetatils5());
+
+//enum과 리터럴 타입
+enum Enum1 {
+    male,  //이렇게 작성하면 타입이 넘버다.
+    female = 'female', //이렇게 작성하면 타입이 문자다.
+}
+interface Student5 {
+    id: number;
+    name: string;
+    age: number;
+    gender: Enum1;
+    subject: string;
+    courseCompleted: boolean;
+}
+function getStudentDetatils6(): Student5 {
+    return {
+        id: 123123,
+        name: '이넘~~~~',
+        age: 30,
+        gender: Enum1.female, //타입이 male은 넘버, female은 문자가 된다.
+        subject: '이넘@@@@',
+        courseCompleted: true
+    }
+}
+console.log(getStudentDetatils6().gender);

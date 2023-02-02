@@ -132,4 +132,21 @@ const getStudentDetatils5 = () => {
         courseCompleted: true
     };
 };
-console.log(getStudentDetatils5());
+// console.log(getStudentDetatils5());
+//enum과 리터럴 타입
+var Enum1;
+(function (Enum1) {
+    Enum1[Enum1["male"] = 0] = "male";
+    Enum1["female"] = "female";
+})(Enum1 || (Enum1 = {}));
+function getStudentDetatils6() {
+    return {
+        id: 123123,
+        name: '이넘~~~~',
+        age: 30,
+        gender: Enum1.female,
+        subject: '이넘@@@@',
+        courseCompleted: true
+    };
+}
+console.log(getStudentDetatils6().gender);
