@@ -226,7 +226,7 @@ interface Student5 {
     id: number;
     name: string;
     age: number;
-    gender: Enum1;
+    gender: 'male' | 'female' | 'genderless'; //리터럴 타입은 오토컴플릿을 제공
     subject: string;
     courseCompleted: boolean;
 }
@@ -235,9 +235,30 @@ function getStudentDetatils6(): Student5 {
         id: 123123,
         name: '이넘~~~~',
         age: 30,
-        gender: Enum1.female, //타입이 male은 넘버, female은 문자가 된다.
+        // gender: Enum1.female, //타입이 male은 넘버, female은 문자가 된다.
+        gender: "genderless",
         subject: '이넘@@@@',
         courseCompleted: true
     }
 }
 console.log(getStudentDetatils6().gender);
+
+//유니언 타입 (파이프로 구분을 해줌 |)
+let price: number | string = 5;
+price = 'free';
+price = 1;
+// price = true; 에러다
+
+type StrOrNum = number | string; // 타입 앨리어시스라고 부른다.
+let itemPrice: number;
+
+function print1(x: StrOrNum): void {
+    // itemPrice = x; -> 에러가 표시된다. 타입이 두가지라고 했기에 if문으로 narrowing 해야하는듯?
+    // typeof operator로 구분해 주어야함
+    if(typeof x === 'string'){
+        itemPrice = 0;
+    } else {
+        itemPrice = x;
+    }
+}
+print1(20);
