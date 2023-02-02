@@ -262,3 +262,64 @@ function print1(x: StrOrNum): void {
     }
 }
 print1(20);
+
+// 함수에 타입을 명시할 때 선택적 매개변수는 필수 매개변수 뒤에 와야한다!!!
+// 매개변수가 필수 요소가 아닐땐 물음표 처리를 하거나 default 매개변수로 지정할 것!!!
+// default 매개변수로 등록해 놓으면 기본적으로 해당 값을 토대로 타입을 추론한다.
+function select1(get1: number, get2?: string, get3 = 'there'):void {
+    console.log(get1, get3);
+}
+select1(100);
+
+// Class문법과의 상관관계 1
+class Ex1 {
+    name: string;
+    age: number;
+
+    getEx1 = ():void => {
+        console.log(`내 이름은 ${this.name}이고 나이는 ${this.age}살입니다.`);
+    }
+}
+let ExPrint1: Ex1 = new Ex1();
+ExPrint1.name = 'SIMBA';
+ExPrint1.age = 4;
+ExPrint1.getEx1();
+
+// Class문법과의 상관관계 2 - constructor를 사용해서 초기화하기****
+// *외부로 부터 접근을 통제하기 위해 Access Modifiers를 사용해보자*
+// 3가지 키워드가 존재 -> Public / Private / Protected
+// 클래스 내부 메소드는 기본적으로 Public이다.
+class Ex2 {
+    private _name: string;
+    age: number;
+    protected gender: string;
+    
+    //필수 매개변수가 아니라면 물음표를 붙여라
+    constructor(name: string, age: number, gender?: string){
+        this._name = name;
+        this.age = age;
+    }
+    get name(){
+        return this._name;
+    }
+    set name(value){
+        this._name = value;
+    }
+    public getEx2 = ():void => {
+        console.log(`내 이름은 ${this._name}이고 나이는 ${this.age}살입니다.`);
+    }
+}
+let ExPrint2: Ex2 = new Ex2('SIMBA', 4);
+console.log(ExPrint2.name); //getter로 접근했다!
+ExPrint2.name = 'SON'; //setter로 접근했다!
+//ExPrint2.gender = 'male'; -> protected property이기 때문에 외부 접근불가!!!
+ExPrint2.getEx2();
+
+// ExPrint2.name = 'SON'; -> private property이기 때문에 외부에서 접근 불가하다!!!
+// 그럼 위처럼 외부접근이 불가능할때는 어떻게 접근해서 변경할까?
+// 위 의문을 해결해주기 위해 타입스크립트에서는 getter & setter를 지원한다!!!!
+// 우선 private가 적용된 변수는 앞에 언더바를 추가한다.(암묵적 룰임)
+
+// public : 클래스의 멤버 함수에서 접근 가능, 자식 클래스의 멤버 함수에서 접근 가능, 외부에서 접근 가능.
+// protected : 클래스의 멤버 함수에서 접근 가능, 자식 클래스의 멤버 함수에서 접근 가능, 외부에서 접근 불가능.
+// private : 클래스의 멤버 함수에서 접근 가능, 자식 클래스의 멤버 함수에서 접근 불가능, 외부에서 접근 불가능.
