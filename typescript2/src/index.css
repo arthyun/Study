@@ -1,0 +1,16 @@
+* {
+  margin: 0; 
+  padding: 0;
+}
+body {
+  font-family: "Jost" sans-serif;
+  font-size: 16px;
+  color: #61dafb;
+  background-color: #282c34;
+}
+ol, ul {
+  list-style: none;
+}
+p {
+  color: #fff;
+}

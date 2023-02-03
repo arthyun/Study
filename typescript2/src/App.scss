@@ -1,0 +1,50 @@
+.App {
+  text-align: center;
+    .App-logo {
+      height: 30vmin;
+      pointer-events: none;
+    }
+    button {
+      display: block;
+      margin: 0 auto;
+      padding: .65rem 2rem;
+      font-size: 1rem;
+      font-weight: 500;
+      margin-bottom: 2rem;
+    }
+    .contentArea {
+      ul {
+        width: 80%;
+        margin: 0 auto;
+        padding: 1rem 0;
+        border: 1px solid #61dafb;
+        li {
+          padding: .5rem 0;
+        }
+        .textArea {
+          background-color: #61dafb;
+          color: #333;
+          border: 0;
+          outline: none;
+          padding-left: 5px;
+          font-family: "Noto Sans KR", sans-serif;
+          font-weight: 700;
+          width: 65%;
+          height: 70px;
+        }
+      }
+    }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
