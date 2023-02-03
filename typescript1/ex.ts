@@ -323,3 +323,42 @@ ExPrint2.getEx2();
 // public : 클래스의 멤버 함수에서 접근 가능, 자식 클래스의 멤버 함수에서 접근 가능, 외부에서 접근 가능.
 // protected : 클래스의 멤버 함수에서 접근 가능, 자식 클래스의 멤버 함수에서 접근 가능, 외부에서 접근 불가능.
 // private : 클래스의 멤버 함수에서 접근 가능, 자식 클래스의 멤버 함수에서 접근 불가능, 외부에서 접근 불가능.
+
+
+//타입스크립트에서 HTML DOM을 조작하는 방법! (이벤트 포함)
+const link1 = document.querySelector('#link');
+const btn1 = document.querySelector('#button');
+
+//총 다섯가지 방법으로 narrowing 할 수 있다.
+if(link1 != null){
+    link1.innerHTML = '나는 첫번째 방법!';
+}
+if(link1 instanceof Element){
+    link1.innerHTML = '나는 두번째 방법!';
+}
+//세번째 방법은 선언문 뒤에 as Element 붙이기 (일명 Type assertion)
+//as 는 자주 사용하지 않는 것이 좋음 (미리 확정지어버리기 때문)
+if(link1?.innerHTML != undefined){
+    link1.innerHTML = '나는 네번째 방법!';
+}
+//다섯째 방법 - 태그마다 수식어가 다르다! (a, div, btn...)
+if(link1 instanceof HTMLAnchorElement){
+    link1.href = 'https://kakao.com';
+}
+//태그에 이벤트를 등록하기 위한 방법!
+//첫번째
+if(btn1 instanceof HTMLButtonElement){
+    btn1.addEventListener('click', () => {
+        alert('click!!!');
+        location.href = 'https://naver.com';
+        // location.reload();
+        // history.go(-1);
+    })
+}
+//두번째 - 간결
+btn1?.addEventListener('click', () => {
+    alert('click!!!');
+    location.href = 'https://naver.com';
+    // location.reload();
+    // history.go(-1);
+})
