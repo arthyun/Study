@@ -347,18 +347,78 @@ if(link1 instanceof HTMLAnchorElement){
 }
 //태그에 이벤트를 등록하기 위한 방법!
 //첫번째
-if(btn1 instanceof HTMLButtonElement){
-    btn1.addEventListener('click', () => {
-        alert('click!!!');
-        location.href = 'https://naver.com';
-        // location.reload();
-        // history.go(-1);
-    })
-}
+// if(btn1 instanceof HTMLButtonElement){
+//     btn1.addEventListener('click', () => {
+//         alert('click!!!');
+//         location.href = 'https://naver.com';
+//         // location.reload();
+//         // history.go(-1);
+//     })
+// }
 //두번째 - 간결
-btn1?.addEventListener('click', () => {
-    alert('click!!!');
-    location.href = 'https://naver.com';
+let cnt:number = 0;
+btn1?.addEventListener('click', (e) => {
+    // alert('click!!!');
+    // location.href = 'https://naver.com';
     // location.reload();
     // history.go(-1);
+    cnt++;
+    if(cnt % 2 == 1){
+        showAPI();
+    } else {
+        (document.querySelector('#listZone') as HTMLUListElement).innerHTML = '';
+    }
 })
+
+//tsc에서 fetch 사용해보자
+let jsonURL:string = 'https://jsonplaceholder.typicode.com/comments';
+let output1:string = '';
+
+//인터페이스1
+interface List1 {
+    id:number;
+    name:string;
+    email:string;
+    body:string;
+}
+
+//get 방식
+let showAPI = () => {
+fetch(jsonURL)
+.then((res) => 
+    res.json()
+)
+.then((data) => {
+    let ulMain = document.querySelector('#listZone');
+    if(ulMain instanceof HTMLUListElement){ //DOM 컨트롤 시 명시해 주어야 함
+        data.map((list: List1) => {
+            output1 += `<li>`;
+            output1 += `<p>${list.id}</p>`;
+            output1 += `<p>${list.name}</p>`;
+            output1 += `<p>${list.email}</p>`;
+            output1 += `<p>${list.body}</p>`;
+            output1 += `</li>`;
+        })
+        ulMain.innerHTML = output1;
+    }
+})
+};
+
+//post 방식
+fetch(jsonURL, {
+    method: "POST",
+    headers: {
+        "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+        title: "Test",
+        body: "I'm Testing!",
+        userId: 1,
+    }),
+})
+.then((res) => 
+    res.json()
+)
+.then((data) => 
+    console.log(data)
+)
