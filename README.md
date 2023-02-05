@@ -6,6 +6,7 @@
 3. 영화 정보 공유 App (Router, Redux 활용)
 4. 게시판 App (Redux-Persist 활용)
 5. Kiosk App (Router, Redux, Redux-Persist 활용)
+6. FE 면접 문제 은행 App (React + TypeScript 활용)
 
 -> Typescript Studying...
 
