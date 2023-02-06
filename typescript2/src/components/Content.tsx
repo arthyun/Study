@@ -11,6 +11,7 @@ function Content(){
     }
     interface QuizStr2 extends QuizStr1 {
         exam: string;
+        answer: string;
     }
     let data: QuizStr2[] = jsonData.quiz;
 
