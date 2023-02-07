@@ -1,10 +1,8 @@
-.App {
-  text-align: center;
-}
-
 .App-logo {
-  height: 40vmin;
+  height: 150px;
   pointer-events: none;
+  display: block;
+  margin: 0 auto;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -14,18 +12,61 @@
 }
 
 .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  width: 80%;
+  min-height: 400px;
+  margin: 0 auto;
+  margin-top: 20%;
+  padding: 1rem;
+  padding-top: 2rem;
+  box-sizing: border-box;
+  background: #fff;
+  border-radius: 15px;
+  text-align: center;
 }
-
-.App-link {
-  color: #61dafb;
+.firstInp,
+.secondInp {
+  display: flex;
+  justify-content: center;
+  margin: 1rem 0;
+}
+.App-header label {
+  width: 20%;
+  text-align: start;
+  margin-right: 1rem;
+  font-size: 3.5vw;
+  font-weight: 700;
+}
+.App-header input {
+  display: inline-block;
+  width: 60%;
+  height: 1.25rem;
+  outline: 0;
+  border: 0;
+  border-bottom: 1px solid rgb(255, 183, 0);
+}
+.App-header .btnZone {
+  display: flex;
+  justify-content: center;
+  gap: .25rem;
+  margin-top: 1.35rem;
+}
+.App-header .btnZone button {
+  width: 42.25%;
+  height: 2.25rem;
+  font-weight: 700;
+  outline: 0;
+  border-style: outset;
+  border: 2px solid #555;
+}
+.App-header .btnZone button:first-child {
+  background: #61dafb;
+}
+.App-header .btnZone button:last-child {
+  background: black;
+  color: #fff;
+}
+.App-header #confirmZone {
+  font-weight: 700;
 }
 
 @keyframes App-logo-spin {
