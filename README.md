@@ -7,6 +7,7 @@
 4. 게시판 App (Redux-Persist 활용)
 5. Kiosk App (Router, Redux, Redux-Persist 활용)
 6. FE 면접 문제 은행 App (React + TypeScript 활용)
+7. React/Redux로 로그인 기능을 구현해 보았다.
 
 -> Typescript Studying...
 
