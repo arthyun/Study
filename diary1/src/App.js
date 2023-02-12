@@ -54,6 +54,14 @@ function App() {
           }
         }}>등록</SubmitBtn>
       </div>
+
+        {
+          arr.map((el, i) => {
+            return (
+            <p key={i}>{el}</p>
+            )
+          })
+        }
     </div>
   );
 }
