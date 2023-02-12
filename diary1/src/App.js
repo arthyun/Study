@@ -23,13 +23,14 @@ const SubmitBtn = styled.button.attrs({ type: 'button' })`
   font-weight: bold;
   display: block;
   box-sizing: border-box;
-  width: 81%;
+  width: 80%;
   height: 40px;
   margin: 0 auto;
 `;
 
 function App() {
   const [text, setText] = useState('');
+  const [arr, setArr] = useState([]);
 
   return (
     <div className="App">
@@ -46,6 +47,8 @@ function App() {
         <SubmitBtn onClick={() => {
           if(window.confirm('등록하시겠습니까?')){
             alert('등록이 완료되었습니다.');
+            setArr(list => [...list, text]);
+            console.log(arr);
           } else {
             alert('다시 확인해 주세요.');
           }
