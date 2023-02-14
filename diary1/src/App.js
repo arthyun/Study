@@ -46,11 +46,11 @@ function App() {
         }} />
         <SubmitBtn onClick={() => {
           if(window.confirm('등록하시겠습니까?')){
-            alert('등록이 완료되었습니다.');
+            alert('등록이 완료되었습니다!');
             setArr(list => [...list, text]);
             console.log(arr);
           } else {
-            alert('다시 확인해 주세요.');
+            alert('다시 확인해 주세요!');
           }
         }}>등록</SubmitBtn>
       </div>
