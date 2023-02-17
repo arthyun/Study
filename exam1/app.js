@@ -1,3 +1,83 @@
+//resizing
+window.addEventListener('resize', () => {
+//media query
+if(matchMedia("(max-width: 640px)").matches){
+    const navBtn2 = document.querySelector('.navBtn2');
+    const closeBtn = document.querySelector('.navClose');
+    const pop = document.querySelector('.popup');
+    const aside = document.querySelector('aside');
+
+    aside.style.transition = 'all .3s';
+
+    closeBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        aside.style.left = '-100%';
+        pop.style.display = 'none';
+        closeBtn.style.display = 'none';
+    });
+
+    navBtn2.addEventListener('click', (e) => {
+        e.preventDefault();
+        aside.style.left = '0';
+        pop.style.display = 'block';
+        closeBtn.style.display = 'block';
+    });
+
+    //lastSlides
+    const lastPrev = document.querySelector('.prev');
+    const lastNext = document.querySelector('.next');
+    const lastView = document.querySelector('.lastSlide');
+    const spans = document.querySelectorAll('.slideBtns span');
+    let count = 0;
+    let move = 33.33;
+
+    spans[0].classList.add('target');
+
+    lastPrev.addEventListener('click', (e) => {
+        e.preventDefault();
+        if(count < 2){
+            count++;
+            lastView.style.transform = `translateX(-${move * count}%)`;
+        }
+        if(count == 2){
+            count = 2;
+        }
+
+        spans.forEach(el => {
+            el.classList.remove('target');
+            if(count == 0){
+                spans[0].classList.add('target');
+            } else if(count == 1){
+                spans[1].classList.add('target');
+            } else if(count == 2){
+                spans[2].classList.add('target');
+            }
+        });
+    });
+
+    lastNext.addEventListener('click', (e) => {
+        e.preventDefault();
+        if(count <= 2){
+            count--;
+            lastView.style.transform = `translateX(-${move * count}%)`;
+        }
+        if(count < 0){
+            count = 0;
+        }
+        
+        spans.forEach(el => {
+            el.classList.remove('target');
+            if(count == 0){
+                spans[0].classList.add('target');
+            } else if(count == 1){
+                spans[1].classList.add('target');
+            } else if(count == 2){
+                spans[2].classList.add('target');
+            }
+        });
+    });
+
+} else {
 //nav
 const navBtn = document.querySelector('.navBtn');
 const navZone = document.querySelector('.navZone');
@@ -17,6 +97,172 @@ navBtn.addEventListener('click', (e) => {
         navBtn.style.background = 'url(./images/sidebar01.png) no-repeat';
     }
 });
+//slides3
+const prevNextBtns = document.querySelectorAll('.lastZone > a');
+const slideBox = document.querySelector('.lastSlide');
+const ul = document.querySelector('.lastSlide ul');
+// const cloneul = ul.cloneNode(true);
+// slideBox.appendChild(cloneul);
+let curPos = 10.4;
+let listWidth = 33.5;
+
+prevNextBtns.forEach(el => {
+    el.addEventListener('click', (e) => {
+        e.preventDefault();
+        if(el.classList.contains('prev')){
+            if(curPos == 43.9){
+                curPos = 10.4;
+                slideBox.style.transform = `translateX(-${curPos}%)`;
+            } else {
+                slideBox.style.transform = `translateX(-${curPos += listWidth}%)`;
+            }
+        } 
+        if(el.classList.contains('next')){
+            if(curPos <= 10.4){
+                curPos = 43.9;
+                slideBox.style.transform = `translateX(-${curPos}%)`;
+            } else {
+                slideBox.style.transform = `translateX(-${curPos -= listWidth}%)`;
+            }
+        }
+    });
+});
+}
+});
+
+
+
+//default
+//media query
+if(matchMedia("(max-width: 640px)").matches){
+    const navBtn2 = document.querySelector('.navBtn2');
+    const closeBtn = document.querySelector('.navClose');
+    const pop = document.querySelector('.popup');
+    const aside = document.querySelector('aside');
+
+    aside.style.transition = 'all .3s';
+
+    closeBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        aside.style.left = '-100%';
+        pop.style.display = 'none';
+        closeBtn.style.display = 'none';
+    });
+
+    navBtn2.addEventListener('click', (e) => {
+        e.preventDefault();
+        aside.style.left = '0';
+        pop.style.display = 'block';
+        closeBtn.style.display = 'block';
+    });
+
+    //lastSlides
+    const lastPrev = document.querySelector('.prev');
+    const lastNext = document.querySelector('.next');
+    const lastView = document.querySelector('.lastSlide');
+    const spans = document.querySelectorAll('.slideBtns span');
+    let count = 0;
+    let move = 33.33;
+
+    spans[0].classList.add('target');
+
+    lastPrev.addEventListener('click', (e) => {
+        e.preventDefault();
+        if(count < 2){
+            count++;
+            lastView.style.transform = `translateX(-${move * count}%)`;
+        }
+        if(count == 2){
+            count = 2;
+        }
+
+        spans.forEach(el => {
+            el.classList.remove('target');
+            if(count == 0){
+                spans[0].classList.add('target');
+            } else if(count == 1){
+                spans[1].classList.add('target');
+            } else if(count == 2){
+                spans[2].classList.add('target');
+            }
+        });
+    });
+
+    lastNext.addEventListener('click', (e) => {
+        e.preventDefault();
+        if(count <= 2){
+            count--;
+            lastView.style.transform = `translateX(-${move * count}%)`;
+        }
+        if(count < 0){
+            count = 0;
+        }
+        
+        spans.forEach(el => {
+            el.classList.remove('target');
+            if(count == 0){
+                spans[0].classList.add('target');
+            } else if(count == 1){
+                spans[1].classList.add('target');
+            } else if(count == 2){
+                spans[2].classList.add('target');
+            }
+        });
+    });
+
+} else {
+//nav
+const navBtn = document.querySelector('.navBtn');
+const navZone = document.querySelector('.navZone');
+const aside = document.querySelector('.navZone aside');
+let cnt = 0;
+
+navBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    cnt++;
+    if(cnt % 2 == 1){
+        navZone.style.width = 0;
+        aside.style.display = 'none';
+        navBtn.style.background = 'url(./images/sidebar02.png) no-repeat';
+    } else {
+        navZone.style.width = 17.5+'%';
+        aside.style.display = 'block';
+        navBtn.style.background = 'url(./images/sidebar01.png) no-repeat';
+    }
+});
+
+//slides3
+const prevNextBtns = document.querySelectorAll('.lastZone > a');
+const slideBox = document.querySelector('.lastSlide');
+const ul = document.querySelector('.lastSlide ul');
+const cloneul = ul.cloneNode(true);
+slideBox.appendChild(cloneul);
+let curPos = 10.4;
+let listWidth = 33.5;
+
+prevNextBtns.forEach(el => {
+    el.addEventListener('click', (e) => {
+        e.preventDefault();
+        if(el.classList.contains('prev')){
+            if(curPos == 43.9){
+                curPos = 10.4;
+                slideBox.style.transform = `translateX(-${curPos}%)`;
+            } else {
+                slideBox.style.transform = `translateX(-${curPos += listWidth}%)`;
+            }
+        } 
+        if(el.classList.contains('next')){
+            if(curPos <= 10.4){
+                curPos = 43.9;
+                slideBox.style.transform = `translateX(-${curPos}%)`;
+            } else {
+                slideBox.style.transform = `translateX(-${curPos -= listWidth}%)`;
+            }
+        }
+    });
+});
+};
+
 
 //category
 const tabBtns = document.querySelectorAll('.tabBtns a');
@@ -94,35 +340,3 @@ nextSpan2.addEventListener('click', (e) => {
     }
     secondUl.style.transform = `translateX(-${50.5 * cnt2}%)`;
 });
-
-//slides3
-const prevNextBtns = document.querySelectorAll('.lastZone > a');
-const slideBox = document.querySelector('.lastSlide');
-const ul = document.querySelector('.lastSlide ul');
-const cloneul = ul.cloneNode(true);
-slideBox.appendChild(cloneul);
-let curPos = 10.4;
-let listWidth = 33.5;
-
-prevNextBtns.forEach(el => {
-    el.addEventListener('click', (e) => {
-        e.preventDefault();
-        if(el.classList.contains('prev')){
-            if(curPos == 43.9){
-                curPos = 10.4;
-                slideBox.style.transform = `translateX(-${curPos}%)`;
-            } else {
-                slideBox.style.transform = `translateX(-${curPos += listWidth}%)`;
-            }
-        } 
-        if(el.classList.contains('next')){
-            if(curPos <= 10.4){
-                curPos = 43.9;
-                slideBox.style.transform = `translateX(-${curPos}%)`;
-            } else {
-                slideBox.style.transform = `translateX(-${curPos -= listWidth}%)`;
-            }
-        }
-    });
-});
-
