@@ -7,6 +7,7 @@ html {
 }
 h2 {
   font-size: 20px;
+  margin: 1.5rem 1rem;
 }
 .wrap {
   margin: 1rem 0;
@@ -26,7 +27,7 @@ h2 {
 .slider_list {
   width: 100%;
   margin: 0 auto;
-  height: 400px;
+  height: 300px;
 }
 .slider_list:nth-of-type(1) {
   background-color: red;
@@ -49,13 +50,48 @@ h2 {
 }
 .btns .prev {
   position: absolute;
-  top: 50%;
+  top: 40%;
   left: 3.75%;
   transform: translate(-50%, -50%);
 }
 .btns .next {
   position: absolute;
-  top: 50%;
-  right: 2%;
+  top: 40%;
+  right: .5%;
   transform: translate(-50%, -50%);
+}
+.tabBtns {
+  width: 90%;
+  margin: 0 auto;
+  display: flex;
+  border: 2px solid brown;
+}
+.tabBtns a {
+  display: block;
+  text-align: center;
+  text-decoration: none;
+  color: #fff;
+  background: #0081cc;
+  width: 25%;
+  padding: .5rem 0;
+  border-right: 1px solid brown;
+}
+.tabBtns a:last-child{
+  border: 0;
+}
+.tabPrint {
+  width: 90%;
+  margin: 0 auto;
+  /* padding: 1rem 0; */
+  position: relative;
+  border: 2px solid #fa10cc;
+}
+.tabPrint p {
+  /* display: none; */
+  padding: 1rem;
+  box-sizing: border-box;
+  position: absolute;
+  left: -100%;
+  background: #10fa8d;
+  transition: all .3s;
 }
