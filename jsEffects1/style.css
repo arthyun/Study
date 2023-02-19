@@ -50,13 +50,13 @@ h2 {
 }
 .btns .prev {
   position: absolute;
-  top: 40%;
+  top: 10%;
   left: 3.75%;
   transform: translate(-50%, -50%);
 }
 .btns .next {
   position: absolute;
-  top: 40%;
+  top: 10%;
   right: .5%;
   transform: translate(-50%, -50%);
 }
@@ -94,4 +94,27 @@ h2 {
   left: -100%;
   background: #10fa8d;
   transition: all .3s;
+}
+.acordian {
+  width: 90%;
+  margin: 0 auto;
+  display: flex;
+  overflow: hidden;
+}
+.acordian > div {
+  width: 25%;
+  height: 300px;
+  transition: width .3s;
+}
+.acordian .wid1 {
+  background-color: #10fa8d;
+}
+.acordian .wid2 {
+  background-color: #fa10cc;
+}
+.acordian .wid3 {
+  background-color: #333;
+}
+.acordian .wid4 {
+  background-color: rgb(255, 166, 0);
 }

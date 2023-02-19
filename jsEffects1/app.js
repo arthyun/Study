@@ -62,3 +62,25 @@ tabBtns.forEach((el, i) => {
 
     })
 });
+
+
+//acordian
+const widths = document.querySelectorAll('.acordian div');
+
+widths.forEach((el, i) => {
+    el.addEventListener('mouseover', (e) => {
+
+        widths.forEach(le => {
+            le.style.width = '10%';
+        });
+
+        e.target.style.width = '70%';
+        // if(e.target){
+        //     e.target.style.width = '97%';
+        // } else {
+        //     widths.forEach(le => {
+        //         le.style.width = '1%';
+        //     });
+        // }
+    });
+});
