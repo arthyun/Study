@@ -118,3 +118,26 @@ h2 {
 .acordian .wid4 {
   background-color: rgb(255, 166, 0);
 }
+.acordian2 {
+  width: 90%;
+  margin: 0 auto;
+}
+.acordian2 ul {
+  list-style: none;
+}
+.acordian2 ul li {
+  background-color: #ccc;
+  /* padding: .25rem 0; */
+  box-sizing: border-box;
+  font-weight: bold;
+  max-height: 25px;
+  overflow: hidden;
+  transition: all .3s;
+}
+.acordian2 ul li p {
+  margin-top: .25rem;
+  background-color: #0081cc;
+  color: red;
+  padding: .5rem 0;
+  /* display: none; */
+}

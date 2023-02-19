@@ -64,7 +64,7 @@ tabBtns.forEach((el, i) => {
 });
 
 
-//acordian
+//acordian1
 const widths = document.querySelectorAll('.acordian div');
 
 widths.forEach((el, i) => {
@@ -84,3 +84,28 @@ widths.forEach((el, i) => {
         // }
     });
 });
+
+//acordian2
+const tabs = document.querySelectorAll('.acordian2 ul li');
+const para = document.querySelectorAll('.acordian2 ul li p');
+
+tabs[0].style.maxHeight = '70px';
+
+tabs.forEach((list, i) => {
+    list.addEventListener('click', (e) => {
+        e.preventDefault();
+
+        //smooth하게
+        tabs.forEach(list2 => {
+            list2.style.maxHeight = '25px';
+        });
+
+        list.style.maxHeight = '70px';
+
+        //hard하게
+        // para.forEach(list2 => {
+        //     list2.style.display = 'none';
+        // });
+        // para[i].style.display = 'block';
+    })
+})
