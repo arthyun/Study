@@ -1,6 +1,8 @@
 <template>
   <div class="hello">
     <h1>{{ msg }}</h1>
+    <button v-if="count1" @click="control1">현재 숫자: {{ count2 }}</button>
+    <button v-else @click="control2">현재 숫자: {{ count2 }}</button>
     <p>
       For a guide and recipes on how to configure / customize this project,<br>
       check out the
@@ -35,6 +37,21 @@ export default {
   name: 'HelloWorld',
   props: {
     msg: String
+  },
+  data(){
+    return {
+      //v-if, v-else를 사용해보자
+      count1: false,
+      count2: 0
+    }
+  },
+  methods: {
+    control1(){
+      this.count2++;
+    },
+    control2(){
+      this.count2--;
+    }
   }
 }
 </script>
