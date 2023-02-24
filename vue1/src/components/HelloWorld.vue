@@ -5,6 +5,17 @@
     <button @click="toggleCount">boolean 변경</button>
     <button v-if="count1" @click="control1">현재 숫자: {{ count2 }}</button>
     <button v-else @click="control2">현재 숫자: {{ count2 }}</button>
+    <br/>
+    <br/>
+    <input type="text" class="textZone" />
+    <button @click="arrHandle2">arr2에 값 추가</button>
+    <ul>
+      <li v-for="(list, i) in arr2" v-bind:key="i">
+        <p style="display: inline-block; margin-right: 10px;">{{ list.id }}</p>
+        <p style="display: inline-block;">{{ list.name }}</p>
+      </li>
+    </ul>
+
 
     <p>
       For a guide and recipes on how to configure / customize this project,<br>
@@ -42,7 +53,8 @@ export default {
           id: 3,
           post1: "Installed CLI Plugins3"
         },
-      ]
+      ],
+      arr2: []
     }
   },
   methods: {
@@ -54,9 +66,20 @@ export default {
     },
     toggleCount(){
       this.count1 = !this.count1;
+    },
+    arrHandle2(){
+      const arrMain = this.arr2;
+      arrMain.push({ 
+        id: Math.floor(Math.random() * 11),
+        name: document.querySelector('.textZone').value
+      });
+      console.log(arrMain);
+      console.log(this.arr2);
     }
   }
 }
+// const dic = document.querySelector('.textZone');
+// console.log(dic.value)
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
@@ -69,7 +92,7 @@ ul {
   padding: 0;
 }
 li {
-  display: inline-block;
+  /* display: inline-block; */
   margin: 0 10px;
 }
 a {
