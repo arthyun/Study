@@ -22,8 +22,34 @@ const Navbar = () => {
         <Link href='/about' style={{color: router.pathname === "/about" ? "yellow" : "#fff"}}>About</Link> */}
 
         {/* 클래스 2개 이상 추가 시 콤마 사용하지 않기 */}
-        <Link href='/' className={`${styles.link} ${router.pathname === "/" ? styles.active : ""}`}>Home</Link>
-        <Link href='/about' className={router.pathname === "/about" ? styles.active : ""}>About</Link>
+        {/* <Link href='/' className={`${styles.link1} ${router.pathname === "/" ? styles.active : ""}`}>Home</Link>
+        <Link href='/about' className={`${styles.link2} ${router.pathname === "/about" ? styles.active : ""}`}>About</Link> */}
+        
+        {/* 또다른 style 입히는 방법(추천) */}
+        {/* Next 신버전에서의 문제는 legacyBehavior를 추가하거나 a태그 대신 span태그를 이용할 것 */}
+        <Link href='/'>
+            <span className={router.pathname === "/" ? "active" : ""}>Home</span>
+        </Link>
+        <Link href='/about' legacyBehavior>
+            <a className={router.pathname === "/about" ? "active" : ""}>About</a>
+        </Link>
+        <style jsx>
+            {`
+                nav {
+                    background-color: tomato;
+                }
+                span {
+                    color: blue;
+                }
+                a {
+                    color: red;
+                }
+                .active {
+                    color: yellow;
+                    font-weight: bold;
+                }
+            `}
+        </style>
         </nav>
     )
 }

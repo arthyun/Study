@@ -1,5 +1,8 @@
-.link {
+.link1 {
     background-color: blue;
+}
+.link2 {
+    background-color: pink;
 }
 .active {
     color: tomato;
