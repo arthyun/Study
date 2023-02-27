@@ -1,0 +1,7 @@
+.link {
+    background-color: blue;
+}
+.active {
+    color: tomato;
+    font-weight: bold;
+}
