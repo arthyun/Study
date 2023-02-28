@@ -27,7 +27,7 @@ const Navbar = () => {
         
         {/* 또다른 style 입히는 방법(추천) */}
         {/* Next 신버전에서의 문제는 legacyBehavior를 추가하거나 a태그 대신 span태그를 이용할 것 */}
-        <Link href='/'>
+        <Link href='/' legacyBehavior>
             <span className={router.pathname === "/" ? "active" : ""}>Home</span>
         </Link>
         <Link href='/about' legacyBehavior>
@@ -37,12 +37,6 @@ const Navbar = () => {
             {`
                 nav {
                     background-color: tomato;
-                }
-                span {
-                    color: blue;
-                }
-                a {
-                    color: red;
                 }
                 .active {
                     color: yellow;
