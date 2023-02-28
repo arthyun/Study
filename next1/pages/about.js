@@ -1,5 +1,5 @@
 import next from "next";
-import Navbar from "./navbar";
+import Navbar from "./Navbar";
 
 const About = () => {
     return (

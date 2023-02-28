@@ -1,6 +1,8 @@
 import '@/styles/globals.css';
-import Navbar from './navbar';
+import Navbar from './Navbar';
 
+
+// _app.js파일은 페이지가 렌더링 될때마다 가장 먼저 읽는 파일이다.(중요!)
 export default function App({ Component, pageProps }) {
   return (
     <>
@@ -8,15 +10,19 @@ export default function App({ Component, pageProps }) {
       <Navbar />
       
       <Component {...pageProps} />
-      <h1>Hello I&apos;m _app.js</h1>
 
       {/* 전역 설정법 -> global 추가 */}
       <style jsx global>
         {`
+          nav {
+            padding: 1rem;
+          }
           span {
             color: white;
+            cursor: pointer;
           }
           a {
+            margin-left: 10px;
             color: #fff;
           } 
         `}
