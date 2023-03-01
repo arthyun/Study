@@ -17,12 +17,13 @@ export default function App({ Component, pageProps }) {
             padding: 1rem;
           }
           span {
-            color: white;
+            color: #333;
             cursor: pointer;
+            font-weight: bold;
           }
           a {
             margin-left: 10px;
-            color: #fff;
+            color: #333;
           } 
         `}
       </style>
