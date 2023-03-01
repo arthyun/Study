@@ -1,10 +1,12 @@
 import next from "next";
-import Navbar from "./Navbar";
+import Seo from '../components/Seo';
 
 const About = () => {
+    
     return (
         <>
-        <h1>About Page!</h1>
+            <Seo title='About' />
+            <h1>About Page!</h1>
         </>
     );
 }
