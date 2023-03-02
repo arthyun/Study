@@ -5,30 +5,31 @@ import styles from '@/styles/Home.module.css';
 import Seo from '../components/Seo';
 import { useEffect, useState } from "react";
 
-const API_KEY = 'dbfc0f1988710cd09310a32ce02c086c';
+// const API_KEY = 'dbfc0f1988710cd09310a32ce02c086c';
 
-export default function Home() {
+export default function Home(props) {
 
   //API를 담을 state변수
-  const [movies, setMovies] = useState();
+  // const [movies, setMovies] = useState();
 
-  //API 호출문
-  useEffect(() => {
-      fetch(`/api/movies`)
-      .then(res => res.json())
-      .then(result => setMovies(result.results));
-  }, []);
+  //API 호출문(rewrites의 source값이 fetch에 매개변수로 들어감)
+  // useEffect(() => {
+  //     fetch(`/api/movies`)
+  //     .then(res => res.json())
+  //     .then(result => setMovies(result.results));
+  // }, []);
   //API를 정상적으로 불러왔다. -> 이제는 API_KEY를 암호화 해야한다!
-  console.log(movies);
+  // console.log(movies);
 
   return (
     <>
     <div className='container'>
       <Seo title='Home' />
-      {!movies && <h4>Loading...</h4>}
+      {/* SSR로 렌더하게 되면 Loading가 필요없음 */}
+      {/* {!movies && <h4>Loading...</h4>} */}
       {/* movies 뒤에 물음표(?)를 붙이는 이유는 movies가 undefined일때 map 함수가 작동되지 않도록 하기 위함이다. */}
       {
-        movies?.map(list => {
+        props.results?.map(list => {
           return (
             <div key={list.id}>
               <div className='movie' key={list.id}>
@@ -63,4 +64,17 @@ export default function Home() {
       `}</style>
     </>
   )
+}
+
+//SSR로 렌더하게 만들어 준다 -> getServerSideProps 함수 사용*
+export async function getServerSideProps() {
+  const res = await fetch(`http://localhost:3000/api/movies`);
+  const data = await res.json();
+  const results = await data.results;
+  //불러온 API(results)를 props로 사용하게 끔 return해준다.
+  return {
+    props: {
+      results,
+    },
+  };
 }
