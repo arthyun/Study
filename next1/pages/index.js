@@ -8,12 +8,13 @@ import { useEffect, useState } from "react";
 const API_KEY = 'dbfc0f1988710cd09310a32ce02c086c';
 
 export default function Home() {
+
   //API를 담을 state변수
   const [movies, setMovies] = useState();
 
   //API 호출문
   useEffect(() => {
-      fetch(`https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}`)
+      fetch(`/api/movies`)
       .then(res => res.json())
       .then(result => setMovies(result.results));
   }, []);
@@ -22,6 +23,7 @@ export default function Home() {
 
   return (
     <>
+    <div className='container'>
       <Seo title='Home' />
       {!movies && <h4>Loading...</h4>}
       {/* movies 뒤에 물음표(?)를 붙이는 이유는 movies가 undefined일때 map 함수가 작동되지 않도록 하기 위함이다. */}
@@ -29,11 +31,36 @@ export default function Home() {
         movies?.map(list => {
           return (
             <div key={list.id}>
-              <h4>{list.original_title}</h4>
+              <div className='movie' key={list.id}>
+                <img src={`https://image.tmdb.org/t/p/w500/${list.poster_path}`} />
+                <h4>{list.original_title}</h4>
+              </div>
             </div>
           )
         })
       }
+      </div>
+      <style jsx>{`
+        .container {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          padding: 20px;
+          gap: 20px;
+        }
+        .movie img {
+          max-width: 100%;
+          border-radius: 12px;
+          transition: transform 0.2s ease-in-out;
+          box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+        }
+        .movie:hover img {
+          transform: scale(1.05) translateY(-10px);
+        }
+        .movie h4 {
+          font-size: 18px;
+          text-align: center;
+        }
+      `}</style>
     </>
   )
 }

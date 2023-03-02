@@ -8,7 +8,7 @@ const Navbar = () => {
     //react router와는 다르게 Link태그는 경로만 지정가능하며 추가 속성을 이용하려면 Link안에 a태그를 지정해야한다.
     return (
         <nav>
-            <img src="/vercel.svg"/>
+            <img src="/vercel.svg" alt="logo" />
 
         {/* Link 구버전 */}
         {/* <Link href='/'>
