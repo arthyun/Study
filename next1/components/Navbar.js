@@ -52,7 +52,7 @@ const Navbar = () => {
                     max-width: 100px;
                     margin-bottom: 5px;
                 }
-                nav a {
+                nav span, nav a {
                     font-weight: 600;
                     font-size: 18px;
                 }
