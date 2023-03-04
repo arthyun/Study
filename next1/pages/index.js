@@ -33,7 +33,7 @@ export default function Home(props) {
           return (
             <div key={list.id}>
               <div className='movie' key={list.id}>
-                <img src={`https://image.tmdb.org/t/p/w500/${list.poster_path}`} />
+                <img src={`https://image.tmdb.org/t/p/w500${list.poster_path}`} />
                 <h4>{list.original_title}</h4>
               </div>
             </div>
@@ -47,6 +47,9 @@ export default function Home(props) {
           grid-template-columns: 1fr 1fr;
           padding: 20px;
           gap: 20px;
+        }
+        .movie {
+          cursor: pointer;
         }
         .movie img {
           max-width: 100%;
