@@ -11,8 +11,10 @@
 
 -> Typescript Studying...
 
--> Styled Components...
+-> Styled Components
 
--> Vue.js 다시보기...
+-> Vue.js 다시보기
 
--> Next.js 시작
+-> Next.js 입문 완료
+
+-> Firebase 시작...
