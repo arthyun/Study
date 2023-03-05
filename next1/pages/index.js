@@ -28,12 +28,7 @@ export default function Home(props) {
   const onClick = (id, title) => {
     //홈화면의 URL주소 바로 뒤에 다음 주소를 추가하기 위해 push()를 사용함.
     //as를 사용하여 URL을 숨기자! (push함수 두번째 인자로 원하는 값을 적어주면 된다.)**
-    router.push({
-      pathname: `/movies/${id}`,
-      query: {
-        title,
-      }
-    }, `/movies/${id}`);
+    router.push(`/movies/${title}/${id}`);
   }
 
   return (
@@ -50,12 +45,7 @@ export default function Home(props) {
                 <img src={`https://image.tmdb.org/t/p/w500${list.poster_path}`} />
                 <h4>
                   {/* Link의 href에도 똑같이 객체 데이터를 넣어줘야 a 태그 클릭 시 데이터가 넘어감 */}
-                  <Link href={{
-                      pathname: `/movies/${list.id}`,
-                      query: {
-                        title: list.original_title,
-                      }
-                    }} as={`/movies/${list.id}`} legacyBehavior>
+                  <Link href={`/movies/${list.original_title}/${list.id}`} legacyBehavior>
                     <a>{list.original_title}</a>
                   </Link>
                 </h4>
