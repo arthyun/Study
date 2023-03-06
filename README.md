@@ -8,13 +8,14 @@
 5. Kiosk App (Router, Redux, Redux-Persist 활용)
 6. FE 면접 문제 은행 App (React + TypeScript 활용)
 7. React/Redux로 로그인 기능을 구현해 보았다.
+8. 영화 데이터 받아와 출력하는 App (Next.js 활용)
 
--> Typescript Studying...
+- Vue.js 다시보기
 
--> Styled Components
+- Next.js 입문 완료
 
--> Vue.js 다시보기
+- Firebase 입문 완료
 
--> Next.js 입문 완료
+- Styled Components
 
--> Firebase 시작...
+- Typescript Studying...
