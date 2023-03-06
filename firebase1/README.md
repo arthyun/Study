@@ -37,4 +37,12 @@
     var 저장할경로 = storageRef.child('image/' + '파일명');
     var 업로드작업 = 저장할경로.put(file)
 
+7. 삭제 방법
+ - const onDeleteClick = async () => {
+        const ok = window.confirm("Are you sure you want to delete this nweet?");
+        if (ok) {
+        await dbService.doc(`nweets/${nweetObj.id}`).delete();
+        }
+    };
+
 * 항상 접근이 되지 않는다면 규칙에 들어가서 접근규칙을 허용해주어야 함! (true)
