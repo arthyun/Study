@@ -19,4 +19,9 @@
  - import firebase from 'firebase.js';
  - console.log(firebase);
 
-추가) npm install react-router-dom@5.3.0 -> 구버전이 좋다면!
+6. .env파일 생성 후 SDK값을 변수로 지정하기(값 은닉)
+ - React에서 사용되기 때문에 변수명 앞에 REACT_APP_를 추가해야한다.
+ - '=' 양옆에 띄어쓰기 금지
+ - .gitignore에 .env 추가
+
+* npm install react-router-dom@5.3.0 -> 구버전이 좋다면! *
