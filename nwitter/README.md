@@ -4,8 +4,9 @@
 
 2. npm install firebase@9.6.1
  - Firebase V9 업데이트 되면서. 이슈가 생겼습니다. 이에 코드의 큰 변경 없이 버전 9.0 을 사용하기 위해서. Firebase 의 'compat' 호환 버전 사용을 권장합니다.
- - import firebase from "firebase/compat/app";
- - import "firebase/compat/auth";
+ * 아래는 신버전일때 import 방법
+ - import { initializeApp } from "firebase/app";
+ - import { getAuth } from "firebase/auth";
  - import "firebase/compat/firestore";
  - import "firebase/compat/storage";
  
@@ -25,3 +26,6 @@
  - .gitignore에 .env 추가
 
 * npm install react-router-dom@5.3.0 -> 구버전이 좋다면! *
+
+7. auth(getAuth())를 호출하여 auth.currentUser를 통해 현재 값 확인
+ - state 변수에 auth.currentUser값을 추가함으로서 auth -> user의 변화를 감지한다.
