@@ -15,6 +15,8 @@
  - firebase.js에 해당 내용 추가해주기
  - 가장 상단에 firebase/app을 import 해주기(작성된 firebase.js 파일 확인)
 
-5. index.js에서 firebase.js import해주기
+5. index.js에서 firebase.js import해서 연결이 잘 되었는지 콘솔에 찍어보기
+ - import firebase from 'firebase.js';
+ - console.log(firebase);
 
 추가) npm install react-router-dom@5.3.0 -> 구버전이 좋다면!
