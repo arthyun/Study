@@ -1,4 +1,5 @@
-import firebase from 'firebase/compat/app';
+import { initializeApp } from 'firebase/app';
+import { getAuth } from 'firebase/auth';
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -10,4 +11,5 @@ const firebaseConfig = {
     appId: process.env.REACT_APP_APP_ID,
 };
 // Initialize Firebase
-export default firebase.initializeApp(firebaseConfig);
+const app = initializeApp(firebaseConfig);
+export const auth = getAuth(app);
