@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, GoogleAuthProvider, GithubAuthProvider, signInWithPopup } from 'firebase/auth';
 
 const Auth = () => {
     const [email, setEmail] = useState("");
@@ -50,6 +50,21 @@ const Auth = () => {
         setNewAccount(prev => !prev);
     }
 
+    //Social로 Log In 하고 싶을 때
+    const onSocialClick = async (e) => {
+        const { target: { name } } = e;
+        const auth = getAuth();
+        let provider;
+
+        if(name === "google"){
+            provider = new GoogleAuthProvider();
+        } else if(name === "github"){
+            provider = new GithubAuthProvider();
+        }
+        const data = await signInWithPopup(auth, provider);
+        console.log(data);
+    }
+
     return(
         <div>
             <form onSubmit={onSubmit}>
@@ -65,8 +80,8 @@ const Auth = () => {
             </span>
 
             <div>
-                <button name='google'>continue with Google</button>
-                <button name='github'>continue with Github</button>
+                <button onClick={onSocialClick} name='google'>continue with Google</button>
+                <button onClick={onSocialClick} name='github'>continue with Github</button>
                 {error}
             </div>
         </div>
