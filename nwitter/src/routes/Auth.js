@@ -47,7 +47,7 @@ const Auth = () => {
     //Log In 버튼 수정
     const toggleAccount = () => {
         //클릭 시 newAccount 값이 반대되게
-        setNewAccount(prev => !prev);
+        setNewAccount(val => !val);
     }
 
     //Social로 Log In 하고 싶을 때
