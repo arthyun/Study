@@ -1,26 +1,38 @@
 import React, { useEffect, useState } from 'react';
 import { db } from '../firebase';
-import { addDoc, getDocs, collection } from 'firebase/firestore';
+import { addDoc, getDocs, collection, onSnapshot, query, orderBy } from 'firebase/firestore';
 
-const Home = () => {
+
+const Home = ({userObj}) => {
     const [nweet, setNweet] = useState("");
     const [nweets, setNweets] = useState([]);
 
+    //구 방식(새로고침을 해야하는 불편함이 있음)
     //DB 데이터를 출력하려면 forEach문과 data()를 사용해야함
-    const getNweets = async () => {
-        const getDB = await getDocs(collection(db, "nweets"));
-        getDB.forEach(document => {
-            const nweetObj = {
-                ...document.data(),
-                id: document.id,
-            };
-            setNweets((current) => [nweetObj, ...current]);
-        })
-    };
+    // const getNweets = async () => {
+    //     const getDB = await getDocs(collection(db, "nweets"));
+    //     getDB.forEach(document => {
+    //         const nweetObj = {
+    //             ...document.data(),
+    //             id: document.id,
+    //         };
+    //         setNweets((current) => [nweetObj, ...current]);
+    //     })
+    // };
+
+    //신 방식(실시간으로 전달가능)
     useEffect(() => {
-        getNweets();
+        const que = query(collection(db, "nweets"), orderBy("createdAt", "desc"));
+        onSnapshot(que, (snapshot) => {
+            console.log(snapshot.docs);
+            const nweetArr = snapshot.docs.map((document) => ({
+                id: document.id,
+                ...document.data(),
+            }));
+            setNweets(nweetArr);
+        });
+        // getNweets();
     }, []);
-    console.log(nweets);
 
     const onChange = (e) => {
         const { target: {value} } = e;
@@ -32,8 +44,9 @@ const Home = () => {
         e.preventDefault();
         //promise를 반환하기 때문에 async, await를 사용(에러를 확인하려면 try/catch문 사용할 것)
         await addDoc(collection(db, "nweets"), {
-            nweet,
+            text: nweet,
             createdAt: Date.now(),
+            creatorId: userObj.uid,
         });
         setNweet("");
     }
@@ -46,10 +59,10 @@ const Home = () => {
             </form>
 
             <div>
-                {[...nweets].reverse().map(el => {
+                {nweets.map(el => {
                     return(
                         <div key={el.id}>
-                            <h4>{el.nweet}</h4>
+                            <h4>{el.text}</h4>
                         </div>
                     )
                 })}

@@ -7,6 +7,7 @@ import { auth } from '../firebase.js';
 function App() {
   const [init, setInit] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userObj, setUserObj] = useState(null);
   
   //onAuthStateChanged 함수로 auth의 상태를 체크할 수 있다.
   useEffect(() => {
@@ -14,6 +15,7 @@ function App() {
       if(user){
         //user가 있을때
         setIsLoggedIn(true);
+        setUserObj(user);
       } else {
         //user가 없을때
         setIsLoggedIn(false);
@@ -25,7 +27,7 @@ function App() {
   return (
     <BrowserRouter>
       <div className="App">
-          {init ? <AppRouter isLoggedIn={isLoggedIn} /> : "Initializing..."}
+          {init ? <AppRouter isLoggedIn={isLoggedIn} userObj={userObj} /> : "Initializing..."}
           <footer>&copy; {new Date().getFullYear()} Nwitter</footer>
       </div>
     </BrowserRouter>

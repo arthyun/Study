@@ -6,15 +6,15 @@ import EditProfile from '../routes/EditProfile';
 import { Routes, Route } from 'react-router-dom';
 import Nav from './Nav';
 
-const AppRouter = (props) => {
+const AppRouter = ({isLoggedIn, userObj}) => {
     
     return (
         <>
-        {props.isLoggedIn && <Nav />}
+        {isLoggedIn && <Nav />}
             <Routes>
-                {props.isLoggedIn ? 
+                {isLoggedIn ? 
                 <>
-                    <Route path='/' element={<Home />} />
+                    <Route path='/' element={<Home userObj={userObj} />} />
                     <Route path='/Profile' element={<Profile />} />
                     <Route path='/EditProfile' element={<EditProfile />} />
                 </>
