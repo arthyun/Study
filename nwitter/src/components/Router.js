@@ -6,7 +6,7 @@ import EditProfile from '../routes/EditProfile';
 import { Routes, Route } from 'react-router-dom';
 import Nav from './Nav';
 
-const AppRouter = ({isLoggedIn, userObj}) => {
+const AppRouter = ({ isLoggedIn, userObj }) => {
     
     return (
         <>

@@ -59,7 +59,6 @@ const Button = ({children, ...props} :Total) : JSX.Element => {
         <StyledButton {...props}>{children}</StyledButton>
         <StyledButton2 {...props}>{children}</StyledButton2>
         <StyledButton as='div' {...props}>{children}</StyledButton>
-        <Inputs type='text' value='input이다'/>
         </>
     );
 }

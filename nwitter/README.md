@@ -28,7 +28,18 @@
  - const data1 = await addDoc(collection(db, "콜렉션명"), { 전달될 값 });
  - const data2 = await getDocs(collection(db, "콜렉션명"));
   -> forEach문과 data()로 해당 DB 배열값 출력하기
- - onSnapshot, query는 해당 DB에 변화가 있을때 실행될 콜백을 가진다.
- - orderBy는 시간순 정렬을 하기위한 메소드이다.
+ - onSnapshot, query는 해당 DB가 UPDATE 되었을때 실행될 콜백을 가진다.
+  -> onSnapshot(db, method()); 첫번째 인자는 query결과물, 두번째 인자는 callback함수가 자리한다.
+  -> onSnapshot(db, method()) 내부에는 docs라는 객체가 있다. -> snapshot.docs.map()처럼 사용하게 됨.
+ - orderBy()는 정렬을 하기위한 메소드이다.
+
+8. DB 내용 삭제 및 변경하려고 할 때
+ - import { doc, deleteDoc, updateDoc } from 'firebase/firestore';
+ - const nweetRef = doc(db, "nweets", `${userObj.id}`) 선언 후
+  -> deleteDoc(nweetRef);
+ - const nweetRef = doc(db, "nweets", `${userObj.id}`) 선언 후
+  -> updateDoc(nweetRef, { text: state변수 });
 
 * npm install react-router-dom@5.3.0 -> 구버전이 좋다면! *
+* {값 && 값} 표현방식은 앞에 값이 true면 뒤에 값을 출력하고 앞에 값이 false라면 뒤에 값을 출력하지 않는다.
+* spread operator는 매우 유용하며 객체 생성 시 복사의 목적을 가지며 전개구문이라하여 해당 값들을 일렬로 전개 시켜준다.

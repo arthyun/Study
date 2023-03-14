@@ -1,4 +1,4 @@
-# React, Redux, TypeScript, Vue Study
+# Study List
 
 <React를 활용한 미니 프로젝트>
 1. 잔고 확인 App (useReducer Hook 활용)
@@ -9,13 +9,16 @@
 6. FE 면접 문제 은행 App (React + TypeScript 활용)
 7. React/Redux로 로그인 기능을 구현해 보았다.
 8. 영화 데이터 받아와 출력하는 App (Next.js 활용)
+9. Twitter를 모방한 Nwitter App (React, Firebase 활용)
 
-- Vue.js 다시보기
+- Vue.js 다시보기...
 
-- Next.js 입문 완료
+- Next.js Checked
 
-- Firebase 입문 완료
+- Firebase Checked
 
-- Styled Components
+- Styled Components Checked
+
+- Materiak UI Checked
 
 - Typescript Studying...

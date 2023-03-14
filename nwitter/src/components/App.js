@@ -14,7 +14,6 @@ function App() {
     auth.onAuthStateChanged((user) => {
       if(user){
         //user가 있을때
-        setIsLoggedIn(true);
         setUserObj(user);
       } else {
         //user가 없을때
@@ -27,7 +26,7 @@ function App() {
   return (
     <BrowserRouter>
       <div className="App">
-          {init ? <AppRouter isLoggedIn={isLoggedIn} userObj={userObj} /> : "Initializing..."}
+          {init ? <AppRouter isLoggedIn={Boolean(userObj)} userObj={userObj} /> : "Initializing..."}
           <footer>&copy; {new Date().getFullYear()} Nwitter</footer>
       </div>
     </BrowserRouter>
