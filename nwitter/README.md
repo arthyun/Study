@@ -23,4 +23,10 @@
  - '=' 양옆에 띄어쓰기 금지
  - .gitignore에 .env 추가
 
+7. 각 페이지에서 DB에 접근하려면* - v9 이상 기준
+ - import { addDoc, getDocs, collection } from 'firebase/firestore';
+ - const data1 = await addDoc(collection(db, "콜렉션명"), { 전달될 값 });
+ - const data2 = await getDocs(collection(db, "콜렉션명"));
+  -> forEach문과 data()로 해당 DB 배열값 출력하기
+
 * npm install react-router-dom@5.3.0 -> 구버전이 좋다면! *
