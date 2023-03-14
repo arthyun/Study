@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { db } from '../firebase';
 import { addDoc, getDocs, collection, onSnapshot, query, orderBy } from 'firebase/firestore';
+import Nweet from '../components/Nweet';
 
 
-const Home = ({userObj}) => {
+const Home = ({ userObj }) => {
     const [nweet, setNweet] = useState("");
     const [nweets, setNweets] = useState([]);
 
@@ -20,15 +21,14 @@ const Home = ({userObj}) => {
     //     })
     // };
 
-    //신 방식(실시간으로 전달가능)
+    //신 방식(실시간으로 전달가능) -> onSnapshot() 내부에는 docs라는 객체가 있다.
     useEffect(() => {
-        const que = query(collection(db, "nweets"), orderBy("createdAt", "desc"));
-        onSnapshot(que, (snapshot) => {
-            console.log(snapshot.docs);
-            const nweetArr = snapshot.docs.map((document) => ({
-                id: document.id,
-                ...document.data(),
-            }));
+        const que = query(collection(db,"nweets"), orderBy("createdAt","desc"));
+            onSnapshot(que, (snapshot) => {
+                const nweetArr = snapshot.docs.map((document) => ({
+                    id: document.id,
+                    ...document.data(),
+                }));
             setNweets(nweetArr);
         });
         // getNweets();
@@ -60,10 +60,10 @@ const Home = ({userObj}) => {
 
             <div>
                 {nweets.map(el => {
-                    return(
-                        <div key={el.id}>
-                            <h4>{el.text}</h4>
-                        </div>
+                    return (
+                        <Nweet key={el.id} 
+                        userObj={el} 
+                        isOwner={el.creatorId === userObj.uid} />
                     )
                 })}
             </div>
