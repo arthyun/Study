@@ -5,8 +5,12 @@ const Home = () => {
     const localInspect = localStorage.getItem("user");
     const [result, setResult] = useState(JSON.parse(localInspect));
     
+    // const onDelete = (person) => {
+    //     const met1 = result.filter(el => !el.아이디.includes(person));
+    //     setResult(met1);
+    // }
     const onDelete = (person) => {
-        const met1 = result.filter(el => !el.아이디.includes(person));
+        const met1 = result.filter(el => el.id !== person);
         setResult(met1);
     }
 
@@ -22,7 +26,7 @@ const Home = () => {
                                     <dt>계정명: {list.아이디}</dt>
                                     <dd>암호: {list.비밀번호}</dd>
                                 </dl>
-                                <button onClick={()=>onDelete(list.아이디)}>❌</button>
+                                <button onClick={()=>onDelete(list.id)}>❌</button>
                             </li>
                         )
                     })
