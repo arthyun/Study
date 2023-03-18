@@ -116,7 +116,7 @@ const respond = (who: Response1, life: Response1): void => {
 };
 respond(Response1.name, Response1.age);
 
-// 유틸리니를 사용하는 법
+// 유틸리티를 사용하는 법
 interface User {
     name: string;
     age: number;
@@ -422,3 +422,20 @@ fetch(jsonURL, {
 .then((data) => 
     console.log(data)
 )
+
+const player = {
+    age: 12
+}
+player.age = 15;
+
+type tuple1 = [number, string];
+type tuple2 = {
+    [key in string]: string;
+};
+
+const they:tuple2[] = [
+    {
+        name: '10', 
+        bar: 'hyun'
+    }
+];

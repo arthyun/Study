@@ -298,3 +298,13 @@ fetch(jsonURL, {
 })
     .then((res) => res.json())
     .then((data) => console.log(data));
+const player = {
+    age: 12
+};
+player.age = 15;
+const they = [
+    {
+        name: '10',
+        bar: 'hyun'
+    }
+];
