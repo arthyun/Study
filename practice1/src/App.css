@@ -1,0 +1,7 @@
+.navlink {
+  text-decoration: none;
+  color: #333;
+}
+.active span {
+  font-weight: bold;
+}
