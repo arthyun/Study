@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import SignIn from './components/SignIn';
-// import AppRouter from './components/Router';
 import Dashboard from './components/Dashboard';
+// 라우터를 어떻게 사용할 것이냐
+// import AppRouter from './components/Router';
 
 
 function App() {
