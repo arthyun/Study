@@ -13,6 +13,7 @@ import Link from '@mui/material/Link';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import NotificationsIcon from '@mui/icons-material/Notifications';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import ListItems from './ListItems';
 import Home from './Home';
 import User from './User';
@@ -117,12 +118,13 @@ function DashboardContent() {
               noWrap
               sx={{ flexGrow: 1 }}
             >
-              Dashboard(헤더자리)
+              회사명(로고)
             </Typography>
             <IconButton color="inherit">
-              <Badge badgeContent={4} color="secondary">
+              {/* <Badge badgeContent={4} color="secondary">
                 <NotificationsIcon />
-              </Badge>
+              </Badge> */}
+                <CheckCircleIcon style={{width: '1.5em', height: '1.5em'}} />
             </IconButton>
           </Toolbar>
         </AppBar>
@@ -131,11 +133,11 @@ function DashboardContent() {
             sx={{
               display: 'flex',
               alignItems: 'center',
-              justifyContent: 'space-between',
+              justifyContent: 'end',
               px: [1],
             }}
           >
-            <h2>Logo</h2>
+            {/* <h2>Logo</h2> */}
             <IconButton onClick={toggleDrawer}>
               <ChevronLeftIcon />
             </IconButton>

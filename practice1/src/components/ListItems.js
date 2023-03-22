@@ -23,8 +23,8 @@ import '../App.css';
 
 export default function ListItems(){
 
-  const [open1, setOpen1] = React.useState(false);
-  const [open2, setOpen2] = React.useState(false);
+  const [open1, setOpen1] = React.useState(true);
+  const [open2, setOpen2] = React.useState(true);
   const handleClick1 = () => {
     setOpen1(!open1);
   };  
@@ -82,7 +82,7 @@ export default function ListItems(){
                 <ListItemIcon>
                   <StarBorder />
                 </ListItemIcon>
-                <ListItemText primary="사용자 설정 관리" />
+                <ListItemText primary="시스템 설정 메뉴" />
               </ListItemButton>
             </List>
         </Collapse>
@@ -114,7 +114,7 @@ export default function ListItems(){
                 <ListItemIcon>
                   <StarBorder />
                 </ListItemIcon>
-                <ListItemText primary="조회1" />
+                <ListItemText primary="Origin Content 현황" />
               </ListItemButton>
             </List>
         </Collapse>
@@ -124,7 +124,7 @@ export default function ListItems(){
                 <ListItemIcon>
                   <StarBorder />
                 </ListItemIcon>
-                <ListItemText primary="조회2" />
+                <ListItemText primary="NAS Content 현황" />
               </ListItemButton>
             </List>
         </Collapse>
