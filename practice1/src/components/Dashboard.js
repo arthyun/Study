@@ -8,17 +8,16 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
-import Badge from '@mui/material/Badge';
 import Link from '@mui/material/Link';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import NotificationsIcon from '@mui/icons-material/Notifications';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import ListItems from './ListItems';
 import Home from './Home';
-import User from './User';
+import Upload from './Upload';
 import Content from './Content';
 import Board from './Board';
+import User from './User';
 import { Routes, Route } from 'react-router-dom';
 
 
@@ -166,9 +165,10 @@ function DashboardContent() {
           {/* 라우터 자리 */}
           <Routes>
             <Route path='/' element={<Home />} />
-            <Route path='/user' element={<User />} />
+            <Route path='/upload' element={<Upload />} />
             <Route path='/content' element={<Content />} />
             <Route path='/board' element={<Board />} />
+            <Route path='/user' element={<User />} />
           </Routes>
 
           <Copyright />

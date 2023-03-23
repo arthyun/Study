@@ -45,6 +45,76 @@ export default function ListItems(){
           </ListItemButton>
         </NavLink>
 
+        <NavLink className='navlink' to='/upload'>
+          <ListItemButton>
+            <ListItemIcon>
+              <DashboardIcon />
+            </ListItemIcon>
+            <ListItemText primary="컨텐츠 업로드" />
+          </ListItemButton>
+        </NavLink>
+
+
+        {/* 2depth */}
+        <ListItemButton onClick={handleClick2}>
+            <ListItemIcon>
+              <BarChartIcon />
+            </ListItemIcon>
+            <ListItemText primary="컨텐츠 현황" />
+            {open2 ? <ExpandLess /> : <ExpandMore />}
+        </ListItemButton>
+        <Collapse in={open2} timeout="auto" unmountOnExit>
+            <List component="div" disablePadding>
+              <NavLink className='navlink' to='/content'>
+                <ListItemButton sx={{ pl: 4 }}>
+                  <ListItemIcon>
+                    <StarBorder />
+                  </ListItemIcon>
+                  <ListItemText primary="컨텐츠 현황" />
+                </ListItemButton>
+              </NavLink>
+            </List>
+        </Collapse>
+        <Collapse in={open2} timeout="auto" unmountOnExit>
+            <List component="div" disablePadding>
+                <ListItemButton sx={{ pl: 4 }}>
+                  <ListItemIcon>
+                    <StarBorder />
+                  </ListItemIcon>
+                  <ListItemText primary="트렌스코딩 이력" />
+                </ListItemButton>
+            </List>
+        </Collapse>
+        <Collapse in={open2} timeout="auto" unmountOnExit>
+            <List component="div" disablePadding>
+              <ListItemButton sx={{ pl: 4 }}>
+                <ListItemIcon>
+                  <StarBorder />
+                </ListItemIcon>
+                <ListItemText primary="Origin Content 현황" />
+              </ListItemButton>
+            </List>
+        </Collapse>
+        <Collapse in={open2} timeout="auto" unmountOnExit>
+            <List component="div" disablePadding>
+              <ListItemButton sx={{ pl: 4 }}>
+                <ListItemIcon>
+                  <StarBorder />
+                </ListItemIcon>
+                <ListItemText primary="NAS Content 현황" />
+              </ListItemButton>
+            </List>
+        </Collapse>
+
+        <NavLink className='navlink' to='/Board'>
+          <ListItemButton>
+            <ListItemIcon>
+              <AssignmentIcon />
+            </ListItemIcon>
+            <ListItemText primary="게시판" />
+          </ListItemButton>
+        </NavLink>
+
 
         {/* 2depth */}
         <ListItemButton onClick={handleClick1}>
@@ -86,57 +156,6 @@ export default function ListItems(){
               </ListItemButton>
             </List>
         </Collapse>
-
-
-        {/* 2depth */}
-        <ListItemButton onClick={handleClick2}>
-            <ListItemIcon>
-              <BarChartIcon />
-            </ListItemIcon>
-            <ListItemText primary="컨텐츠 현황" />
-            {open2 ? <ExpandLess /> : <ExpandMore />}
-        </ListItemButton>
-        <Collapse in={open2} timeout="auto" unmountOnExit>
-            <List component="div" disablePadding>
-              <NavLink className='navlink' to='/content'>
-                <ListItemButton sx={{ pl: 4 }}>
-                  <ListItemIcon>
-                    <StarBorder />
-                  </ListItemIcon>
-                  <ListItemText primary="트렌스코딩 이력" />
-                </ListItemButton>
-              </NavLink>
-            </List>
-        </Collapse>
-        <Collapse in={open2} timeout="auto" unmountOnExit>
-            <List component="div" disablePadding>
-              <ListItemButton sx={{ pl: 4 }}>
-                <ListItemIcon>
-                  <StarBorder />
-                </ListItemIcon>
-                <ListItemText primary="Origin Content 현황" />
-              </ListItemButton>
-            </List>
-        </Collapse>
-        <Collapse in={open2} timeout="auto" unmountOnExit>
-            <List component="div" disablePadding>
-              <ListItemButton sx={{ pl: 4 }}>
-                <ListItemIcon>
-                  <StarBorder />
-                </ListItemIcon>
-                <ListItemText primary="NAS Content 현황" />
-              </ListItemButton>
-            </List>
-        </Collapse>
-
-        <NavLink className='navlink' to='/Board'>
-          <ListItemButton>
-            <ListItemIcon>
-              <AssignmentIcon />
-            </ListItemIcon>
-            <ListItemText primary="게시판" />
-          </ListItemButton>
-        </NavLink>
 
       <Divider sx={{ my: 1 }} />
     </List>
