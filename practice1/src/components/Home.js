@@ -1,73 +1,94 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import PostList from '../안쓰는거 모음/Pagenation';
+import PostList from '../안쓰는거 모음/Pagination';
 
 const Home = () => {
     return (
         <div className='homeWrap'>
-            <div className='leftContent'>
+            <div className='topContent'>
                 <h1>Dashboard</h1>
-                <PostList />
-            </div>
-            <div className='rightContent'>
                 <h4>{`${new Date().getFullYear()}.${new Date().getDay()}.${new Date().getDate()}`}</h4>
                 <ul>
-                    <li><Link to='/user'>Setting</Link></li>
-                    <li><Link to='/content'>Contents</Link></li>
-                    <li><Link to='/board'>Board</Link></li>
+                    <li><Link to='/upload'>icon</Link>Upload</li>
+                    <li><Link to='/content'>icon</Link>Contents</li>
+                    <li><Link to='/board'>icon</Link>Board</li>
+                    <li><Link to='/user'>icon</Link>Setting</li>
                 </ul>
             </div>
+
+            <div className='bottomContent'>
+                <PostList />
+            </div>
+            
         
         <style jsx='true'>
         {`
             .homeWrap {
                 margin-top: 64px;
                 width: 100%;
-                display: flex;
+                overflow: hidden;
             }
             .homeWrap > div {
                 padding: 2rem;
                 box-sizing: border-box;
             }
-            .leftContent {
-                width: 50%;
-                height: 200px;
+            .topContent {
+                width: 100%;
+                border: 5px solid red;
             }
-            .rightContent {
-                width: 50%;
+            h1 {
+                margin: 0;
             }
-            .rightContent h4 {
+            h4 {
                 text-align: end;
+                font-size: 24px;
+                font-weight: normal;
                 color: #999;
+                margin: 0;
+                margin-bottom: .5rem;
             }
-            .rightContent ul {
+            .topContent ul {
+                margin: 0;
                 box-sizing: border-box;
-                list-style: none;
-                display: grid;
-                grid-template-columns: 1fr 1fr;
-                grid-gap: 1rem;
-            }
-            .rightContent ul li {
                 border: 1px solid #333;
                 border-radius: 15px;
-                box-sizing: border-box;
-                width: 100%;
-                overflow: hidden;
+                padding: 2rem 0;
+                list-style: none;
+                display: flex;
+                justify-content: center;
+                background: #ddd;
             }
-            .rightContent ul li a {
+            .topContent ul li {
+                width: 20%;
+                overflow: hidden;
+                text-align: center;
+            }
+            .topContent ul li a {
                 display: block;
                 text-align: center;
                 text-decoration: none;
                 color: #333;
                 font-weight: bold;
-                padding: 3rem;
+                width: 80px;
+                height: 80px;
+                border-radius: 80px;
+                border: 1px solid #333;
+                margin: 0 auto;
+                margin-bottom: .75rem;
+                line-height: 5rem;
             }
-            .rightContent ul li a:hover {
+            .topContent ul li a:hover {
                 background-color: red;
                 color: #fff;
             }
-            .rightContent ul li:nth-child(3) {
+            .topContent ul li:nth-child(3) {
                 grid-column: 1/3;
+            }
+
+            .bottomContent {
+                width: 100%;
+                height: 600px;
+                border: 5px solid red;
             }
         `}
 

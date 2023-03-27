@@ -63,6 +63,15 @@ const PostList = () => {
           ))}
         </ul>
       </nav>
+
+      <style jsx='true'>
+        {`
+          .pagination {
+            list-style: none;
+            display: flex;
+          }
+        `}
+      </style>
     </div>
   );
 };
