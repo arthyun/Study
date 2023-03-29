@@ -24,7 +24,7 @@ const PostList = () => {
 
   // Page numbers
   const pageNumbers = [];
-  for (let i = 1; i <= Math.ceil(posts.length / postsPerPage); i++) {
+  for(let i = 1; i <= Math.ceil(posts.length / postsPerPage); i++){
     pageNumbers.push(i);
   }
 

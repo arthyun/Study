@@ -9,8 +9,8 @@ const Home = () => {
     //     const met1 = result.filter(el => !el.아이디.includes(person));
     //     setResult(met1);
     // }
-    const onDelete = (person) => {
-        const met1 = result.filter(el => el.id !== person);
+    const onDelete = (id) => {
+        const met1 = result.filter(el => el.id !== id);
         setResult(met1);
     }
 

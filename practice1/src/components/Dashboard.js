@@ -19,6 +19,7 @@ import Content from './Content';
 import Board from './Board';
 import User from './User';
 import { Routes, Route } from 'react-router-dom';
+import App1 from '../안쓰는거 모음/ExDatagrid';
 
 
 function Copyright(props) {
@@ -163,13 +164,16 @@ function DashboardContent() {
         >
           
           {/* 라우터 자리 */}
-          <Routes>
+          {/* <Routes>
             <Route path='/' element={<Home />} />
             <Route path='/upload' element={<Upload />} />
             <Route path='/content' element={<Content />} />
             <Route path='/board' element={<Board />} />
             <Route path='/user' element={<User />} />
-          </Routes>
+          </Routes> */}
+
+          {/* DataGrid 테스트 자리 */}
+          <App1 />
 
           <Copyright />
 
