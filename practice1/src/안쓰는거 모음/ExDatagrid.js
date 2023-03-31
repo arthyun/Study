@@ -187,33 +187,32 @@ const Datagrid = () => {
       width: 100,
       renderCell: () => (
         <>
-        <Button 
-          variant='contained'
-          color='primary'
-          size='small'
-          style={{ minWidth: '60px' }}
-          // onClick={handleClick}
-          onClick={handleOpen}
-        >
-          <PlayArrowIcon/>
-        </Button>
-        <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="parent-modal-title"
-        aria-describedby="parent-modal-description"
-        >
-          <Box className='videoZone' sx={{ ...style, width: 640, height: 360 }}>
-            {open && ( <ReactPlayer url="./images/test2.mp4" playing /> )}
-          </Box>
-        </Modal>
+          <Button 
+            variant='contained'
+            color='primary'
+            size='small'
+            style={{ minWidth: '50px', background: '#e00'}}
+            // onClick={handleClick}
+            onClick={handleOpen}
+          >
+            <PlayArrowIcon/>
+          </Button>
+          <Modal
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="parent-modal-title"
+          aria-describedby="parent-modal-description"
+          >
+            <Box className='videoZone' sx={{ ...style, width: 640, height: 360 }}>
+              {open && ( <ReactPlayer url="./images/test2.mp4" playing /> )}
+            </Box>
+          </Modal>
         </>
       )
     },
   ];
 
-  const rows = [
-      {   
+  const rows = [{   
           id: 1,
           seqNo: 2,
           fileName: "sign.png",
@@ -223,8 +222,7 @@ const Datagrid = () => {
           progress: "55",
           startTransCoding: "2023-03-20T14:59:02",
           finishTransCoding: "2023-03-21T14:59:02",
-      }
-  ];
+      }];
 
   return (
     <Box sx={{ height: 400, width: '80%', margin: '200px auto', background: '#fff' }}>
