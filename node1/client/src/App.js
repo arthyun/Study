@@ -7,6 +7,7 @@ import TableRow from '@mui/material/TableRow';
 import TableCell from '@mui/material/TableCell';
 import Paper from '@mui/material/Paper';
 import { withStyles, ThemeProvider } from '@mui/styles';
+import { useEffect, useState } from 'react';
 
 
 
@@ -22,35 +23,27 @@ const styles = theme => ({
 })
 
 
-const customers = [
-  {
-    id: 1,
-    image: 'http://placeimg.com/64/64/any',
-    name: '홍길동',
-    birthday: '961222',
-    gender: '200',
-    job: '대학생'
-  },
-  {
-    id: 2,
-    image: 'http://placeimg.com/64/64/any',
-    name: '김김김',
-    birthday: '931222',
-    gender: '200',
-    job: '프로그래머'
-  },
-  {
-    id: 3,
-    image: 'http://placeimg.com/64/64/any',
-    name: '손손손',
-    birthday: '981222',
-    gender: '200',
-    job: '의사'
-  }
-]
-
 function App() {
   const classes = styles();
+
+  //data 담을곳
+  const [customers, setCustomers] = useState([]);
+
+  const callApi = async () => {
+    const response = await fetch('http://localhost:5000/api/customers');
+    const body = await response.json();
+    return body;
+  }
+
+  //페이지 접속 후 데이터 불러옴
+  useEffect(() => {
+    callApi()
+    .then(res => setCustomers(res))
+    .catch(err => console.log(err));
+  }, [])
+
+  console.log(customers);
+
 
   return (
     <ThemeProvider style={classes.root}>
