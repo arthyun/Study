@@ -18,28 +18,43 @@ const initialState = {
             content: '3번째 게시물 내용입니다.',
             date: `${new Date().toLocaleDateString()}`,
         },
-    ]
+    ],
+    data: [ 
+        {
+            id: '',
+            seqNo: '',
+        }
+    ],
 };
 
-const test1 = (state = initialState, action) => {
+const list1 = (state = initialState, action) => {
     switch(action.type){
-        case 'increment':
-            const newArr = {
-                id: action.payload.id, 
-                subject: action.payload.subject,
-                content: action.payload.content,
-                date: `${new Date().toLocaleDateString()}`
-            }
-            return {
-                board: [...state.board, newArr],
-            };
-        case 'delete':
-            return {
-                board: [...state.board.filter(list => list.id !== action.payload.id)]
-            }
+        // case 'increment':
+        //     const newArr = {
+        //         id: action.payload.id, 
+        //         subject: action.payload.subject,
+        //         content: action.payload.content,
+        //         date: `${new Date().toLocaleDateString()}`
+        //     }
+        //     return {
+        //         board: [...state.board, newArr],
+        //     };
+        // case 'delete':
+        //     return {
+        //         board: [...state.board.filter(list => list.id !== action.payload.id)]
+        //     };
+        case 'fetch':
+            console.log(state);
+            // return {
+            //     ...state,
+            //     data: [...state.data, {
+            //         id: action.payload.id,
+            //         seqNo: action.payload.seqNo,
+            //     }],
+            // };
         default:
             return state;
     }
 };
 
-export default test1;
+export default list1;

@@ -1,5 +1,5 @@
 import './App.css';
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import Content from './components/Content.js';
 import Content2 from './components/Content2.js';
@@ -77,6 +77,37 @@ function App() {
     }
   }
 
+
+  function useInterval(callback, delay) {
+    const savedCallback = useRef();
+    useEffect(() => {
+      savedCallback.current = callback;
+    }, [callback]);
+  
+    useEffect(() => {
+      function tick() {
+        savedCallback.current();
+      }
+      if (delay !== null) {
+        let id = setInterval(tick, delay);
+        return () => clearInterval(id);
+      }
+    }, [delay]);
+  }
+  
+  function Test() {
+    const [count, setCount] = useState(0);
+  
+    useInterval(() => {
+      setCount(count + 1);
+    }, 1000);
+
+    return (
+      <p>{count}</p>
+    )
+  }
+
+
   return (
     <Router>
       <div className="App">
@@ -88,6 +119,8 @@ function App() {
         }} state1={mode} />
 
         {_article}
+
+        <Test/>
       </div>
     </Router>
   );

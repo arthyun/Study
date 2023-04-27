@@ -46,6 +46,16 @@ function App(){
         }}>등록</button>
       </div>
 
+      <button onClick={() => {
+        dispatch({
+          type: 'fetch',
+          payload: {
+            id: 1,
+            seqNo: 2,
+          }
+        })
+      }}>데이터 전송!</button>
+
     </div>
   );
 }

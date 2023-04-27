@@ -8,7 +8,7 @@ const Content = () => {
     const list = useSelector(state => { 
         return state.list1.board;
     });
-    console.log(list)
+    // console.log(list)
 
     return(
         <>
@@ -22,18 +22,18 @@ const Content = () => {
 
             <ul className='boardlist'>
             {
-                list.map((list, i) => {
-                    return <li key={i} data-id={(i+1)}>
-                            <p>{list.id}</p>
-                            <p>{list.subject} &nbsp;
-                                <span onClick={() => {
-                                    dispatch({ type:'delete', payload: {id: list.id} })
-                                }}>❌</span>
-                            </p>
-                            {/* <p>{list.content}</p> */}
-                            <p>{list.date}</p>
-                           </li>
-                })
+                // list.map((list, i) => {
+                //     return <li key={i} data-id={(i+1)}>
+                //             <p>{list.id}</p>
+                //             <p>{list.subject} &nbsp;
+                //                 <span onClick={() => {
+                //                     dispatch({ type:'delete', payload: {id: list.id} })
+                //                 }}>❌</span>
+                //             </p>
+                //             {/* <p>{list.content}</p> */}
+                //             <p>{list.date}</p>
+                //         </li>
+                // })
             }
             </ul>
         </>
