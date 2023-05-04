@@ -9,7 +9,13 @@
         "dev": "concurrently \"npm run server\" \"npm run client\""
     },
 
-4. mongoose 문법 이해하기
+4. MongoDB 실행하기(mongod)
+ - 우선 터미널에서 mongodb를 homebrew를 통해 실행시킨다.
+  - brew services start mongodb-community(시작)
+  - brew services stop mongodb-community(종료)
+ - 이후 MongoDB Compass를 실행시켜 접속한다.
+
+5. mongoose 문법 이해하기
  1. DB 연결설정
  - const mongoose = require('mongoose');
  - mongoose.connect('mongodb://localhost/my_database', {

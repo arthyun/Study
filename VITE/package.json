@@ -1,14 +1,15 @@
 {
   "scripts": {
-        "client": "cd client && npm run dev",
-        "server": "nodemon server.js",
-        "dev": "concurrently \"npm run server\" \"npm run client\""
+    "client": "cd client && npm run dev",
+    "server": "nodemon server.js",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "dependencies": {
     "body-parser": "^1.20.2",
     "concurrently": "^8.0.1",
     "cors": "^2.8.5",
     "express": "^4.18.2",
+    "mongoose": "^7.1.0",
     "nodemon": "^2.0.22"
   }
 }

@@ -3,6 +3,15 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const app = express();
 
+//DB
+const mongoose = require('mongoose');
+mongoose.connect('', {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+});
+const db = mongoose.connection;
+db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+
 //연결문
 app.use(cors());
 app.use(bodyParser.json());
