@@ -9,7 +9,7 @@
         "dev": "concurrently \"npm run server\" \"npm run client\""
     },
 
-4. MongoDB 실행하기(mongod)
+4. MongoDB 실행하기(mongod) -> 커맨드 제발 외워라 현호야~!
  - 우선 터미널에서 mongodb를 homebrew를 통해 실행시킨다.
   - brew services start mongodb-community(시작)
   - brew services stop mongodb-community(종료)
