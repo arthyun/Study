@@ -20,7 +20,7 @@ mongoose.connect('mongodb://localhost:27017/test1', {
 });
 
 //DB 지정
-const db = mongoose.connection;
+// const db = mongoose.connection;
 
 //DB 설계
 const UserSchema = new mongoose.Schema({
@@ -37,15 +37,23 @@ const newUser = new UserModel({
     gender: 'male'
 });
 
-//DB에 객체 저장
-newUser.save()
-.then(() => {
-    console.log('Object saved to the database!');
-})
-.catch((error) => {
-    console.log('Error saving object:', error);
-});
+//DB에 객체 저장(req.body를 대입하여 저장하는 방법 구현할 것!)
+// newUser.save()
+// .then(() => {
+//     console.log('Object saved to the database!');
+// })
+// .catch((error) => {
+//     console.log('Error saving object:', error);
+// });
 
+//DB 불러오기
+var data1 = [];
+UserModel.find()
+.then(res => {
+    data1.push(res[0]);
+    console.log(data1);
+})
+.catch(err => console.log(err));
 
 //CRUD 연산 수행하기
 // app.get('/user', (req, res) => {
