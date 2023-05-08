@@ -46,12 +46,15 @@
 
  - app.get('/users/:id', (req, res) => {
     const { id } = req.params;
-    UserModel.findById(id, (err, user) => {
-        if (err) return res.status(500).send(err);
-        if (!user) return res.status(404).send('User not found');
-        res.json(user);
-    });
-  });
+    var data1 = [];
+        UserModel.find()
+        .then(res => {
+            data1.push(res[0]);
+            console.log(data1);
+            })
+        .catch(err => console.log(err));
+        });
+});
 
  - app.patch('/users/:id', (req, res) => {
     const { id } = req.params;

@@ -37,34 +37,34 @@ const newUser = new UserModel({
     gender: 'male'
 });
 
-//DB에 객체 저장(req.body를 대입하여 저장하는 방법 구현할 것!)
+//DB에 객체 저장(save),(req.body를 대입하여 저장하는 방법 구현할 것!)
 // newUser.save()
 // .then(() => {
-//     console.log('Object saved to the database!');
+//     console.log('DB에 저장 성공!');
 // })
 // .catch((error) => {
 //     console.log('Error saving object:', error);
 // });
 
-//DB 불러오기
-var data1 = [];
-UserModel.find()
-.then(res => {
-    data1.push(res[0]);
-    console.log(data1);
-})
-.catch(err => console.log(err));
+//DB 불러오기(find, findById)
+// var data1 = [];
+// UserModel.find()
+// .then(res => {
+//     data1.push(res[0]);
+//     console.log(data1);
+// })
+// .catch(err => console.log(err));
+
+//DB 삭제하기(deleteOne, deleteMany),(req.params로 전달 받아서 삭제 가능)
+// UserModel.deleteOne({ name: '현호2' })
+// .then(res => {
+//     console.log(res);
+// })
+// .catch(err => console.log(err));
 
 //CRUD 연산 수행하기
 // app.get('/user', (req, res) => {
-// //     var data = [];
 
-// //     UserModel.find({})
-// //     .then(res => data.push(res))
-// //     .catch(err => console.log(err));
-
-//     // res.send({ user : data });
-//     res.send({ status: 'success' });
 // });
 
 //포트 연결 확인
