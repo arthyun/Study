@@ -47,11 +47,11 @@ const newUser = new UserModel({
 // });
 
 //DB 불러오기(find, findById)
-// var data1 = [];
+// var data1 = []; 
 // UserModel.find()
 // .then(res => {
-//     data1.push(res[0]);
-//     console.log(data1);
+//     // data1.push(res[0]);
+//     console.log(res);
 // })
 // .catch(err => console.log(err));
 
@@ -62,16 +62,38 @@ const newUser = new UserModel({
 // })
 // .catch(err => console.log(err));
 
-//CRUD 연산 수행하기
-// app.get('/user', (req, res) => {
+//DB 수정하기(updateOne, updateMany)
+// UserModel.updateOne({ name: '현호' }, { name: '바보똥개' })
+// .then(res => {
+//     console.log(res);
+// })
+// .catch(err => console.log(err));
 
-// });
+// UserModel.find()
+// .then(res => {
+//     const newData = res.map(el => el);
+//     console.log(newData);
+// })
+// .catch(err => console.log(err));
+
+//CRUD 연산 수행하기
+app.get('/', (req, res) => {
+    UserModel.find()
+    .then(data => {
+        const newData = data.map(el => el);
+        const result = JSON.stringify(newData);
+        // res.setHeader('Content-Type', 'application/json');
+        res.send(result);
+    })
+    .catch(err => {
+        console.log(err);
+    });
+});
 
 //포트 연결 확인
 app.listen(5000, () => {
     console.log('포트에 연결됐당께~');
 })
-
 
 // //ejs test
 // var data = [];
