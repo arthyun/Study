@@ -26,56 +26,53 @@
  - db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
  2. 데이터모델 정의
- - const { Schema } = mongoose;
- - const UserSchema = new Schema({
-    username: { type: String, required: true },
-    password: { type: String, required: true },
-    email: { type: String, required: true },
+ - const UserSchema = new mongoose.Schema({
+    name: String,
+    phone: String,
+    email: String,
+    gender: String,
   });
  - const UserModel = mongoose.model('User', UserSchema);
+ - const newUser = new UserModel({
+    name: '현호', 
+    phone: '010-7212-8581', 
+    email: 'heun3316@naver.com',
+    gender: 'male'
+  });
 
  3. CRUD 연산 수행하기
- - app.post('/users', (req, res) => {
-    const { username, password, email } = req.body;
-    const newUser = new UserModel({ username, password, email });
-    newUser.save((err, savedUser) => {
-        if (err) return res.status(500).send(err);
-        res.status(201).json(savedUser);
+    1. DB에 객체 저장(save),(req.body를 대입하여 저장하는 방법 구현할 것!)
+    - newUser.save()
+    .then(() => {
+        console.log('DB에 저장 성공!');
+    })
+    .catch((error) => {
+        console.log('Error saving object:', error);
     });
-  });
 
- - app.get('/users/:id', (req, res) => {
-    const { id } = req.params;
-    UserModel.findById(id, (err, user) => {
-        if (err) return res.status(500).send(err);
-        if (!user) return res.status(404).send('User not found');
-        res.json(user);
-    });
-  });
+    2. DB 불러오기(find, findById)
+    //var data1 = []; 
+    UserModel.find()
+    .then(res => {
+        //data1.push(res[0]);
+        console.log(res);
+    })
+    .catch(err => console.log(err));
 
- - app.patch('/users/:id', (req, res) => {
-    const { id } = req.params;
-    const { username, password, email } = req.body;
-    UserModel.findByIdAndUpdate(
-        id,
-        { username, password, email },
-        { new: true },
-        (err, updatedUser) => {
-        if (err) return res.status(500).send(err);
-        if (!updatedUser) return res.status(404).send('User not found');
-        res.json(updatedUser);
-        }
-    );
-  });
+    3. DB 삭제하기(deleteOne, deleteMany),(req.params로 전달 받아서 삭제 가능)
+    UserModel.deleteOne({ name: '현호2' })
+    .then(res => {
+       console.log(res);
+    })
+    .catch(err => console.log(err));
 
- - app.delete('/users/:id', (req, res) => {
-    const { id } = req.params;
-    UserModel.findByIdAndDelete(id, (err, deletedUser) => {
-        if (err) return res.status(500).send(err);
-        if (!deletedUser) return res.status(404).send('User not found');
-        res.json(deletedUser);
-    });
-  });
+    4. DB 수정하기(updateOne, updateMany)
+    UserModel.updateOne({ name: '현호' }, { name: '바보똥개' })
+    .then(res => {
+       console.log(res);
+    })
+    .catch(err => console.log(err));
+
 
  4. 미들웨어 사용하기
  - const authenticate = (req, res, next) => {

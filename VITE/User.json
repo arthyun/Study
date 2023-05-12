@@ -1,0 +1,16 @@
+{
+    "User": [
+        {
+            "name" : "손현호",
+            "phone" : "010-7212-8581",
+            "email" : "heun3316@naver.com",
+            "gender" : "male"
+        },
+        {
+            "name" : "김아영",
+            "phone" : "010-4704-7562",
+            "email" : "rladkdud147@naver.com",
+            "gender" : "female"
+        }
+    ]
+}
