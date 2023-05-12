@@ -10,6 +10,7 @@ const Home = () => {
         .then(response => response.json())
         .then(data => {
             setFetchArr(data);
+            console.log(data);
         })
         .catch(err => console.error(err));
     }
@@ -20,7 +21,7 @@ const Home = () => {
 
     return (
         <div style={{ padding: '1rem 2rem', boxSizing: 'border-box' }}>
-            <h1>Home Page.</h1>
+            <h1>Home Page(AWS 수정된 위치)</h1>
 
             <nav className='homeNav'>
                 <ul>

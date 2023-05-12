@@ -8,7 +8,7 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-//DB 연결
+//DB 연결(URL을 보면 포트뒤에 해당 DB명이 들어갔다)
 const mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost:27017/test1', {
     useNewUrlParser: true,
