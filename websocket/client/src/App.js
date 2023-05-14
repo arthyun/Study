@@ -11,20 +11,21 @@ function App() {
 
   //이 부분이 관건(수정 전 코드는 무한루프 발생)
   useEffect(() => {
+    //1. ws 연결
     ws.current = new WebSocket("ws://localhost:8001");
-
+    //2. ws로부터 msg 전달
     ws.current.onmessage = (e) => {
       console.log(e);
       const newMessage = e.data;
       setChatMessages(prev => [...prev, newMessage]);
     };
-
+    //3. ws 종료
     return () => {
       ws.current.close();
     };
   }, []);
 
-  function sendMessage() {
+  const sendMessage = () => {
     const fullMessage = `${nickname.current.value}: ${message.current.value}`;
     if (nickname.current.value && message.current.value) {
       ws.current.send(fullMessage);
@@ -33,8 +34,9 @@ function App() {
     } else {
       alert('공백이 없게 하세요.');
     }
-  }
+  };
 
+  //반복할 컴포넌트 생성
   const ChatPara = ({ message }) => {
     return (
       <p>{message}</p>
