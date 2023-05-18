@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const app = express();
+const port = 5000;
 
 //설치파일 연결문
 app.use(cors());
@@ -30,12 +31,12 @@ const UserSchema = new mongoose.Schema({
     gender: String,
 });
 const UserModel = mongoose.model('User', UserSchema);
-const newUser = new UserModel({
-    name: '현호', 
-    phone: '010-7212-8581', 
-    email: 'heun3316@naver.com',
-    gender: 'male'
-});
+// const newUser = new UserModel({
+//     name: '현호', 
+//     phone: '010-7212-8581', 
+//     email: 'heun3316@naver.com',
+//     gender: 'male'
+// });
 
 //DB에 객체 저장(save),(req.body를 대입하여 저장하는 방법 구현할 것!)
 // newUser.save()
@@ -76,13 +77,13 @@ const newUser = new UserModel({
 // })
 // .catch(err => console.log(err));
 
-//CRUD 연산 수행하기
+//CRUD 연산
 app.get('/', (req, res) => {
     UserModel.find()
     .then(data => {
         const newData = data.map(el => el);
         const result = JSON.stringify(newData);
-        // res.setHeader('Content-Type', 'application/json');
+        // console.log(result);
         res.send(result);
     })
     .catch(err => {
@@ -90,10 +91,59 @@ app.get('/', (req, res) => {
     });
 });
 
+app.post('/create', (req, res) => {
+    const newPost = new UserModel({
+        name: req.body.name, 
+        phone: req.body.phone, 
+        email: req.body.email,
+        gender: req.body.gender
+    });
+    newPost.save()
+    .then((json) => {
+        console.log('DB에 저장 성공!');
+        // console.log(json);
+        res.status(200).send({status : 'success'});
+    })
+    .catch((error) => {
+        console.log('Error saving object:', error);
+        res.send(error);
+    });
+});
+
+app.delete('/delete', (req, res) => {
+    // console.log(req.body.name);
+    UserModel.deleteOne({ name: req.body.name })
+    .then(json => {
+        console.log(json);
+        res.status(200).send({status : 'success'});
+    })
+    .catch(error => {
+        console.log('Error saving object:', error);
+        res.send(error);
+    });
+});
+
+app.patch('/patch/:mail', (req, res) => {
+    // console.log(req.params.mail);
+    UserModel.updateOne({ email: req.params.mail }, 
+        { 
+            name: req.body.name, 
+            gender: req.body.gender,
+        })
+    .then(json => {
+        console.log(json);
+        res.status(200).send({status : 'success'});
+    })
+    .catch(error => {
+        console.log('Error saving object:', error);
+        res.send(error);
+    });
+});
+
 //포트 연결 확인
-app.listen(5000, () => {
-    console.log('포트에 연결됐당께~');
-})
+app.listen(port, () => {
+    console.log(`${port} 포트 연결 성공!`);
+});
 
 // //ejs test
 // var data = [];
