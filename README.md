@@ -11,6 +11,7 @@
 8. 영화 데이터 받아와 출력하는 App (Next.js 활용)
 9. Twitter를 모방한 Nwitter App (React, Firebase 활용)
 10. 여럿이 접속하여 채팅할 수 있는 App (express, ws 활용)
+11. MongoDB를 ejs로 연동하여 CRUD작성
 
 - Vue.js 다시보기...
 
