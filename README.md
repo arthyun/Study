@@ -10,15 +10,7 @@
 7. React/Redux로 로그인 기능을 구현해 보았다.
 8. 영화 데이터 받아와 출력하는 App (Next.js 활용)
 9. Twitter를 모방한 Nwitter App (React, Firebase 활용)
-
-- Vue.js 다시보기...
-
-- Next.js Checked
-
-- Firebase Checked
-
-- Styled Components Checked
-
-- Materiak UI Checked
+10. Profile 등록 및 확인 App (Vite, React, MongoDB 활용)
+11. 실시간 채팅 App (Websocket, Express, React 활용)
 
 - Typescript Studying...
