@@ -1,32 +1,34 @@
 import logo from './logo.svg';
 import './App.css';
-import store from './Store';
 import { useState } from 'react';
 
 function App() {
+  //States
   const [text, setText] = useState('');
-  let [cnt, setCnt] = useState(0);
 
-  const textChange = (e) => {
-    setText(e.target.value);
-  }
-
-  store.subscribe(() => {
-    setText(store.getState().para[0].text);
-    setCnt(store.getState().para[0].id);
-  });
+  const onChangeSelect = (e) => {
+    const { value } = e.target;
+    setText(value);
+  };
+  const onSubmitHandle = (e) => {
+    e.preventDefault();
+    console.log(text);
+  };
 
   return (
     <div className="App">
         <img src={logo} className="App-logo" alt="logo" />
 
       <div className='formTag'>
-        <form>
-          <input type='text' value={text} onChange={textChange} required />
-          <input type='button' value='작성' onClick={() => {
-                setCnt(cnt++);
-                store.dispatch( {type:'INCREMENT', id: cnt, para: text} );
-          }} />
+        <form onSubmit={onSubmitHandle}>
+          <select id='mySelect' onChange={onChangeSelect}>
+            <option value='첫번째'>첫번째</option>
+            <option value='두번째'>두번째</option>
+            <option value='세번째'>세번째</option>
+            <option value='네번째'>네번째</option>
+            <option value='다섯번째'>다섯번째</option>
+          </select>
+          <button>제출</button>
         </form>
 
         <ul className='textZone'>
