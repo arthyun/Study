@@ -1,6 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 
 function App() {
   //States
@@ -14,6 +15,14 @@ function App() {
     e.preventDefault();
     console.log(text);
   };
+
+  //Redux Methods
+  const dispatch = useDispatch();
+
+  const onDispatch1 = () => {
+    dispatch({ type:'INCREMENT', payload: { cnt: 1 } });
+    console.log('전송 완료');
+  }
 
   return (
     <div className="App">
@@ -30,6 +39,10 @@ function App() {
           </select>
           <button>제출</button>
         </form>
+
+
+        <button onClick={onDispatch1} type='button'>TEST</button>
+
 
         <ul className='textZone'>
           {/* {
