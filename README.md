@@ -13,4 +13,4 @@
 10. Profile 등록 및 확인 App (Vite, React, MongoDB 활용)
 11. 실시간 채팅 App (Websocket, Express, React 활용)
 
-- Typescript Studying...
+- 최신 @Reduxjs/toolkit의 createSlice()를 이용하여 store 간편하게 생성.
