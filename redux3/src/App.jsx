@@ -1,8 +1,8 @@
+import './App.css';
 import reactLogo from './assets/react.svg';
 import viteLogo from '/vite.svg';
-import './App.css';
 import { useDispatch } from 'react-redux';
-import { changeState } from './store';
+import { changeName, changeStatus } from './store';
 
 
 function App() {
@@ -12,8 +12,13 @@ function App() {
   // const firstData = useSelector(state => state);
   // console.log(selector);
 
-  const clickHandle = () => {
-    dispatch(changeState());
+  const clickHandle1 = (text) => {
+    dispatch(changeName(text));
+    console.log('클릭 완료1');
+  }
+  const clickHandle2 = () => {
+    dispatch(changeStatus());
+    console.log('클릭 완료2');
   }
 
   return (
@@ -28,7 +33,8 @@ function App() {
       </div>
       <h1>Vite + React</h1>
       <div className="card">
-        <button type='button' onClick={clickHandle} >REDUX 2</button>
+        <button type='button' onClick={() => clickHandle1({ name: 'Kim' })} >REDUX_1</button>
+        <button type='button' onClick={() => clickHandle2()} >REDUX_2</button>
         <p>
           Edit <code>src/App.jsx</code> and save to test HMR
         </p>

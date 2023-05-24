@@ -30,6 +30,9 @@ body {
   min-width: 320px;
   min-height: 100vh;
 }
+ol, ul {
+  list-style: none;
+}
 
 h1 {
   font-size: 3.2em;
