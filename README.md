@@ -14,3 +14,4 @@
 11. 실시간 채팅 App (Websocket, Express, React 활용)
 
 - 최신 @Reduxjs/toolkit의 createSlice()를 이용하여 store 간편하게 생성.
+  - redux3 폴더 참조하여 최신문법 익히기
