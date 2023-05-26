@@ -1,8 +1,10 @@
-import './App.css';
+import './style/App.css';
 import reactLogo from './assets/react.svg';
 import viteLogo from '/vite.svg';
 import { useDispatch } from 'react-redux';
 import { changeName, changeStatus } from './store';
+import { Routes, Route } from 'react-router-dom';
+import Sub1 from './components/Sub1';
 
 
 function App() {
@@ -42,6 +44,11 @@ function App() {
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
       </p>
+
+
+      <Routes>
+        <Route path='/sub1' element={<Sub1 />}></Route>
+      </Routes>
     </>
   )
 }
