@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux';
 import { changeName, changeStatus } from './store';
 import { Routes, Route, NavLink } from 'react-router-dom';
 import Sub1 from './components/Sub1';
+import Sub2 from './components/Sub2';
 
 
 function App() {
@@ -62,6 +63,7 @@ function App() {
 
       <Routes>
         <Route path='/sub1' element={<Sub1 />}></Route>
+        <Route path='/sub2' element={<Sub2 />}></Route>
       </Routes>
 
       <style>
