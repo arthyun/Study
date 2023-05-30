@@ -36,15 +36,18 @@ export default function Sub1(){
     const submitHandle = (e) => {
         e.preventDefault();
         //배열이 아닌 객체이기 때문에 기본 for문으로는 안됌
-        // for (let id in values) {
-        //     if(values[id] === '') {
-        //         console.log(`Property '${id}' contains spaces.`);
-        //     } else {
-        //         console.log('값이 있다.');
-        //     }
-        // }
-        // dispatch(userPost(values));
+        for (let id in values) {
+            if(values[id] === '') {
+                alert(`'${id}' 입력란이 공백입니다.`);
+            } else if(values[id]) {
+                console.log(values);
+                return dispatch(userPost(values));
+            }
+        }
     };
+
+    //Persist를 사용하지 않고 데이터를 유지시키려면?? -> 로컬/세션/쿠키에 reduxState를 저장해야하남
+
 
     return (
         <div style={{ background: '#555' }}>
