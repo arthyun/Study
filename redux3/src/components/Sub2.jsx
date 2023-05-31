@@ -47,6 +47,11 @@ export default function Sub1(){
     };
 
     //Persist를 사용하지 않고 데이터를 유지시키려면?? -> 로컬/세션/쿠키에 reduxState를 저장해야하남
+    localStorage.setItem('User', JSON.stringify(getUserData));
+    const onLocalStorage = () => {
+        const result = localStorage.getItem('User');
+        console.log(JSON.parse(result));
+    };
 
 
     return (
@@ -64,6 +69,8 @@ export default function Sub1(){
                 </select>
                 <button>제출</button>
             </form>
+
+            <button type="button" onClick={onLocalStorage}>로컬스토리지 확인용 버튼</button>
 
             <ul className="userUl">
             {
