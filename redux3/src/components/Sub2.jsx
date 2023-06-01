@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { userPost } from '../store';
 
@@ -8,15 +8,15 @@ export default function Sub1(){
     const getUserData = useSelector(state => state.userData);
 
     //id값을 가진 새로운 배열로...
-    let indexNum = 0;
-    const newUserData = [];
-    getUserData.map(item => {
-        indexNum++;
-        newUserData.push({
-            id: indexNum,
-            ...item
-        });
-    });
+    // let indexNum = 0;
+    // let sendData = [];
+    // getUserData.map(item => {
+    //     indexNum++;
+    //     sendData.push({
+    //         id: indexNum,
+    //         ...item
+    //     });
+    // });
 
     const [values, setValues] = useState({
         name: '',
@@ -33,25 +33,38 @@ export default function Sub1(){
         }));
     };
 
+    //수정 필요!
     const submitHandle = (e) => {
         e.preventDefault();
         //배열이 아닌 객체이기 때문에 기본 for문으로는 안됌
         for (let id in values) {
             if(values[id] === '') {
                 alert(`'${id}' 입력란이 공백입니다.`);
-            } else if(values[id]) {
-                console.log(values);
-                return dispatch(userPost(values));
+            // } else if(values[id]) {
+            // console.log(values);
+            //     sendData.push(values);
+            //     localStorage.setItem('User', JSON.stringify(sendData));
+            //     return dispatch(userPost(values));
             }
         }
+        const newUserData = [...getUserData, values];
+        localStorage.setItem('User', JSON.stringify(newUserData));
+        dispatch(userPost(values));
     };
 
-    //Persist를 사용하지 않고 데이터를 유지시키려면?? -> 로컬/세션/쿠키에 reduxState를 저장해야하남
-    localStorage.setItem('User', JSON.stringify(getUserData));
-    const onLocalStorage = () => {
-        const result = localStorage.getItem('User');
-        console.log(JSON.parse(result));
-    };
+    //Persist를 사용하지 않고 데이터를 유지시키려면?? -> lifecycle이란 넘 어렵군
+    const [sendData, setSendData] = useState([]);
+
+    useEffect(() => {
+        const newBringData = localStorage.getItem('User');
+        setSendData(JSON.parse(newBringData) || []);
+    }, []);
+
+    useEffect(() => {
+        const newBringData = localStorage.getItem('User');
+        setSendData(JSON.parse(newBringData) || []);
+    }, [getUserData]);
+
 
 
     return (
@@ -70,11 +83,9 @@ export default function Sub1(){
                 <button>제출</button>
             </form>
 
-            <button type="button" onClick={onLocalStorage}>로컬스토리지 확인용 버튼</button>
-
             <ul className="userUl">
             {
-                newUserData.map((item, i) => {
+                sendData.map((item, i) => {
                     return(
                         <li key={i}>
                             <dl>
