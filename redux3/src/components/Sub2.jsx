@@ -6,7 +6,6 @@ import { userPost } from '../store';
 export default function Sub1(){
     const dispatch = useDispatch();
     const getUserData = useSelector(state => state.userData);
-
     //id값을 가진 새로운 배열로...
     // let indexNum = 0;
     // let sendData = [];
@@ -37,18 +36,14 @@ export default function Sub1(){
     const submitHandle = (e) => {
         e.preventDefault();
         //배열이 아닌 객체이기 때문에 기본 for문으로는 안됌
-        for (let id in values) {
+        for (let id in values){
             if(values[id] === '') {
                 alert(`'${id}' 입력란이 공백입니다.`);
-            // } else if(values[id]) {
-            // console.log(values);
-            //     sendData.push(values);
-            //     localStorage.setItem('User', JSON.stringify(sendData));
-            //     return dispatch(userPost(values));
             }
         }
         const newUserData = [...getUserData, values];
         localStorage.setItem('User', JSON.stringify(newUserData));
+        setSendData(newUserData);
         dispatch(userPost(values));
     };
 
@@ -56,14 +51,14 @@ export default function Sub1(){
     const [sendData, setSendData] = useState([]);
 
     useEffect(() => {
-        const newBringData = localStorage.getItem('User');
-        setSendData(JSON.parse(newBringData) || []);
-    }, []);
-
-    useEffect(() => {
-        const newBringData = localStorage.getItem('User');
-        setSendData(JSON.parse(newBringData) || []);
-    }, [getUserData]);
+        let bring1 = localStorage.getItem('User');
+        
+        if(!bring1){
+            localStorage.setItem('User', JSON.stringify(getUserData));
+            bring1 = localStorage.getItem('User');
+        } 
+        setSendData(JSON.parse(bring1));
+    },[]);
 
 
 
