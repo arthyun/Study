@@ -35,16 +35,22 @@ export default function Sub1(){
     //수정 필요!
     const submitHandle = (e) => {
         e.preventDefault();
+        //입력된 값이 없으면 실행하지 않는 조건문 필요
+        let confirmSubmit = true;
         //배열이 아닌 객체이기 때문에 기본 for문으로는 안됌
         for (let id in values){
             if(values[id] === '') {
                 alert(`'${id}' 입력란이 공백입니다.`);
+                confirmSubmit = false;
             }
         }
-        const newUserData = [...getUserData, values];
-        localStorage.setItem('User', JSON.stringify(newUserData));
-        setSendData(newUserData);
-        dispatch(userPost(values));
+        if(confirmSubmit){
+            const newUserData = [...getUserData, values];
+            localStorage.setItem('User', JSON.stringify(newUserData));
+            setSendData(newUserData);
+            dispatch(userPost(values));
+        }
+        console.log(confirmSubmit);
     };
 
     //Persist를 사용하지 않고 데이터를 유지시키려면?? -> lifecycle이란 넘 어렵군
