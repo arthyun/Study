@@ -66,6 +66,13 @@ export default function Sub1(){
         setSendData(JSON.parse(bring1));
     },[]);
 
+    //삭제 기능
+    const onDelete = (e) => {
+        //즉시 반영되게 하기 위해 따로 변수에 담아서 setState한다.
+        const filteredData = sendData.filter(el => el.name !== e.target.id);
+        setSendData(filteredData);
+        localStorage.setItem('User', JSON.stringify(filteredData));
+    };
 
 
     return (
@@ -94,6 +101,8 @@ export default function Sub1(){
                                 <dd>{item.phone}</dd>
                                 <dd>{item.email}</dd>
                                 <dd>{item.gender}</dd>
+                                <dd id={item.name} style={{cursor: 'pointer'}} 
+                                onClick={onDelete} >❌</dd>
                             </dl>
                         </li>
                     )
