@@ -16,3 +16,5 @@
 - 최신 @Reduxjs/toolkit의 createSlice()를 이용하여 store 간편하게 생성.
   - redux3 폴더 참조하여 최신문법 익히기
   - redux persist를 사용하지않고 원초적인 redux의 값을 local에 저장하여 새로고침 에러를 막아보았다.
+
+- Next.js 강의 듣고싶다. 너무 비싸다.
