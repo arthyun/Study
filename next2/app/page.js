@@ -1,10 +1,12 @@
 import Image from 'next/image';
 import styles from './page.module.css';
+import Carousel from './carousel';
 
 export default function Home() {
   return (
     <main className={styles.main}>
       <div className={styles.description}>
+      <Carousel />
         <p>
           Get started by editing&nbsp;
           <code className={styles.code}>app/page.js</code>
