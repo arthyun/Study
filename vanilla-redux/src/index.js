@@ -1,16 +1,21 @@
 import { createStore } from 'redux';
+import rightClickTest from './rightClickTest';
+
 
 const add = document.getElementById('add');
 const minus = document.getElementById('minus');
 const number = document.querySelector('span');
 
+const ADD = 'ADD';
+const MINUS = 'MINUS';
+
 //Reducer 정의
 const countModifier = (state = 0, action) => {
   //action은 항상 객체로서 전달되어야 함
   switch(action.type){
-    case "ADD":
+    case ADD:
       return state + 1;
-    case "MINUS":
+    case MINUS:
       return state - 1;
     default:
       return state;
@@ -26,11 +31,11 @@ const onChange = () => {
 }
 
 const handleAdd = () => {
-  countStore.dispatch({ type: "ADD" });
+  countStore.dispatch({ type: ADD });
   // console.log(countStore.getState());
 };
 const handleMinus = () => {
-  countStore.dispatch({ type: "MINUS" });
+  countStore.dispatch({ type: MINUS });
   // console.log(countStore.getState());
 };
 
