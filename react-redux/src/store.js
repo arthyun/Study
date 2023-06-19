@@ -3,7 +3,7 @@ import { configureStore, createSlice } from '@reduxjs/toolkit';
 const initialState = {
   data: [
     {
-      name: "Hyunho"
+      name: "Hyunho",
     }
   ]
 };
