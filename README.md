@@ -18,3 +18,5 @@
   - redux persist를 사용하지않고 원초적인 redux의 값을 local에 저장하여 새로고침 에러를 막아보았다.
 
 - Next.js 강의 듣고싶다. 너무 비싸다.
+
+- React-Query와 TypeScript를 잘 쓰고 싶다.
