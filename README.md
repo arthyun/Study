@@ -19,4 +19,4 @@
 
 - Next.js 강의 듣고싶다. 너무 비싸다.
 
-- React-Query와 TypeScript를 잘 쓰고 싶다.
+- React-Query와 TypeScript를 잘 쓰고 싶다...

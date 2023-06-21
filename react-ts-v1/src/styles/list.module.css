@@ -1,0 +1,88 @@
+.listArea1 {
+    width: 90%;
+    margin: 0 auto;
+    border-top: 4px solid greenyellow;
+    border-bottom: 4px solid greenyellow;
+    /* max-height: 450px;
+    overflow-y: scroll; */
+}
+.listArea1_ul {
+    display: flex;
+    border-bottom: 1px solid greenyellow;
+}
+.listArea1_ul > li {
+    color: #333;
+}
+.listArea1_ul_header {
+    width: 25%;
+    padding: .5rem 0;
+    font-weight: bold;
+    background-color: #999;
+}
+.listArea1_ul_header:nth-of-type(1),
+.listArea1_ul_header:nth-of-type(3),
+.listArea1_ul_header:nth-of-type(4){
+    width: 15%;
+}
+.listArea1_ul_header:nth-of-type(2){
+    width: 55%;
+}
+.listArea2_ul {
+    display: flex;
+    flex-direction: column;
+}
+.listArea2_li {
+    display: flex;
+    background-color: #ddd;
+    border-bottom: 1px solid greenyellow;
+}
+.listArea2_li > p {
+    padding: .5rem 0;
+    color: #333;
+}
+.listArea2_li > p:nth-of-type(1),
+.listArea2_li > p:nth-of-type(3),
+.listArea2_li > p:nth-of-type(4){
+    width: 15%;
+}
+.listArea2_li > p:nth-of-type(2){
+    width: 55%;
+}
+
+/* Login pages */
+.loginWrap {
+    width: 400px;
+    height: 500px;
+    background-color: #eee;
+    padding: 3rem 1rem;
+    box-sizing: border-box;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, 35%);
+}
+.imgTag {
+    width: 100%;
+    height: 15vh;
+}
+.formTag {
+    margin: 3rem 0;
+    margin-bottom: 4.5rem;
+}
+.formTag > input {
+    display: block;
+    width: 100%;
+    height: 40px;
+    border: 0;
+    margin-bottom: .35rem;
+    padding-left: 7px;
+    box-sizing: border-box;
+}
+.formBtnTag {
+    width: 100%;
+    border-radius: 0;
+}
+.paraTag {
+    font-size: 12px;
+    color: #333;
+}
