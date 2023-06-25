@@ -1,6 +1,6 @@
 import logo from '../assets/react.svg';
 import styles from '../styles/list.module.css';
-import { FormEvent, useRef, useState } from 'react';
+import { ChangeEvent, FormEvent, useRef, useState } from 'react';
 
 
 //.env 경로 가져오기
@@ -31,7 +31,7 @@ const Login = ({ loginState } : { loginState: () => void }) => {
         }
     };
 
-    const onChange = (e: FormEvent<HTMLInputElement>) => {
+    const onChange = (e: ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.currentTarget;
         if(name === 'id'){
             setIdValue(value);
