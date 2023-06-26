@@ -1,6 +1,6 @@
 import React from 'react';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { getTodo, postTodo, updateTodo } from './my-api';
+import { getTodo, postTodo, updateTodo, deleteTodo } from './my-api';
 
 
 const Todos = () => {
@@ -33,13 +33,32 @@ const Todos = () => {
         }
     });
 
+    const deleteMutation = useMutation({
+        mutationFn: deleteTodo,
+        onSuccess: () => {
+            console.log('delete 완료');
+            queryClient.invalidateQueries({ queryKey: ['todos'] });
+        },
+        onError: () => {
+            throw new Error('update Error!');
+        }
+    });
+
+    if(getQuery.isLoading){
+        return <h1>Loading...</h1>;
+    }
+    if(getQuery.error){
+        return 'An error has occured: ' + getQuery.error.message;
+    }
 
     return (
         <div>
             <ul>
             {
-                getQuery.data?.map((todo) => (
-                    <li key={todo.id}>{todo.title}</li>
+                getQuery.data?.slice(0, 8).map((todo) => (
+                    <li key={todo.id}>{todo.title} &nbsp;<span onClick={() => {
+                        deleteMutation.mutate(todo.id)}} style={{cursor: 'pointer'}}>❌</span>
+                    </li>
                 ))
             }
             </ul>
