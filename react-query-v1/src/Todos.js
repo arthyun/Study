@@ -62,14 +62,14 @@ const Todos = () => {
                 ))
             }
             </ul>
-            <button onClick={() => {
+            <button className='underBtns' onClick={() => {
                 postMutation.mutate({
                     title: 'POST TITLE',
                     body: 'POST BODY',
                     userId: `POST ${Date.now()}`,
                 })
             }}>POST BTN</button>
-            <button onClick={() => {
+            <button className='underBtns' onClick={() => {
                 updateMutation.mutate({
                     id: 100,
                     title: 'UPDATE TITLE',

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 
-const KyeolJae = () => {
+const KyeolJae = ({ modalOpen }) => {
   const [firstRow, setFirstRow] = useState(['김재준','송영환','오은택','김명래','손현호']);
   const [secondRow, setSecondRow] = useState([]);
 
@@ -49,8 +49,7 @@ const KyeolJae = () => {
 
 
   return (
-    <div className="App">
-
+    <div className="kyeoljae" onClick={modalOpen}>
       <div className='mainWrap'>
         <div>
           <h3>결재자</h3>
@@ -83,9 +82,18 @@ const KyeolJae = () => {
       
       <style jsx='true'>
         {`
-          * {
-            margin: 0;
-            padding: 0;
+          .kyeoljae {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 100;
+          }
+          .mainWrap {
+            background: #fff;
+            z-index: 110;
           }
           span {
             display: inline-block;
@@ -110,12 +118,8 @@ const KyeolJae = () => {
             padding: 15px;
             box-sizing: border-box;
           }
-          h3 {
-            margin-bottom: 15px;
-          }
           .firstUl,
           .secondUl {
-            list-style: none;
             width: 200px;
             height: 400px;
             border: 1px solid #333;

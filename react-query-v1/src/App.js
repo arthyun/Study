@@ -1,6 +1,8 @@
+import './styles/index.css'
 import React, { useCallback, useMemo, useState } from 'react';
 import Example from './Example';
 import Todos from './Todos';
+import KyeolJae from './결재선';
 
 
 function App(){
@@ -16,8 +18,17 @@ function App(){
     console.log(name);
   }, [name]);
 
+  //Modal on/off
+  const [modalOpen, setModalOpen] = useState(false);
+  const modalClose = useCallback(() => {
+    setModalOpen(!modalOpen)
+  },[modalOpen])
+
   return (
     <div className="App">
+      {modalOpen ? <KyeolJae modalOpen={modalClose} /> : console.log(modalOpen)}
+      <button onClick={() => setModalOpen(!modalOpen)} style={{display: 'block'}}>Modal</button>
+      <br/>
       <button onClick={() => setEx((curr) => (curr + 1))}>X</button>
       <button onClick={() => setWhy((curr) => (curr + 1))}>Y</button>
 
