@@ -49,7 +49,9 @@ const KyeolJae = ({ modalOpen }) => {
 
 
   return (
-    <div className="kyeoljae" onClick={modalOpen}>
+    <>
+      <div className='kyeoljae' onClick={modalOpen}></div>
+
       <div className='mainWrap'>
         <div>
           <h3>결재자</h3>
@@ -80,20 +82,30 @@ const KyeolJae = ({ modalOpen }) => {
         </div>
       </div>
       
+      
       <style jsx='true'>
         {`
           .kyeoljae {
             position: absolute;
             left: 0;
             top: 0;
+            z-index: 100;
             width: 100%;
             height: 100%;
             background: rgba(0, 0, 0, 0.5);
-            z-index: 100;
           }
           .mainWrap {
-            background: #fff;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
             z-index: 110;
+            display: flex;
+            gap: 50px;
+            justify-content: center;
+            background: #fff;
+            width: 600px;
+            height: 500px;
           }
           span {
             display: inline-block;
@@ -106,17 +118,6 @@ const KyeolJae = ({ modalOpen }) => {
             background: red;
             color: #fff;
             border-radius: 100px;
-          }
-          .mainWrap {
-            width: 600px;
-            display: flex;
-            gap: 75px;
-            justify-content: center;
-            border: 2px solid red;
-            margin: 0 auto;
-            margin-top: 10rem;
-            padding: 15px;
-            box-sizing: border-box;
           }
           .firstUl,
           .secondUl {
@@ -132,7 +133,7 @@ const KyeolJae = ({ modalOpen }) => {
           }
         `}
       </style>
-    </div>
+    </>
   );
 }
 
