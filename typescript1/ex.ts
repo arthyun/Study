@@ -1,3 +1,7 @@
+//types.ts 붙이기
+import { AllTypes } from "./types";
+
+
 // tsc에서 DOM의 타입을 지정할 때
 var para1 = document.querySelector('.innerZone1') as HTMLParagraphElement;
 var para2 = document.querySelector('.innerZone2') as HTMLParagraphElement;
@@ -430,12 +434,16 @@ const player = {
 }
 player.age = 15;
 
-type tuple1 = [number, string];
 type tuple2 = {
     [key in string]: string;
 };
 
-const they:tuple2[] = [
+const importTypes : AllTypes =  {
+    tuple1 : [1, 'hyun'],
+    fuc1 : (num) => console.log(num),
+}
+
+const they2:tuple2[] = [
     {
         name: '10', 
         bar: 'hyun'
