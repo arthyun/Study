@@ -6,3 +6,6 @@
 
 3. useRouter는 client side에서만 작동하며 변경된 import 방식은 아래와 같다.
 - import { useRouter } from 'next/navigation';
+
+4. 페이지 라우팅 방식이 달라졌다.
+- 폴더내에 layout.tsx가 있고 children으로 page.tsx 파일을 보여준다.
