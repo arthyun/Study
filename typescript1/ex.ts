@@ -1,3 +1,7 @@
+//types.ts 붙이기
+import { AllTypes } from "./types";
+
+
 // tsc에서 DOM의 타입을 지정할 때
 var para1 = document.querySelector('.innerZone1') as HTMLParagraphElement;
 var para2 = document.querySelector('.innerZone2') as HTMLParagraphElement;
@@ -44,7 +48,7 @@ type Third = {
     name: string,
     age: number,
     gender?: string,
-    address: string
+    address: string,
 }
 const info1: Third[] = [
     {
@@ -77,14 +81,16 @@ const tupleZone: Tuple1 = ['튜플아니고 터플이라 불러라', 2, false];
 // tupleZone.push('바보들'); -> readonly로 인해 사용 불가능!
 // console.log(tupleZone);
 
+type Fnc = (x : number | null) => void
+
 // Narrowing 방식**
-function Nar(x :number | string){
+const Nar: Fnc = (x) => {
     //매개변수가 넘버타입일때
     if(typeof x === "number"){
-        // console.log(x + 3);
+        console.log(x + 3);
     } else {
         //매개변수가 문자타입일때
-        // console.log(x);
+        console.log(x);
     }
 }
 Nar(120);
@@ -428,12 +434,16 @@ const player = {
 }
 player.age = 15;
 
-type tuple1 = [number, string];
 type tuple2 = {
     [key in string]: string;
 };
 
-const they:tuple2[] = [
+const importTypes : AllTypes =  {
+    tuple1 : [1, 'hyun'],
+    fuc1 : (num) => console.log(num),
+}
+
+const they2:tuple2[] = [
     {
         name: '10', 
         bar: 'hyun'

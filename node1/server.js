@@ -9,6 +9,9 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+console.log(__dirname);
+console.log(__filename);
+
 //데이터 가져오기
 app.get('/api/customers', (req, res) => {
     res.send([
