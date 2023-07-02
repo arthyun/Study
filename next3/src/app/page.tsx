@@ -1,36 +1,36 @@
 import Image from 'next/image';
 import styles from '../styles/page.module.css';
-import Link from 'next/link';
 
+async function getData() {
+  const res = await fetch('https://jsonplaceholder.typicode.com/todos')
+  return res.json();
+}
 
-export default function Home() {
+interface Data {
+  id: number;
+  // 다른 속성들의 타입 정의
+}
 
+export default async function Home() {
+  const data : Data[] = await getData();
 
   return (
-    <div className='wrap'>
-      <header>
-        <ul>
-            <li>
-                <Link href='/'>Home</Link>
-            </li>
-            <li>
-                <Link href='/sub1'>Sub1</Link>
-            </li>
-            <li>
-                <Link href='/sub2'>Sub2</Link>
-            </li>
-        </ul>
-      </header>
-      <main className={styles.main}>
-        <Image
-          src="/next.svg"
-          alt="Next Logo"
-          className={styles.logo}
-          width={300}
-          height={48}
-          priority
-        />
-      </main>
-    </div>
+    <main className={styles.main}>
+      {
+        data.slice(0, 3).map((el:Data) => {
+          return(
+          <p key={el.id}>{el.id}</p>
+          )
+        })
+      }
+      <Image
+        src="/next.svg"
+        alt="Next Logo"
+        className={styles.logo}
+        width={300}
+        height={48}
+        priority
+      />
+    </main>
   )
 }
