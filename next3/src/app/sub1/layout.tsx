@@ -1,11 +1,12 @@
-import React from 'react';
+import Header from './components/header';
+import Modal from './components/modal';
 
 export default function Layout({children} : {children: React.ReactNode}){
     return (
-        <div>
-            <h1>Sub - Layout1</h1>
-
+        <>
+            <Header />
+            <Modal />
             {children}
-        </div>
+        </>
     )
 }
