@@ -6,10 +6,9 @@ export default function Page(){
 
     return (
         <Fragment>
-            <h1 style={{ display: 'inline-block' }}>Sub - page1</h1>&nbsp;
+            <h1 style={{ display: 'inline-block' }}>Sub1 page</h1>&nbsp;
 
-            <Link className={styles.moveCompo} href='/sub1/0'>하위로 이동</Link>
-
+            <Link className={styles.moveCompo} href='/sub1/sub1_1'>하위로 이동</Link>
         </Fragment>
     )
 };

@@ -1,12 +1,19 @@
+import { Suspense } from 'react';
 import Header from './components/header';
-import Modal from './components/modal';
+import Loading from './loading';
+// import Modal from './components/modal';
 
 export default function Layout({children} : {children: React.ReactNode}){
     return (
         <>
+            {/* <Modal /> */}
+
+
             <Header />
-            <Modal />
-            {children}
+
+            <Suspense fallback={<Loading />}>
+                {children}
+            </Suspense>
         </>
     )
 }

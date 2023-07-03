@@ -1,6 +1,5 @@
 import '../styles/globals.css';
 import { Inter } from 'next/font/google';
-import Link from 'next/link';
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -14,19 +13,6 @@ export default async function RootLayout({ children } : { children: React.ReactN
   return (
     <html lang="ko">
       <body className={inter.className}>
-      <header>
-          <ul>
-              <li>
-                  <Link href='/'>Home</Link>
-              </li>
-              <li>
-                  <Link href='/sub1'>Sub1</Link>
-              </li>
-              <li>
-                  <Link href='/sub2'>Sub2</Link>
-              </li>
-          </ul>
-        </header>
       {children}
       </body>
     </html>
