@@ -1,3 +1,5 @@
-export type Example = {
-
+export interface Example {
+    name?: string,
+    age: number,
+    gender: string,
 }
