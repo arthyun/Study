@@ -1,4 +1,4 @@
-import { ChangeEvent, FormEvent } from "react";
+import { ChangeEvent, FormEvent, MouseEvent } from "react";
 
 export interface AllTypes {
     submitHandle?: (e: FormEvent<HTMLFormElement>) => void,
@@ -6,4 +6,5 @@ export interface AllTypes {
     bringUser?: {id: string, pass: string},
     isLogin?: (a: boolean) => void,
     openNav?: () => void,
+    depthHandle?: (e: MouseEvent<HTMLAnchorElement>) => void,
 }

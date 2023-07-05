@@ -1,7 +1,7 @@
-import React, { Fragment, useEffect, useState } from 'react';
 import './styles/App.css';
-import Login from './components/Login';
+import React, { Fragment, useEffect, useState } from 'react';
 import AppRouter from './Router';
+import Login from './components/Login';
 import Header from './components/Header';
 import Navbar from './components/Navbar';
 

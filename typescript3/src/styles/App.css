@@ -89,6 +89,17 @@ nav > ul > li > a:hover {
     color: #333;
     font-weight: bold;
 }
+nav > ul > li > ul {
+    background: #002a43;
+}
+nav > ul > li > ul > li > a {
+    display: block;
+    padding: .5rem;
+    padding-left: 1.5rem;
+    font-size: 14px;
+    color: #fff;
+    border-bottom: 1px solid #fff;
+}
 
 /* Home.tsx */
 .homePage {
