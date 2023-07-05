@@ -1,38 +1,96 @@
-.App {
-  text-align: center;
+/* App.tsx */
+.contentArea {
+    display: flex;
+    height: 700px;
+    overflow: hidden;
 }
 
-.App-logo {
-  height: 20vmin;
-  pointer-events: none;
+/* Router.tsx */
+.routingZone {
+    padding: 1.5rem;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+/* Login.tsx */
+.loginDiv {
+    width: 45%;
+    margin: 0 auto;
+    padding: 1.25rem;
+    box-shadow: 5px 15px 50px 0px rgba(0, 0, 0, .2);
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+.loginDiv > h1 {
+    margin-bottom: 1rem;
+}
+.loginDiv > form {
+    width: 100%;
+    overflow: hidden;
+}
+.loginDiv > form > input {
+    display: block;
+    height: 30px;
+    font-size: 16px;
+    width: 100%;
+    margin: .25rem 0;
+    padding-left: 5px;
+    outline: 0;
+    box-sizing: border-box;
+}
+.loginDiv > form > button {
+    width: 100%;
+    padding: .55rem 0;
+    border: none;
+    background: #0081cc;
+    color: #fff;
+    cursor: pointer;
+}
+.loginDiv > form > button:hover {
+    background: #ccc;
+    color: #333;
+    transition: all .3s;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 1vmin);
-  color: white;
+/* Header.tsx */
+.headerArea {
+    width: 100%;
+    padding: 1rem 0;
+    padding-left: 5px;
+    padding-right: 20px;
+    background: #192145;
+    display: flex;
+    justify-content: space-between;
+    box-sizing: border-box;
+}
+.headerArea > img {
+    width: 70px;
+    height: 40px;
+}
+.headerArea > button {
+    width: 40px;
 }
 
-.App-link {
-  color: #61dafb;
+/* Navbar.tsx */
+nav {
+    width: 300px;
+    height: 100%;
+    background: rgba(0, 0, 0, .5);
+}
+nav > ul > li > a {
+    display: block;
+    padding: 1rem;
+    font-size: 1.125rem;
+    color: #fff;
+    border-bottom: 1px solid #fff;
+}
+nav > ul > li > a:hover {
+    background: #fff;
+    color: #333;
+    font-weight: bold;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* Home.tsx */
+.homePage {
+    width: 100%;
 }
