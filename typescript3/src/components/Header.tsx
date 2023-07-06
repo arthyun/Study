@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
 import '../styles/App.css';
+import React, { useState } from 'react';
 import { AllTypes } from '../types';
 
-const Header : React.FC<AllTypes> = ({openNav}) => {
+const Header : React.FC<AllTypes> = ({ openNav }) => {
     // const btnRef = useRef<HTMLButtonElement>(null);
     const [count, setCount] = useState<number>(0);
 

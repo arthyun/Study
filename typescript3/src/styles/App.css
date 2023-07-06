@@ -7,6 +7,7 @@
 
 /* Router.tsx */
 .routingZone {
+    width: 100%;
     padding: 1.5rem;
 }
 
@@ -75,7 +76,7 @@
 nav {
     width: 300px;
     height: 100%;
-    background: rgba(0, 0, 0, .5);
+    background: rgba(0, 0, 0, .55);
 }
 nav > ul > li > a {
     display: block;
@@ -104,4 +105,34 @@ nav > ul > li > ul > li > a {
 /* Home.tsx */
 .homePage {
     width: 100%;
+}
+.main {
+    width: auto;
+    margin: 0 auto;
+    margin-top: 1.5rem;
+    border: 2px solid #333;
+}
+
+.tableMain {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid #333;
+}
+.tableMain > tbody > tr {
+    border-bottom: 1px solid #ddd;
+}
+.tableMain > tbody > tr > th {
+    padding: .35rem 0;
+    background: #ccc;
+}
+.tableMain > tbody > tr > td {
+    padding-left: 10px;
+}
+.main > form > .btnZone {
+    margin-top: .75rem;
+    text-align: end;
+}
+.main > form > .btnZone > .submitBtn {
+    width: 150px;
+    height: 30px;
 }

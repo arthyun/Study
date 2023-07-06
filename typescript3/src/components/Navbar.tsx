@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
 import '../styles/App.css';
+import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { AllTypes } from '../types';
 
@@ -19,7 +19,7 @@ const Navbar : React.FC = () => {
         }
     };
 
-    
+
     return (
         <nav>
             <ul>

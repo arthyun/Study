@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
 import '../styles/App.css'
+import React, { useState } from 'react';
 import { AllTypes } from '../types';
 
 const appId = process.env.REACT_APP_ID;
