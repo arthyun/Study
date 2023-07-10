@@ -8,3 +8,12 @@ export interface AllTypes {
     isLogin?: (a: boolean) => void,
     openNav?: () => void,
 }
+
+export interface Userinfo {
+    id: string,
+    date: string,
+    hour: string | number,
+    minute: string | number,
+    emergency: boolean,
+    notice: boolean,
+}

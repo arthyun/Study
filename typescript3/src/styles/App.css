@@ -64,7 +64,7 @@
     justify-content: space-between;
     box-sizing: border-box;
 }
-.headerArea > img {
+.headerArea > a > img {
     width: 70px;
     height: 40px;
 }
@@ -110,13 +110,13 @@ nav > ul > li > ul > li > a {
     width: auto;
     margin: 0 auto;
     margin-top: 1.5rem;
-    border: 2px solid #333;
+    /* border: 2px solid #333; */
 }
-
 .tableMain {
     width: 100%;
     border-collapse: collapse;
-    border: 1px solid #333;
+    border-top: 2px solid #666;
+    border-bottom: 2px solid #666;
 }
 .tableMain > tbody > tr {
     border-bottom: 1px solid #ddd;
@@ -135,4 +135,14 @@ nav > ul > li > ul > li > a {
 .main > form > .btnZone > .submitBtn {
     width: 150px;
     height: 30px;
+    border: 0;
+    background: #0081cc;
+    color: #fff;
+    font-size: .85rem;
+    cursor: pointer;
+    transition: all .3s;
+}
+.main > form > .btnZone > .submitBtn:hover {
+    background: #ccc;
+    color: #333;
 }
