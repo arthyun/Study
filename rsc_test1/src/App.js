@@ -1,5 +1,5 @@
-import '../styles/App.css';
-import Sub1 from '../clientComponents/Sub1.client';
+import React from 'react';
+import './styles/App.css';
 
 function App() {
   // console.log('Im ServerComponent');
@@ -9,8 +9,6 @@ function App() {
       <header className="App-header">
         <img src="./logo.svg" className="App-logo" alt="logo" />
         <br />
-        {/* Client Components */}
-        <Sub1 />
       </header>
     </div>
   );
