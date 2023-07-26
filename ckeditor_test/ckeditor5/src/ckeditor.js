@@ -6,7 +6,6 @@ import ClassicEditor from '@ckeditor/ckeditor5-editor-classic/src/classiceditor.
 import Autoformat from '@ckeditor/ckeditor5-autoformat/src/autoformat.js';
 import BlockQuote from '@ckeditor/ckeditor5-block-quote/src/blockquote.js';
 import Bold from '@ckeditor/ckeditor5-basic-styles/src/bold.js';
-import CKBox from '@ckeditor/ckeditor5-ckbox/src/ckbox.js';
 import CloudServices from '@ckeditor/ckeditor5-cloud-services/src/cloudservices.js';
 import Essentials from '@ckeditor/ckeditor5-essentials/src/essentials.js';
 import Heading from '@ckeditor/ckeditor5-heading/src/heading.js';
@@ -22,10 +21,8 @@ import List from '@ckeditor/ckeditor5-list/src/list.js';
 import MediaEmbed from '@ckeditor/ckeditor5-media-embed/src/mediaembed.js';
 import Paragraph from '@ckeditor/ckeditor5-paragraph/src/paragraph.js';
 import PasteFromOffice from '@ckeditor/ckeditor5-paste-from-office/src/pastefromoffice.js';
-import PictureEditing from '@ckeditor/ckeditor5-image/src/pictureediting.js';
 import Table from '@ckeditor/ckeditor5-table/src/table.js';
 import TableColumnResize from '@ckeditor/ckeditor5-table/src/tablecolumnresize.js';
-import TableProperties from '@ckeditor/ckeditor5-table/src/tableproperties';
 import TableToolbar from '@ckeditor/ckeditor5-table/src/tabletoolbar.js';
 import TextTransformation from '@ckeditor/ckeditor5-typing/src/texttransformation.js';
 
@@ -36,7 +33,6 @@ Editor.builtinPlugins = [
 	Autoformat,
 	BlockQuote,
 	Bold,
-	CKBox,
 	CloudServices,
 	Essentials,
 	Heading,
@@ -52,10 +48,8 @@ Editor.builtinPlugins = [
 	MediaEmbed,
 	Paragraph,
 	PasteFromOffice,
-	PictureEditing,
 	Table,
 	TableColumnResize,
-	TableProperties,
 	TableToolbar,
 	TextTransformation
 ];
@@ -77,10 +71,10 @@ Editor.defaultConfig = {
 			'|',
 			'imageUpload',
 			'blockQuote',
-			'undo',
-			'redo',
 			'insertTable',
-			'mediaEmbed'
+			'mediaEmbed',
+			'undo',
+			'redo'
 		]
 	},
 	language: 'ko',
@@ -97,8 +91,7 @@ Editor.defaultConfig = {
 		contentToolbar: [
 			'tableColumn',
 			'tableRow',
-			'mergeTableCells',
-			'tableProperties'
+			'mergeTableCells'
 		]
 	}
 };
