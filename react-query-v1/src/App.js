@@ -14,6 +14,7 @@ function App(){
   }, [ex, why]);
 
   const [name, setName] = useState('');
+
   const onSave = useCallback(() => {
     console.log(name);
   }, [name]);
@@ -24,16 +25,21 @@ function App(){
     setModalOpen(!modalOpen)
   },[modalOpen])
 
+  const [addName, setAddName] = useState('');
+
   return (
     <div className="App">
-      {modalOpen ? <KyeolJae modalOpen={modalClose} /> : console.log(modalOpen)}
-      <button onClick={() => setModalOpen(!modalOpen)} style={{display: 'block'}}>Modal</button>
-      <br/>
       <button onClick={() => setEx((curr) => (curr + 1))}>X</button>
       <button onClick={() => setWhy((curr) => (curr + 1))}>Y</button>
 
       <Example />
       <Todos />
+
+      <br/>
+      {/* 검토자 기능 테스트 */}
+      <input value={addName} placeholder='공란' disabled />
+      <button onClick={() => setModalOpen(!modalOpen)}>선택</button>
+      {modalOpen ? <KyeolJae modalOpen={modalClose} setAddName={setAddName} /> : null}
     </div>
   );
 }
