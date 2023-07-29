@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 
-const KyeolJae = ({ modalOpen, setAddName }) => {
+const KyeolJae = ({ modalOpen, setValue }) => {
   const [firstRow, setFirstRow] = useState(['김재준','송영환','오은택','김명래','손현호']);
   const [secondRow, setSecondRow] = useState([]);
 
@@ -80,7 +80,7 @@ const KyeolJae = ({ modalOpen, setAddName }) => {
             }
           </ul>
         <button onClick={() => {
-          setAddName(secondRow[0]);
+          setValue('name', secondRow[0]);
           modalOpen();
         }}>저장</button>
         </div>

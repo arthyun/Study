@@ -3,6 +3,7 @@ import React, { useCallback, useMemo, useState } from 'react';
 import Example from './Example';
 import Todos from './Todos';
 import KyeolJae from './결재선';
+import { useForm } from 'react-hook-form';
 
 
 function App(){
@@ -27,6 +28,11 @@ function App(){
 
   const [addName, setAddName] = useState('');
 
+  const { register, handleSubmit, setValue } = useForm();
+  const onSubmit = (data) => {
+    console.log(data);
+  };
+
   return (
     <div className="App">
       <button onClick={() => setEx((curr) => (curr + 1))}>X</button>
@@ -35,11 +41,18 @@ function App(){
       <Example />
       <Todos />
 
-      <br/>
+      <br/>https://bard.google.com/?hl=en
       {/* 검토자 기능 테스트 */}
-      <input value={addName} placeholder='공란' disabled />
+      {/* <input value={addName} placeholder='공란' disabled />
       <button onClick={() => setModalOpen(!modalOpen)}>선택</button>
-      {modalOpen ? <KyeolJae modalOpen={modalClose} setAddName={setAddName} /> : null}
+      {modalOpen ? <KyeolJae modalOpen={modalClose} setAddName={setAddName} /> : null} */}
+
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <input readOnly {...register('name')} placeholder='선택하세요.' />
+        <button type='button' onClick={() => setModalOpen(!modalOpen)}>선택</button>
+        <button type='submit'>저장</button>
+      </form>
+      {modalOpen ? <KyeolJae setValue={setValue} modalOpen={modalClose}/> : null}
     </div>
   );
 }
