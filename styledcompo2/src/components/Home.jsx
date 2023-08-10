@@ -1,10 +1,16 @@
 import styled from 'styled-components';
 
 const HomeWrap = styled.div`
-  margin-top: 1rem;
   width: 100%;
-  height: 300px;
+  margin-top: 1rem;
+  padding: 2rem;
+  box-sizing: border-box;
   border: 2px solid #fff;
+  transition: all 0.3s;
+
+  &:hover {
+    border: 15px solid #fff;
+  }
 
   & .first {
     color: red;
@@ -32,7 +38,7 @@ const HomeWrap = styled.div`
 const Home = () => {
   return (
     <div className="outsideWrap">
-      <HomeWrap>
+      <HomeWrap as="section">
         <h1 className="first">Welcome Home</h1>
         <h2 className="second">Welcome Home</h2>
         <h3 className="third">Welcome Home</h3>
