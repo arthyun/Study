@@ -8,7 +8,7 @@ const Home: React.FC = () => {
   const selectedCount = useRecoilValue<number>(selectedCountState(100));
   const [rowdata, SetRowData] = useRecoilState(getChangeList);
   const naming = useRecoilValue(nameState);
-  console.log(naming);
+  // console.log(naming);
 
   // useEffect(() => {
   //     count === 0 ? setCount(33) : console.log('not 0');

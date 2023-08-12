@@ -15,6 +15,7 @@
     "@ckeditor/ckeditor5-dev-utils": "^32.1.2",
     "@ckeditor/ckeditor5-editor-classic": "^38.1.0",
     "@ckeditor/ckeditor5-essentials": "^38.1.0",
+    "@ckeditor/ckeditor5-font": "^38.1.0",
     "@ckeditor/ckeditor5-heading": "^38.1.0",
     "@ckeditor/ckeditor5-image": "^38.1.0",
     "@ckeditor/ckeditor5-indent": "^38.1.0",

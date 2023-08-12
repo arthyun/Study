@@ -1,35 +1,53 @@
-import { useState } from 'react';
 import styled from 'styled-components';
 
 const HomeWrap = styled.div`
-    margin-top: 1rem;
-    width: 300px;
-    height: 300px;
-    border: 2px solid #fff;
-`;
-const FirstInput = styled.input.attrs({required: true})`
-    width: 100%;
-    padding: .75rem;
-    box-sizing: border-box;
-    background: pink;
-    font-size: 20px;
-    color: #2f00ff;
+  width: 100%;
+  margin-top: 1rem;
+  padding: 2rem;
+  box-sizing: border-box;
+  border: 2px solid #fff;
+  transition: all 0.3s;
+
+  &:hover {
+    border: 15px solid #fff;
+  }
+
+  & .first {
+    color: red;
+  }
+  & .second {
+    color: aqua;
+  }
+  & .third {
+    color: green;
+  }
+  .forth {
+    color: yellow;
+  }
+  .fifth {
+    color: purple;
+  }
+  .six {
+    color: beige;
+  }
+  .outsideWrap & {
+    background-color: #555;
+  }
 `;
 
 const Home = () => {
-    const [text, setText] = useState('');
-
-    const onChange = (e) => {
-        const { value } = e.target;
-        setText(value);
-    };
-
-    return (
-        <HomeWrap>
-            Home
-            <FirstInput type='text' value={text} onChange={onChange} />
-        </HomeWrap>
-    )
-}
+  return (
+    <div className="outsideWrap">
+      <HomeWrap as="section">
+        <h1 className="first">Welcome Home</h1>
+        <h2 className="second">Welcome Home</h2>
+        <h3 className="third">Welcome Home</h3>
+        <h4 className="forth">Welcome Home</h4>
+        <h5 className="fifth">Welcome Home</h5>
+        <h6 className="six">Welcome Home</h6>
+      </HomeWrap>
+    </div>
+  );
+};
 
 export default Home;
