@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
-import { nameState, countState, countWithUnitState, selectedCountState, getList, getChangeList } from '../store';
+import { nameState, countState, selectedCountState, getList, getChangeList } from '../store';
 import { useRecoilState, useRecoilValue } from 'recoil';
 
 const Home: React.FC = () => {
   const [cnt, setCnt] = useRecoilState<number>(countState);
-  const [count, setCount] = useRecoilState<number>(countWithUnitState);
+  // const [count, setCount] = useRecoilState<number>(countWithUnitState);
   const selectedCount = useRecoilValue<number>(selectedCountState(100));
   const [rowdata, SetRowData] = useRecoilState(getChangeList);
   const naming = useRecoilValue(nameState);

@@ -11,16 +11,23 @@ export const nameState = atom({
 });
 
 //selector를 활용하여 get과 set 가능
-export const countWithUnitState = selector({
-  key: 'countSelector',
+export const countStateSelector = selector({
+  key: 'countSelector1',
   get: ({ get }) => {
-    const count = get(countState);
+    const count = get(countState) + 'px';
     return count;
-  },
-  set: ({ set }, newValue) => {
-    set(countState, newValue);
   }
 });
+// export const countWithUnitState = selector({
+//   key: 'countSelector2',
+//   get: ({ get }) => {
+//     const count = get(countState);
+//     return count;
+//   },
+//   set: ({ set }, newValue) => {
+//     set(countState, newValue);
+//   }
+// });
 
 //매개변수를 주고자 할 때
 export const selectedCountState = selectorFamily({
