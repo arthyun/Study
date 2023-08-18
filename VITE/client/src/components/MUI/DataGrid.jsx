@@ -50,6 +50,7 @@ export default function DataGridMain() {
   const navigate = useNavigate();
 
   const onCellDoubleClick = (params, event, details) => {
+    // 지정한 필드값에서만 navigate가 발동되게...
     if (params.field === 'firstName') {
       navigate(`/mui/${params.id}`, { replace: false });
       console.log('필드값이 일치합니다.', params.field);
