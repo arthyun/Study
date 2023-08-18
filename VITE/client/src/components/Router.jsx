@@ -10,34 +10,37 @@ import About from './About';
 import Contact from './Contact';
 import Faq from './Faq';
 import Notfound from './Notfound';
-
+import DataGridMain from './MUI/DataGrid';
+import Detail from './MUI/Detail';
 
 const AppRouter = ({ account }) => {
+  return (
+    <Fragment>
+      {account ? (
+        <>
+          <Header />
 
-    return (
-        <Fragment>
-        {
-        account ? 
-            <>
-                <Header/>
+          <Routes>
+            <Route path="/" element={<Home />}>
+              <Route path="1" element={<Home1_1 />} />
+              <Route path="2" element={<Home1_2 />} />
+              <Route path="3" element={<Home1_3 />} />
+            </Route>
+            <Route path="/about" element={<About />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/faq" element={<Faq />} />
+            <Route path="/mui" element={<DataGridMain />}>
+              <Route path="/mui/:id" element={<Detail />} />
+            </Route>
 
-                <Routes>
-                    <Route path='/' element={<Home />}>
-                        <Route path='1' element={<Home1_1 />} />
-                        <Route path='2' element={<Home1_2 />} />
-                        <Route path='3' element={<Home1_3 />} />
-                    </Route>
-                    <Route path='/about' element={<About />} />
-                    <Route path='/contact' element={<Contact />} />
-                    <Route path='/faq' element={<Faq />} />
-                    <Route path='*' element={<Notfound />} />
-                </Routes>
-            </>
-            :
-            <Signin/>
-        }
-        </Fragment>
-    )
-}
+            <Route path="*" element={<Notfound />} />
+          </Routes>
+        </>
+      ) : (
+        <Signin />
+      )}
+    </Fragment>
+  );
+};
 
 export default AppRouter;
