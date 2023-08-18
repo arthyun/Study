@@ -29,9 +29,8 @@ const AppRouter = ({ account }) => {
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/faq" element={<Faq />} />
-            <Route path="/mui" element={<DataGridMain />}>
-              <Route path="/mui/:id" element={<Detail />} />
-            </Route>
+            <Route path="/mui" element={<DataGridMain />} />
+            <Route path="/mui/:id" element={<Detail />} />
 
             <Route path="*" element={<Notfound />} />
           </Routes>

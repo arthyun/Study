@@ -1,6 +1,7 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import { DataGrid } from '@mui/x-data-grid';
+import { useNavigate } from 'react-router-dom';
 
 const columns = [
   { field: 'id', headerName: 'ID', width: 90 },
@@ -8,20 +9,20 @@ const columns = [
     field: 'firstName',
     headerName: 'First name',
     width: 150,
-    editable: true
+    editable: false
   },
   {
     field: 'lastName',
     headerName: 'Last name',
     width: 150,
-    editable: true
+    editable: false
   },
   {
     field: 'age',
     headerName: 'Age',
     type: 'number',
     width: 110,
-    editable: true
+    editable: false
   },
   {
     field: 'fullName',
@@ -46,22 +47,36 @@ const rows = [
 ];
 
 export default function DataGridMain() {
+  const navigate = useNavigate();
+
+  const onRowDoubleClick = (params, event, details) => {
+    // console.log('선택된 RowId 값:', params.id);
+    navigate(`/mui/${params.id}`, { replace: false });
+  };
+
   return (
-    <Box sx={{ height: 400, width: '100%' }}>
-      <DataGrid
-        rows={rows}
-        columns={columns}
-        initialState={{
-          pagination: {
-            paginationModel: {
-              pageSize: 5
+    <>
+      <Box sx={{ height: 400, width: '100%' }}>
+        <DataGrid
+          rows={rows}
+          columns={columns}
+          initialState={{
+            pagination: {
+              paginationModel: {
+                pageSize: 5
+              }
             }
-          }
-        }}
-        pageSizeOptions={[5]}
-        checkboxSelection
-        disableRowSelectionOnClick
-      />
-    </Box>
+          }}
+          pageSizeOptions={[5]}
+          checkboxSelection
+          disableRowSelectionOnClick
+          onRowDoubleClick={(params, event, details) => onRowDoubleClick(params, event, details)}
+        />
+      </Box>
+
+      {/* <div className="onClickViewZone">
+        <Outlet />
+      </div> */}
+    </>
   );
 }
