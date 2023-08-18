@@ -49,9 +49,13 @@ const rows = [
 export default function DataGridMain() {
   const navigate = useNavigate();
 
-  const onRowDoubleClick = (params, event, details) => {
-    // console.log('선택된 RowId 값:', params.id);
-    navigate(`/mui/${params.id}`, { replace: false });
+  const onCellDoubleClick = (params, event, details) => {
+    if (params.field === 'firstName') {
+      navigate(`/mui/${params.id}`, { replace: false });
+      console.log('필드값이 일치합니다.', params.field);
+    } else {
+      console.log('필드값 확인바람.', params.field);
+    }
   };
 
   return (
@@ -70,7 +74,8 @@ export default function DataGridMain() {
           pageSizeOptions={[5]}
           checkboxSelection
           disableRowSelectionOnClick
-          onRowDoubleClick={(params, event, details) => onRowDoubleClick(params, event, details)}
+          //   onRowDoubleClick={(params, event, details) => onRowDoubleClick(params, event, details)}
+          onCellDoubleClick={(params, event, details) => onCellDoubleClick(params, event, details)}
         />
       </Box>
 
