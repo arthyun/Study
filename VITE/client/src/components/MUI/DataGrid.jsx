@@ -1,7 +1,9 @@
-import * as React from 'react';
+import React from 'react';
 import Box from '@mui/material/Box';
 import { DataGrid } from '@mui/x-data-grid';
-import { useNavigate } from 'react-router-dom';
+import ReactDOM from 'react-dom/client';
+import PopupCompo from './PopupCompo';
+// import { useNavigate } from 'react-router-dom';
 
 const columns = [
   { field: 'id', headerName: 'ID', width: 90 },
@@ -47,17 +49,31 @@ const rows = [
 ];
 
 export default function DataGridMain() {
-  const navigate = useNavigate();
+  //state
+  //   const [popupData, setPopupData] = useState([]);
 
-  const onCellDoubleClick = (params, event, details) => {
-    // 지정한 필드값에서만 navigate가 발동되게...
-    if (params.field === 'firstName') {
-      navigate(`/mui/${params.id}`, { replace: false });
-      console.log('필드값이 일치합니다.', params.field);
-    } else {
-      console.log('필드값 확인바람.', params.field);
-    }
+  // 클릭 시 윈도우 팝업 발생
+  const onClickPopup = (params) => {
+    const popupWindow = window.open('', '_blank', 'width=500, height=500');
+    const popupDocument = popupWindow.document;
+
+    popupDocument.write('<html><body><div id="popup-root"></div></body></html>');
+
+    const popupRoot = ReactDOM.createRoot(popupDocument.getElementById('popup-root'));
+    popupRoot.render(<PopupCompo params={params} />);
   };
+
+  //   const navigate = useNavigate();
+
+  //   const onCellDoubleClick = (params, event, details) => {
+  //     // 지정한 필드값에서만 navigate가 발동되게...
+  //     if (params.field === 'firstName') {
+  //       navigate(`/mui/${params.id}`, { replace: false });
+  //       console.log('필드값이 일치합니다.', params.field);
+  //     } else {
+  //       console.log('필드값 확인바람.', params.field);
+  //     }
+  //   };
 
   return (
     <>
@@ -75,8 +91,8 @@ export default function DataGridMain() {
           pageSizeOptions={[5]}
           checkboxSelection
           disableRowSelectionOnClick
-          //   onRowDoubleClick={(params, event, details) => onRowDoubleClick(params, event, details)}
-          onCellDoubleClick={(params, event, details) => onCellDoubleClick(params, event, details)}
+          //   onCellDoubleClick={(params, event, details) => onCellDoubleClick(params, event, details)}
+          onCellDoubleClick={(params, event, details) => onClickPopup(params)}
         />
       </Box>
 
