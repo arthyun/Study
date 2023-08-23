@@ -80,6 +80,29 @@ export default function DataGridMain() {
     { id: 9, lastName: 'Roxie', firstName: 'Harvey', age: 65 }
   ];
 
+  // 헤더 그룹짓기
+  const columnGroupingModel = [
+    {
+      groupId: '1번 그룹',
+      description: '',
+      children: [{ field: 'id' }]
+    },
+    {
+      groupId: '2번 그룹',
+      children: [
+        {
+          groupId: '2-1번 그룹',
+          children: [{ field: 'lastName' }, { field: 'firstName' }]
+        },
+        { field: 'age' }
+      ]
+    },
+    {
+      groupId: '3번 그룹',
+      children: [{ field: 'fullName' }]
+    }
+  ];
+
   // 클릭 시 윈도우 팝업 발생
   const onClickPopup = (params) => {
     const popupWindow = window.open('', '_blank', 'width=500, height=500');
@@ -92,7 +115,11 @@ export default function DataGridMain() {
   };
 
   const handleConfirm = () => {
-    console.log('선택된 값:', selectedValue);
+    if (selectedValue === '') {
+      alert('값이 비었으니 확인 바람!');
+    } else {
+      console.log('선택된 값:', selectedValue);
+    }
   };
 
   return (
@@ -113,6 +140,8 @@ export default function DataGridMain() {
           disableRowSelectionOnClick
           //   onCellDoubleClick={(params, event, details) => onCellDoubleClick(params, event, details)}
           onCellDoubleClick={(params, event, details) => onClickPopup(params)}
+          experimentalFeatures={{ columnGrouping: true }} // 그룹 기능 사용하려면
+          columnGroupingModel={columnGroupingModel}
         />
       </Box>
 
