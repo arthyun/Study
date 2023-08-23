@@ -57,7 +57,7 @@ export default function DataGridMain() {
       type: 'number',
       width: 110,
       editable: false,
-      renderCell: (params) => params.row.id === 1 && <p>나는 1이다.</p>
+      renderCell: (params) => (params.row.id === 1 ? <input type="checkbox" /> : params.row.age)
     },
     {
       field: 'fullName',
