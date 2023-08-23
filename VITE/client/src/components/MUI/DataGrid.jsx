@@ -56,7 +56,8 @@ export default function DataGridMain() {
       headerName: 'Age',
       type: 'number',
       width: 110,
-      editable: false
+      editable: false,
+      renderCell: (params) => params.row.id === 1 && <p>나는 1이다.</p>
     },
     {
       field: 'fullName',
@@ -124,7 +125,7 @@ export default function DataGridMain() {
 
   return (
     <>
-      <Box sx={{ height: 400, width: '100%' }}>
+      <Box sx={{ height: 550, width: '100%' }}>
         <DataGrid
           rows={rows}
           columns={columns}
