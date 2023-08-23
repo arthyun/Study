@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link, Outlet } from 'react-router-dom';
 import axios from 'axios';
+import { useForm, Controller } from "react-hook-form";
 
 
 const Home = () => {
@@ -127,6 +128,13 @@ const Home = () => {
         .catch(err => console.log(err));
     };
 
+    //useform 테스트
+    const { handleSubmit, register } = useForm();
+
+    const saveData = (form_data) => {
+        console.log(form_data);
+    };
+
 
     return (
         <div style={{ padding: '1rem 2rem', boxSizing: 'border-box' }}>
@@ -174,6 +182,17 @@ const Home = () => {
                 })
             }
             </div>
+
+            <form onSubmit={handleSubmit(saveData)}>
+                <input type="text" list="list1" {...register("list")} />
+                <datalist id="list1">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                </datalist>
+
+                <button type="submit">Save</button>
+            </form>
 
             <style jsx='true'>
             {`
