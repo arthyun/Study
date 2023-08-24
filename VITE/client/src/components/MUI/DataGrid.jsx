@@ -18,12 +18,12 @@ const DataList = ({ register }) => {
     <div>
       <input type="text" list="list" {...register('numbers')} />
       <datalist id="list">
-        <option value="1" />
-        <option value="2" />
-        <option value="3" />
-        <option value="4" />
-        <option value="5" />
-        <option value="6" />
+        <option value="아야" />
+        <option value="어여" />
+        <option value="오요" />
+        <option value="우유" />
+        <option value="이이" />
+        <option value="야야" />
       </datalist>
     </div>
   );
@@ -55,7 +55,7 @@ export default function DataGridMain() {
       headerName: 'Age',
       type: 'number',
       width: 110,
-      editable: false,
+      editable: true,
       renderCell: (params) => (params.row.id === 1 ? <input type="checkbox" /> : params.row.age)
     },
     {
@@ -114,12 +114,18 @@ export default function DataGridMain() {
   //   popupRoot.render(<PopupCompo params={params} />);
   // };
 
+  const newRowData1 = [];
+
   const getNewRowData = (params) => {
-    const newRowData = [];
     params.forEach((item) => {
-      newRowData.push(rows[item - 1]);
+      newRowData1.push({
+        id: rows[item - 1].id,
+        lastName: rows[item - 1].lastName,
+        firstName: rows[item - 1].firstName,
+        age: rows[item - 1].age,
+        madeIn: 'hyunho'
+      });
     });
-    console.log(newRowData);
   };
 
   const handleConfirm = (form_data) => {
@@ -128,7 +134,10 @@ export default function DataGridMain() {
     // } else {
     //   console.log('선택된 값:', selectedValue);
     // }
-    console.log(form_data);
+    newRowData1.forEach((item) => {
+      item.numbers = form_data.numbers;
+    });
+    console.log(newRowData1);
   };
 
   return (
