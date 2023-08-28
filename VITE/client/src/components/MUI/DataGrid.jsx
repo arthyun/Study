@@ -3,37 +3,36 @@ import Box from '@mui/material/Box';
 import { DataGrid } from '@mui/x-data-grid';
 import ReactDOM from 'react-dom/client';
 import PopupCompo from './PopupCompo';
+import { useForm } from 'react-hook-form';
 
 // 컴포넌트 생성
 const CountButton = ({ count, setCount }) => {
-  return <button onClick={() => setCount((prev) => prev + 1)}>{count}</button>;
+  return (
+    <button type="button" onClick={() => setCount((prev) => prev + 1)}>
+      {count}
+    </button>
+  );
 };
-const DataList = ({ selectedValue, handleInputChange }) => {
+const DataList = ({ register }) => {
   return (
     <div>
-      <label htmlFor="numbers">Select</label>
-      <input type="text" list="list" id="numbers" value={selectedValue} onChange={handleInputChange} />
+      <input type="text" list="list" {...register('numbers')} />
       <datalist id="list">
-        <option value="1" />
-        <option value="2" />
-        <option value="3" />
-        <option value="4" />
-        <option value="5" />
-        <option value="6" />
+        <option value="아야" />
+        <option value="어여" />
+        <option value="오요" />
+        <option value="우유" />
+        <option value="이이" />
+        <option value="야야" />
       </datalist>
     </div>
   );
 };
 
 export default function DataGridMain() {
-  // 컴포넌트들에 전달할 States
-  const [count, setCount] = useState(0);
-  const [selectedValue, setSelectedValue] = useState('');
+  const { register, handleSubmit } = useForm();
 
-  const handleInputChange = (e) => {
-    const { value } = e.target;
-    setSelectedValue(value);
-  };
+  const [count, setCount] = useState(0);
 
   const columns = [
     { field: 'id', headerName: 'ID', width: 90 },
@@ -48,15 +47,15 @@ export default function DataGridMain() {
       field: 'lastName',
       headerName: 'Last name',
       width: 150,
-      editable: false,
-      renderHeader: () => <DataList selectedValue={selectedValue} handleInputChange={handleInputChange} />
+      editable: true,
+      renderHeader: () => <DataList register={register} />
     },
     {
       field: 'age',
       headerName: 'Age',
       type: 'number',
       width: 110,
-      editable: false,
+      editable: true,
       renderCell: (params) => (params.row.id === 1 ? <input type="checkbox" /> : params.row.age)
     },
     {
@@ -105,49 +104,74 @@ export default function DataGridMain() {
   ];
 
   // 클릭 시 윈도우 팝업 발생
-  const onClickPopup = (params) => {
-    const popupWindow = window.open('', '_blank', 'width=500, height=500');
-    const popupDocument = popupWindow.document;
+  // const onClickPopup = (params) => {
+  //   const popupWindow = window.open('', '_blank', 'width=500, height=500');
+  //   const popupDocument = popupWindow.document;
 
-    popupDocument.write('<html><body><div id="popup-root"></div></body></html>');
+  //   popupDocument.write('<html><body><div id="popup-root"></div></body></html>');
 
-    const popupRoot = ReactDOM.createRoot(popupDocument.getElementById('popup-root'));
-    popupRoot.render(<PopupCompo params={params} />);
+  //   const popupRoot = ReactDOM.createRoot(popupDocument.getElementById('popup-root'));
+  //   popupRoot.render(<PopupCompo params={params} />);
+  // };
+
+  const newRowData1 = [];
+
+  const getNewRowData = (params) => {
+    params.forEach((item) => {
+      newRowData1.push({
+        id: rows[item - 1].id,
+        lastName: rows[item - 1].lastName,
+        firstName: rows[item - 1].firstName,
+        age: rows[item - 1].age,
+        madeIn: 'hyunho'
+      });
+    });
   };
 
-  const handleConfirm = () => {
-    if (selectedValue === '') {
-      alert('값이 비었으니 확인 바람!');
-    } else {
-      console.log('선택된 값:', selectedValue);
-    }
+  const handleConfirm = (form_data) => {
+    // if (selectedValue === '') {
+    //   alert('값이 비었으니 확인 바람!');
+    // } else {
+    //   console.log('선택된 값:', selectedValue);
+    // }
+    newRowData1.forEach((item) => {
+      item.numbers = form_data.numbers;
+    });
+    console.log(newRowData1);
   };
 
   return (
     <>
-      <Box sx={{ height: 550, width: '100%' }}>
-        <DataGrid
-          rows={rows}
-          columns={columns}
-          initialState={{
-            pagination: {
-              paginationModel: {
-                pageSize: 5
+      <form onSubmit={handleSubmit(handleConfirm)}>
+        <Box sx={{ height: 550, width: '100%' }}>
+          <DataGrid
+            rows={rows}
+            columns={columns}
+            initialState={{
+              pagination: {
+                paginationModel: {
+                  pageSize: 5
+                }
               }
-            }
-          }}
-          pageSizeOptions={[5]}
-          checkboxSelection
-          disableRowSelectionOnClick
-          //   onCellDoubleClick={(params, event, details) => onCellDoubleClick(params, event, details)}
-          onCellDoubleClick={(params, event, details) => onClickPopup(params)}
-          experimentalFeatures={{ columnGrouping: true }} // 그룹 기능 사용하려면
-          columnGroupingModel={columnGroupingModel}
-        />
-      </Box>
+            }}
+            pageSizeOptions={[5]}
+            checkboxSelection
+            disableRowSelectionOnClick
+            //   onCellDoubleClick={(params, event, details) => onCellDoubleClick(params, event, details)}
+            // onCellDoubleClick={(params, event, details) => onClickPopup(params)} // 더블클릭 시 팝업 노출
+            experimentalFeatures={{ columnGrouping: true }} // 그룹 기능 사용하려면
+            columnGroupingModel={columnGroupingModel}
+            processRowUpdate={(updatedRow, originalRow) => {
+              console.log('업데이트된 값:', updatedRow);
+              console.log('기존값:', originalRow);
+            }} // 수정한 cell 값 반영
+            // onProcessRowUpdateError={}
+            onRowSelectionModelChange={getNewRowData} // 선택한 id 값으로 로우 전체 데이터를 구하기
+          />
+        </Box>
 
-      <button onClick={handleConfirm}>Confirm</button>
-
+        <button type="submit">Confirm</button>
+      </form>
       {/* <div className="onClickViewZone">
         <Outlet />
       </div> */}
