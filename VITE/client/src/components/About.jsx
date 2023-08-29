@@ -53,7 +53,10 @@ const About = () => {
 
 
             <button onClick={() => setCnt(cnt + 1)}>Count {cnt}</button>
-            <button onClick={() => onPopup('/popup', 'portalTest', '600', '400')}>팝업</button>
+            <button onClick={() => {
+                localStorage.setItem('recoilValue', cnt);
+                onPopup('/popup', 'portalTest', '600', '400');
+            }}>팝업</button>
         </>
     )
 }
