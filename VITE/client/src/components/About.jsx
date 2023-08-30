@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { useRecoilState } from 'recoil';
 import { testStore } from '../store';
 
@@ -36,6 +36,56 @@ const About = () => {
         openWindow.cnt = cnt;
     }
 
+    // 체크박스 테스트
+    const data = [
+        {
+          id: 'id-1',
+          name: 'Row 1',
+        },
+        {
+          id: 'id-2',
+          name: 'Row 2',
+        },
+        {
+          id: 'id-3',
+          name: 'Row 3',
+        },
+        {
+          id: 'id-4',
+          name: 'Row 4',
+        },
+        {
+          id: 'id-5',
+          name: 'Row 5',
+        },
+        {
+          id: 'id-6',
+          name: 'Row 6',
+        },
+      ];
+
+    const [checkedArr, setCheckedArr] = useState([]);
+    const numChecked = checkedArr.length;
+
+    const handleOnChange = (id) => {
+        const isChecked = checkedArr.includes(id);
+
+        if (isChecked) {
+            setCheckedArr((prev) => prev.filter((el) => el !== id));
+        } else {
+            setCheckedArr((prev) => [...prev, id]);
+        }
+    };
+
+    const AllChecked = ({ target: { checked } }) => {
+        if (checked) {
+            setCheckedArr(data.map((row) => row));
+        } else {
+            setCheckedArr([]);
+        }
+    };
+      
+
     return (
         <>
             <h1 style={{ padding: '1rem 2rem', boxSizing: 'border-box' }}>About Page.</h1>
@@ -58,6 +108,48 @@ const About = () => {
                 // localStorage.setItem('recoilValue', cnt);
                 onPopup('/popup', 'portalTest', '600', '400');
             }}>팝업</button>
+
+            <div>
+            <table>
+                <thead>
+                    <tr>
+                    <th>
+                        <input
+                        type='checkbox'
+                        onChange={AllChecked}
+                        checked={numChecked === data.length}
+                        />
+                    </th>
+                    <th style={{ minWidth: '8rem' }}>
+                        {numChecked ? `Selected ${numChecked}` : 'None selected'}
+                    </th>
+                    </tr>
+                    <tr>
+                    <th />
+                    <th>ID</th>
+                    <th>Name</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {data?.map(({ id, name }, i) => (
+                    <tr key={id}>
+                        <td>
+                        <input
+                            type='checkbox'
+                            onChange={() => handleOnChange(id)}
+                            checked={checkedArr && checkedArr[i] ? checkedArr[i].id.includes(id) : false}
+                        />
+                        </td>
+                        <td>{id}</td>
+                        <td>{name}</td>
+                    </tr>
+                    ))}
+                </tbody>
+                </table>
+                <button onClick={() => console.log(checkedArr)}>
+                    Extract Selected Data
+                </button>
+            </div>
         </>
     )
 }
