@@ -32,7 +32,8 @@ const About = () => {
         const popupHeight = height;
         const popupX = (window.screen.width / 2) - (popupWidth / 2);
         const popupY = (window.screen.height / 2) - (popupHeight / 2);
-        window.open(url, name, 'status=no, height=' + popupHeight + ', width=' + popupWidth + ', left=' + popupX + ', top=' + popupY);
+        const openWindow = window.open(url, name, 'status=no, height=' + popupHeight + ', width=' + popupWidth + ', left=' + popupX + ', top=' + popupY);
+        openWindow.cnt = cnt;
     }
 
     return (
@@ -54,7 +55,7 @@ const About = () => {
 
             <button onClick={() => setCnt(cnt + 1)}>Count {cnt}</button>
             <button onClick={() => {
-                localStorage.setItem('recoilValue', cnt);
+                // localStorage.setItem('recoilValue', cnt);
                 onPopup('/popup', 'portalTest', '600', '400');
             }}>팝업</button>
         </>
