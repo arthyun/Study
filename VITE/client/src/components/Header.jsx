@@ -10,6 +10,7 @@ export default function Header() {
             {to: '/about', title: 'ABOUT'},
             {to: '/contact', title: 'CONTACT'},
             {to: '/faq', title: 'FAQ'},
+            {to: '/select', title: 'SELECT'},
         ]
     };
 

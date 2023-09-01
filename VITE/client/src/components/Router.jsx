@@ -13,6 +13,7 @@ import Notfound from './Notfound';
 import DataGridMain from './MUI/DataGrid';
 import Detail from './MUI/Detail';
 import Popup from './Popup';
+import Select from './Select';
 
 const AppRouter = ({ account }) => {
   return (
@@ -30,6 +31,7 @@ const AppRouter = ({ account }) => {
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/faq" element={<Faq />} />
+            <Route path="/select" element={<Select />} />
             <Route path="/mui" element={<DataGridMain />} />
             <Route path="/mui/:id" element={<Detail />} />
 
