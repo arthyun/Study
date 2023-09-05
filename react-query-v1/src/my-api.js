@@ -2,6 +2,19 @@ import axios from 'axios';
 
 const URL = process.env.REACT_APP_FETCH_URL;
 
+export const getTest1 = async () => {
+    const result = await axios.get(`${URL}/1`).then(res => res.data);
+    return result;
+};
+export const getTest2 = async () => {
+    const result = await axios.get(`${URL}/2`).then(res => res.data);
+    return result;
+};
+export const getTest3 = async () => {
+    const result = await axios.get(`${URL}/3`).then(res => res.data);
+    return result;
+};
+
 //GET
 export const getTodo = async () => {
     const result = await axios.get(URL).then(res => res.data);
