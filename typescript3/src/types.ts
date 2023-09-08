@@ -1,6 +1,8 @@
 import { ChangeEvent, FormEvent, MouseEvent } from "react";
 
 export interface AllTypes {
+    count : number,
+    navOpenClose: () => void,
     changeHandle?: (e: ChangeEvent<HTMLInputElement>) => void,
     submitHandle?: (e: FormEvent<HTMLFormElement>) => void,
     depthHandle?: (e: MouseEvent<HTMLAnchorElement>) => void,    

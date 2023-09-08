@@ -5,7 +5,7 @@ import { AllTypes } from '../types';
 
 const Header : React.FC<AllTypes> = ({ openNav }) => {
     // const btnRef = useRef<HTMLButtonElement>(null);
-    const [count, setCount] = useState<number>(0);
+    const [count, setCount] = useState(0);
 
     const navOpenClose = () => {
         if(openNav){
