@@ -6,7 +6,7 @@ const appId = process.env.REACT_APP_ID;
 const appPs = process.env.REACT_APP_PASS;
 
 
-const Login : React.FC<AllTypes> = ({isLogin}) => {
+const Login : React.FC = ({ isLogin }:AllTypes) => {
     const [id, setId] = useState<string>('');
     const [pass, setPass] = useState<string>('');
 

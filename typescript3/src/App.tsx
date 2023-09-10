@@ -4,13 +4,14 @@ import AppRouter from './Router';
 import Login from './components/Login';
 import Header from './components/Header';
 import Navbar from './components/Navbar';
+import { AllTypes } from './types';
 
-
-const App : React.FC = () => {
+const App : React.FC<AllTypes> = () => {
   const [isLogin, setIsLogin] = useState<boolean>(false);
   const [openNav, setOpenNav] = useState<boolean>(false);
+  const [count, setCount] = useState(0);
 
-  const openNavToggle = ():void => {
+  const openNavToggle = () => {
     setOpenNav(!openNav);
   }
 

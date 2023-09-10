@@ -28,17 +28,14 @@ const TokenTest = () => {
   }, []);
 
   // 토큰 리프레시 함수
-  const refreshTokens = async () => {
+  const refreshTokens = async (refreshToken: string) => {
     try {
-      // 리프레시 토큰을 사용하여 새로운 액세스 토큰 발급 요청
-      const response = await axios.post('/api/refresh', {
+      const response = await axios.post<{ accessToken: string }>('/api/refresh', {
         refreshToken: refreshToken,
       });
-
-      // 새로운 액세스 토큰으로 업데이트
       setAccessToken(response.data.accessToken);
     } catch (error) {
-      console.log('토큰 리프레시 오류:', error);
+      console.log('토큰 갱신 오류:', error);
     }
   };
 
@@ -51,7 +48,7 @@ const TokenTest = () => {
 
       if (tokenExpiration - currentTime < 60) {
         // 만료 60초 이내라면 토큰 리프레시 수행
-        refreshTokens();
+        refreshTokens('value');
       }
     }, 5000); // 5초마다 확인
 
