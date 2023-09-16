@@ -1,65 +1,61 @@
-import React, { useEffect, useState } from 'react';
-import './style/App.css';
-
-interface AppTypes {
-  getTestApi : () => void;
-  imgSrc : {
-    birthday: string;
-    gender: string;
-    id: number;
-    image: string;
-    job: string;
-    name: string;
-  }[];
-}
+import React, { useState } from "react";
+import "./style/App.css";
+import Home from "./components/Home";
 
 const App = () => {
-  const [imgSrc, setImgSrc] = useState<AppTypes['imgSrc']>([]);
-
-  const getTestApi : AppTypes['getTestApi'] = async () => {
-    const response = await fetch('http://localhost:5000/api/user', {
-      method: 'GET',
-      headers: {
-        "Content-Type": "application/json"
-      }
-    }).then(res => res.json());
-    const result = response;
-    return setImgSrc(result);
-  }
-
-  useEffect(() => {
-    getTestApi();
-  },[]);
-
-  console.log(imgSrc);
+  const [name, setName] = useState<string>("");
+  const [pass, setPass] = useState<string>("");
+  const [isLogin, setIsLogin] = useState<boolean>(false);
 
   return (
     <div className="App">
       <header className="App-header">
-        <img src='./logo.svg' className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+        <img
+          src="./logo.svg"
+          className="App-logo"
+          alt="logo"
+        />
+        <label htmlFor="name">이름</label>
+        <input
+          type="text"
+          id="name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+        />
+        <label htmlFor="password">비밀번호</label>
+        <input
+          type="password"
+          id="password"
+          value={pass}
+          onChange={(e) => setPass(e.target.value)}
+        />
+        <button
+          type="button"
+          onClick={async () => {
+            await fetch("http://localhost:5000/api/login", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({ id: name, password: pass }),
+            })
+              .then((res) => res.json())
+              .then((data) => {
+                if (data.message === "Login failed") {
+                  alert("로그인에 실패했습니다.");
+                } else {
+                  console.log(data.message);
+                  setIsLogin(true);
+                }
+              });
+          }}
         >
-          Learn React
-        </a>
-        {imgSrc?.map((item) => {
-          return (
-            <div key={item.id}>
-              <img src={item.image} alt={item.name} />
-            </div>
-          )
-        }
-        )}
-
+          제출
+        </button>
+        {isLogin && <Home />}
       </header>
     </div>
   );
-}
+};
 
 export default App;
