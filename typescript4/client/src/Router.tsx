@@ -1,32 +1,45 @@
 import React from "react";
-// import { Routes, Route } from "react-router-dom";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Header from "./components/Header";
 import Home from "./components/Home";
+import About from "./components/About";
+import Task from "./components/Task";
 
 const AppRouter = () => {
   return (
-    <Router>
-      <Routes>
-        <Route
-          path="/"
-          element={<Header />}
-        >
+    <Routes>
+      <Route
+        path="/"
+        element={<Header />}
+      >
+        <Route path="sub1">
           <Route
-            index
+            path="home"
             element={<Home />}
           />
-          {/* <Route
+        </Route>
+        <Route path="sub2">
+          <Route
+            path="about"
+            element={<About />}
+          />
+        </Route>
+        <Route path="sub3">
+          <Route
+            path="task"
+            element={<Task />}
+          />
+        </Route>
+        {/* <Route
             path="/about"
             element={<About />}
-          /> */}
-          {/* <Route
+          />
+          <Route
             path="/task"
             element={<Task />}
           /> */}
-        </Route>
-      </Routes>
-    </Router>
+      </Route>
+    </Routes>
   );
 };
 

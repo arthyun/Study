@@ -27,6 +27,7 @@ const Home = () => {
 
   return (
     <div>
+      Home
       <Sub1 data={imgSrc} />
     </div>
   );
