@@ -8,6 +8,7 @@ interface AppTypes {
 const Home = () => {
   const [imgSrc, setImgSrc] = useState<never[]>([]);
 
+  // 유저리스트 호출
   const getTestApi: AppTypes["getTestApi"] = async () => {
     const response = await fetch("http://localhost:5000/api/user", {
       method: "GET",
@@ -19,6 +20,7 @@ const Home = () => {
     return setImgSrc(result);
   };
 
+  // 렌더링 직후 호출
   useEffect(() => {
     getTestApi();
   }, []);
