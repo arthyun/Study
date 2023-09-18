@@ -3,11 +3,25 @@ const cors = require("cors");
 const app = express();
 const port = process.env.PORT || 5000;
 const bodyParser = require("body-parser");
+const db = require("./database");
 
 //json형태로 사용
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
+//DB 접근
+app.get("/api/database", (req, res) => {
+  db.query("select * from memos", function (error, results, fields) {
+    if (error) {
+      console.error(error);
+    }
+    console.log("The db is: ", results);
+    res.json(results);
+  });
+
+  // return connection.end();
+});
 
 app.get("/api/user", (req, res) => {
   res.json([
