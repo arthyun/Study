@@ -16,7 +16,7 @@ app.get("/api/database", (req, res) => {
     if (error) {
       console.error(error);
     }
-    console.log("The db is: ", results);
+    console.log(results);
     res.json(results);
   });
 
@@ -27,7 +27,6 @@ app.get("/api/user", (req, res) => {
   res.json([
     {
       id: 1,
-      image: "http://placeimg.com/64/64/any",
       name: "홍길동",
       birthday: "961222",
       gender: "200",
@@ -35,7 +34,6 @@ app.get("/api/user", (req, res) => {
     },
     {
       id: 2,
-      image: "http://placeimg.com/64/64/any",
       name: "김김김",
       birthday: "931222",
       gender: "200",
@@ -43,7 +41,6 @@ app.get("/api/user", (req, res) => {
     },
     {
       id: 3,
-      image: "http://placeimg.com/64/64/any",
       name: "손손손",
       birthday: "981222",
       gender: "200",
