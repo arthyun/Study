@@ -32,7 +32,7 @@ const Login: React.FC<IProps> = ({ setIsLogin }) => {
       <button
         type="button"
         onClick={async () => {
-          await fetch("http://localhost:5000/api/login", {
+          await fetch("/api/login", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",

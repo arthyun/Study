@@ -18,7 +18,7 @@ const Home = () => {
 
   // 유저리스트 호출
   const getTestApi: AppTypes["getTestApi"] = async () => {
-    const response = await fetch("http://localhost:5000/api/user", {
+    const response = await fetch("/api/user", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -30,7 +30,7 @@ const Home = () => {
 
   // DB 초기값 호출
   const getDbApi: AppTypes["getDbApi"] = async () => {
-    const response = await fetch("http://localhost:5000/api/database", {
+    const response = await fetch("/api/database", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
