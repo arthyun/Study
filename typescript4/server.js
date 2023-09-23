@@ -3,12 +3,13 @@ const express = require("express");
 const app = express();
 const port = process.env.PORT || 5000;
 const bodyParser = require("body-parser");
+const cookieParser = require("cookie-parser");
 const db = require("./database");
 
-//json형태로 사용
 // app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cookieParser());
 
 //DB 접근
 app.get("/api/database", (req, res) => {
@@ -51,12 +52,27 @@ app.get("/api/user", (req, res) => {
 
 app.post("/api/login", (req, res) => {
   const { id, password } = req.body;
-
-  if (id === "son" && password === "3316") {
-    res.status(200).json({ message: "Login successful" });
+  const userName = id;
+  const pass = password;
+  if (userName === "arthyun" && pass === "3316") {
+    db.query(`select * from member where userName=? and pass=?`, [userName, pass], function (error, results, fields) {
+      if (error) {
+        console.error(error);
+      }
+      // console.log("req.cookies:", req.cookies);
+      // res.cookie("임시", JSON.stringify(results), { maxAge: 900000, httpOnly: true });
+      // console.log(results);
+      res.status(200).json(results);
+    });
   } else {
     res.status(200).json({ message: "Login failed" });
   }
+
+  // if (id === "son" && password === "3316") {
+  //   res.status(200).json({ message: "Login successful" });
+  // } else {
+  //   res.status(200).json({ message: "Login failed" });
+  // }
   // res.status(200).json({
   //     status: 'success',
   //     data: []

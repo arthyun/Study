@@ -1,12 +1,21 @@
 import "./style/App.css";
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import AppRouter from "./Router";
 import Login from "./components/Login";
+import { useRecoilState } from "recoil";
+import { isloginStore } from "./store";
 
 const App = () => {
-  const [isLogin, setIsLogin] = useState<boolean>(false);
+  // 새로고침 할때 마다 로그인 여부 확인용
+  const [isLogin, setIsLogin] = useRecoilState(isloginStore);
 
-  return <div className="App">{isLogin ? <AppRouter /> : <Login setIsLogin={setIsLogin} />}</div>;
+  useEffect(() => {
+    if (sessionStorage.getItem("recoilPersist")) {
+      setIsLogin(true);
+    }
+  }, []);
+
+  return <div className="App">{isLogin ? <AppRouter /> : <Login />}</div>;
 };
 
 export default App;
