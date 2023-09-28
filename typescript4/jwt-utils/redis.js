@@ -1,7 +1,7 @@
 // refresh token을 저장할 redis 세팅
 // homebrew로 redis 설치 후 redis-server 로 실행 후 작동시켜야함 !
 const redis = require('redis');
-require('dotenv').config();
+require('dotenv').config(); // 경로상의 env 파일을 읽기 위함
 const redisPort = process.env.REDIS_PORT;
 
 const redisClient = redis.createClient(redisPort);

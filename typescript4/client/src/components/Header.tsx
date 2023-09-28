@@ -1,5 +1,6 @@
 import React from 'react';
 import { NavLink, Outlet } from 'react-router-dom';
+import Main from './Main';
 
 const Header = () => {
   return (
@@ -20,6 +21,7 @@ const Header = () => {
         </nav>
       </header>
       <div className="content-section">
+        <Main />
         <Outlet />
       </div>
     </>

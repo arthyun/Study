@@ -4,8 +4,9 @@ const app = express();
 const port = process.env.PORT || 5000;
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
-const jwt = require('./jwt-util');
-const redisClient = require('./redis');
+const jwt = require('./jwt-utils/jwt-util');
+const redisClient = require('./jwt-utils/redis');
+const authJWT = require('./jwt-utils/authJWT');
 // const cors = require("cors"); // proxy 설정을 했기에 불필요
 // const db = require('./database');
 
@@ -31,13 +32,13 @@ app.use(cookieParser());
 // 로그인 API
 app.post('/api/login', async (req, res) => {
   const { id, password } = req.body;
-  const userName = id;
-  const pass = password;
+  const userId = id;
+  const userPass = password;
   const user = {
-    id: userName,
-    pass: pass
+    id: userId,
+    password: userPass
   };
-  if (userName === 'son' && pass === '3316') {
+  if (user.id === 'son' && user.password === '3316') {
     /* DB 쿼리문 */
     // db.query(`select * from member where userName=? and pass=?`, [userName, pass], function (error, results, fields) {
     //   if (error) {
@@ -69,6 +70,17 @@ app.post('/api/login', async (req, res) => {
   } else {
     console.log('로그인에 실패했습니다.');
     return res.status(401).json({ status: 'failed', message: '로그인에 실패했습니다.' });
+  }
+});
+
+// 토큰 상태 확인
+app.get('/api/tokenVerify', authJWT, (req, res) => {
+  // console.log(req.id);
+  // console.log(req.password);
+
+  if (req.id && req.password) {
+    // 임시
+    res.json('요청 값이 있습니다.');
   }
 });
 
