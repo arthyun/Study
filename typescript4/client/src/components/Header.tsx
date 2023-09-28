@@ -1,12 +1,12 @@
-import React, { useEffect } from "react";
-import { NavLink, Outlet } from "react-router-dom";
+import React from 'react';
+import { NavLink, Outlet } from 'react-router-dom';
 
 const Header = () => {
   return (
     <>
       <header>
         <nav>
-          <ul style={{ display: "flex", gap: "2rem", listStyle: "none" }}>
+          <ul style={{ display: 'flex', gap: '2rem', listStyle: 'none' }}>
             <li>
               <NavLink to="/sub1/home">Home</NavLink>
             </li>
