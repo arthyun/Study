@@ -3,13 +3,13 @@ import { recoilPersist } from "recoil-persist";
 
 // 세션에 저장되게..
 const { persistAtom } = recoilPersist({
-  key: "recoilPersist",
+  key: "JWT",
   storage: sessionStorage,
 });
 
-export const loginStore = atom({
-  key: "loginStore",
-  default: [],
+export const accessToken = atom({
+  key: "accessToken",
+  default: "",
   effects_UNSTABLE: [persistAtom],
 });
 

@@ -1,8 +1,8 @@
 // jwt 메소드 정리
-const { promisify } = require('util');
-const jwt = require('jsonwebtoken');
-const redisClient = require('./redis');
-require('dotenv').config(); // 경로상의 env 파일을 읽기 위함
+const { promisify } = require("util");
+const jwt = require("jsonwebtoken");
+const redisClient = require("./redis");
+require("dotenv").config(); // 경로상의 env 파일을 읽기 위함
 const secret = process.env.JWT_SECRET_KEY; // secret 키 생성
 
 module.exports = {
@@ -12,13 +12,13 @@ module.exports = {
     const payload = {
       // accessToken에 들어갈 payload
       id: user.id,
-      password: user.password
+      password: user.password,
     };
 
     return jwt.sign(payload, secret, {
       // secret으로 sign하여 발급하고 return
-      algorithm: 'HS256', // 암호화 알고리즘
-      expiresIn: '1h' // 유효기간
+      algorithm: "HS256", // 암호화 알고리즘
+      expiresIn: "1m", // 유효기간
     });
   },
   // 확인
@@ -30,12 +30,12 @@ module.exports = {
       return {
         ok: true,
         id: decoded.id,
-        password: decoded.password
+        password: decoded.password,
       };
     } catch (err) {
       return {
         ok: false,
-        message: err.message
+        message: err.message,
       };
     }
   },
@@ -44,8 +44,8 @@ module.exports = {
     // refreshToken 발급
     return jwt.sign({}, secret, {
       // refreshToken은 payload 없이 발급
-      algorithm: 'HS256',
-      expiresIn: '14d'
+      algorithm: "HS256",
+      expiresIn: "14d",
     });
   },
   // 재발급 검증
@@ -69,5 +69,5 @@ module.exports = {
     } catch (err) {
       return false;
     }
-  }
+  },
 };

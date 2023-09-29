@@ -4,15 +4,18 @@ import ReactDOM from "react-dom/client";
 import "./style/index.css";
 import App from "./App";
 import { BrowserRouter } from "react-router-dom";
+import { CookiesProvider } from "react-cookie";
 import { RecoilRoot } from "recoil";
 
 const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
 root.render(
-  <RecoilRoot>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
-  </RecoilRoot>,
+  <CookiesProvider>
+    <RecoilRoot>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </RecoilRoot>
+  </CookiesProvider>,
 );
 
 // If you want to start measuring performance in your app, pass a function

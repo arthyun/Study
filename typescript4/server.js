@@ -51,11 +51,11 @@ app.post("/api/login", async (req, res) => {
     // });
 
     /* JWT 인증 방법 */
-    // access token과 refresh token을 발급합니다.
+    // access token과 refreshToken을 발급합니다.
     const accessToken = jwt.sign(user);
     const refreshToken = jwt.refresh();
-    console.log("엑세스토큰: ", accessToken);
-    console.log("리프레시토큰: ", refreshToken);
+    // refreshToken은 쿠키에 저장
+    res.cookie("refreshToken", refreshToken, { maxAge: 900000, httpOnly: true });
 
     // 발급한 refresh token을 redis에 key를 user의 id로 하여 저장합니다.
     await redisClient.set(user.id, refreshToken);
@@ -78,9 +78,23 @@ app.get("/api/tokenVerify", authJWT, (req, res) => {
   // console.log(req.id);
   // console.log(req.password);
 
-  if (req.id && req.password) {
-    // 임시
-    res.json("요청 값이 있습니다.");
+  // 토큰값이 정상인지 아닌지
+  if (req.ok) {
+    res.json({
+      message: "토큰이 정상입니다.",
+      data: {
+        ok: req.ok,
+        id: req.id,
+        // password: req.password,
+      },
+    });
+  } else {
+    res.json({
+      message: "토큰이 만료되었습니다.",
+      data: {
+        ok: req.ok,
+      },
+    });
   }
 });
 
