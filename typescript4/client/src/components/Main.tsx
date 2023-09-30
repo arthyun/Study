@@ -1,10 +1,14 @@
 import React from "react";
+import { useCookies } from "react-cookie";
 
 interface SessionStorageTypes {
   accessToken: string;
 }
 
 const Main: React.FC = () => {
+  // 쿠키 함수
+  const [cookies] = useCookies(["refreshToken"]);
+
   return (
     <>
       <br />
@@ -17,10 +21,12 @@ const Main: React.FC = () => {
           const accessToken = loginStore && loginStore.accessToken;
           // console.log(accessToken);
 
+          // 검증 시 accessToken, refreshToken 두개다 보내서 검증함.
           await fetch("/api/tokenVerify", {
             method: "GET",
             headers: {
               authorization: `Bearer ${accessToken}`,
+              refresh: cookies.refreshToken,
               "Content-Type": "application/json",
             },
           })

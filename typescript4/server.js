@@ -54,8 +54,9 @@ app.post("/api/login", async (req, res) => {
     // access token과 refreshToken을 발급합니다.
     const accessToken = jwt.sign(user);
     const refreshToken = jwt.refresh();
-    // refreshToken은 쿠키에 저장
-    res.cookie("refreshToken", refreshToken, { maxAge: 900000, httpOnly: true });
+    // refreshToken은 쿠키에 저장 -> httpOnly를 설정하면 쿠키 확인 불가
+    // res.cookie("refreshToken", refreshToken, { maxAge: 900000, httpOnly: true });
+    res.cookie("refreshToken", refreshToken, { maxAge: 900000 });
 
     // 발급한 refresh token을 redis에 key를 user의 id로 하여 저장합니다.
     await redisClient.set(user.id, refreshToken);
