@@ -3,10 +3,12 @@ const { sign, verify, refreshVerify } = require('./jwt-util');
 const jwt = require('jsonwebtoken');
 
 const refresh = async (req, res) => {
+  console.log(req.cookies.refreshToken); // refreshToken 확인 - httpOnly가 설정된 쿠키는 클라이언트에서 읽을 수 없으니 서버에서 처리
+
   // accessToken과 refreshToken의 존재 유무를 체크합니다.
   if (req.headers.authorization && req.headers.refresh) {
     const authToken = req.headers.authorization.split('Bearer ')[1];
-    const refreshToken = req.headers.refresh;
+    const refreshToken = req.headers.refresh; // req.cookies.refreshToken로 대체가능
 
     // accessToken 검증 -> expired여야 함.
     const authResult = verify(authToken);

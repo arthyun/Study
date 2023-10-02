@@ -14,7 +14,7 @@ const refresh = require('./jwt-utils/refresh');
 /* express 의존 */
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(cookieParser());
+app.use(cookieParser()); // 보안설정된 쿠키를 읽기 위함
 // app.use(cors()); // proxy 설정을 했기에 불필요
 
 /* DB 접근 */
@@ -52,14 +52,14 @@ app.post('/api/login', async (req, res) => {
     // });
 
     /* JWT 인증 방법 */
-    // access token과 refreshToken을 발급합니다.
+    // accessToken과 refreshToken을 발급합니다.
     const accessToken = jwt.sign(user);
     const refreshToken = jwt.refresh();
-    // refreshToken은 쿠키에 저장 -> httpOnly를 설정하면 쿠키 확인 불가
-    // res.cookie("refreshToken", refreshToken, { maxAge: 900000, httpOnly: true });
-    res.cookie('refreshToken', refreshToken, { maxAge: 900000 });
+    // refreshToken은 쿠키에 저장 -> httpOnly를 설정하면 쿠키 확인 불가 -> httpOnly가 설정된 쿠키는 클라이언트에서 읽을 수 없으니 서버에서 처리
+    res.cookie('refreshToken', refreshToken, { maxAge: 900000, secure: true, httpOnly: true });
+    // res.cookie('refreshToken', refreshToken, { maxAge: 900000 });
 
-    // 발급한 refresh token을 redis에 key를 user의 id로 하여 저장합니다.
+    // 발급한 refreshToken을 redis에 key를 user의 id로 하여 저장합니다.
     await redisClient.set(user.id, refreshToken);
     return res.status(200).json({
       // client에게 토큰 모두를 반환합니다.

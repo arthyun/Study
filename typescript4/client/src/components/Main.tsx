@@ -26,12 +26,12 @@ const Main: React.FC = () => {
           const accessToken = loginStore && loginStore.accessToken;
           // console.log(accessToken);
 
-          // 검증 시 accessToken, refreshToken 두개다 보내서 검증함.
+          // 검증 시 accessToken, refreshToken 두개다 보내서 검증함. -> httpOnly가 설정된 쿠키는 클라이언트에서 읽을 수 없으니 서버에서 처리
           await fetch('/api/tokenVerify', {
             method: 'GET',
             headers: {
               authorization: `Bearer ${accessToken}`,
-              refresh: cookies.refreshToken,
+              // refresh: cookies.refreshToken,
               'Content-Type': 'application/json'
             }
           })
