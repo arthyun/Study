@@ -1,8 +1,6 @@
-const hello = () => "hi";
+import { init, exit } from 'myPackage';
 
-class Block {
-    constructor(private data: string){}
-    static hello(){
-        return "hi";
-    }
-}
+init({
+    debug: true,
+    url: 'asd',
+});
