@@ -1,17 +1,26 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
+  <img
+    alt="Vue logo"
+    src="./assets/logo.png"
+  />
   <HelloWorld msg="Welcome to Your Vue.js App" />
+  <button @click="printEnv">눌러서 환경변수 확인</button>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import HelloWorld from "./components/HelloWorld.vue";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    HelloWorld
-  }
-}
+    HelloWorld,
+  },
+  methods: {
+    printEnv() {
+      console.log(process.env.VUE_APP_USER_PASSWORD);
+    },
+  },
+};
 </script>
 
 <style>
