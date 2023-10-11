@@ -4,7 +4,10 @@
       alt="Vue logo"
       src="./assets/logo.png"
     />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
+    <HelloWorld
+      msg="Welcome to Your Vue.js App"
+      ref="helloWorldRef"
+    />
     <button @click="printEnv">axios 호출</button>
   </div>
 </template>
@@ -63,6 +66,8 @@ export default {
    */
   mounted() {
     console.log("mounted");
+    console.log(this.$refs.helloWorldRef.count1);
+    // whoAmI();
   },
 };
 </script>

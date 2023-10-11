@@ -54,6 +54,9 @@
 
 <script>
 /* eslint-disable */
+export const whoAmI = () => {
+  console.log("나야나");
+};
 
 export default {
   name: "HelloWorld",
