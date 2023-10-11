@@ -53,6 +53,8 @@
 </template>
 
 <script>
+/* eslint-disable */
+
 export default {
   name: "HelloWorld",
   props: {
@@ -98,6 +100,12 @@ export default {
       });
       console.log(arrMain);
       console.log(this.arr2);
+    },
+  },
+  watch: {
+    count2: function (newValue, oldValue) {
+      // console.log("바뀐값 =>", newValue);
+      // console.log("이전값 =>", oldValue);
     },
   },
 };
