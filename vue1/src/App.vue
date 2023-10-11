@@ -1,14 +1,28 @@
 <template>
   <div>
-    <img
-      alt="Vue logo"
-      src="./assets/logo.png"
-    />
-    <HelloWorld
-      msg="Welcome to Your Vue.js App"
-      ref="helloWorldRef"
-    />
-    <button @click="printEnv">axios 호출</button>
+    <div
+      class="black-bg"
+      v-if="modalOpen"
+    >
+      <div class="white-bg">
+        <h4>상세페이지임</h4>
+        <p>상세페이지 내용임</p>
+        <button @click="modalToggle">모달 {{ modalOpen ? "닫기" : "열기" }}</button>
+      </div>
+    </div>
+
+    <div>
+      <img
+        alt="Vue logo"
+        src="./assets/logo.png"
+      />
+      <HelloWorld
+        msg="Welcome to Your Vue.js App"
+        ref="helloWorldRef"
+      />
+      <button @click="printEnv">axios 호출</button>
+      <button @click="modalToggle">모달 {{ modalOpen ? "닫기" : "열기" }}</button>
+    </div>
   </div>
 </template>
 
@@ -29,6 +43,7 @@ export default {
     console.log("data");
     return {
       value: "",
+      modalOpen: false,
     };
   },
   components: {
@@ -39,6 +54,9 @@ export default {
       const response = await axios.get("https://jsonplaceholder.typicode.com/todos");
       const result = response.data;
       console.log(result);
+    },
+    modalToggle() {
+      this.modalOpen = !this.modalOpen;
     },
   },
   /**
@@ -80,5 +98,24 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+body {
+  margin: 0;
+}
+div {
+  box-sizing: border-box;
+}
+.black-bg {
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  padding: 20px;
+}
+.white-bg {
+  width: 100%;
+  background: white;
+  border-radius: 8px;
+  padding: 20px;
 }
 </style>
