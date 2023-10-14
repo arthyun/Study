@@ -1,10 +1,15 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 import Link from "next/link";
 import styled from "styled-components";
 import Image from "next/image";
 import styles from "../page.module.css";
+import { usePathname, useRouter } from "next/navigation";
+
+// Recoil
+import { useRecoilState } from "recoil";
+import { loginStore } from "../store/Recoil";
 
 const Nav = styled.nav`
    ul {
@@ -22,6 +27,14 @@ const Nav = styled.nav`
 `;
 
 const Sidebar = () => {
+   const [isLogin, setIsLogin] = useRecoilState<boolean>(loginStore);
+   const router = useRouter();
+
+   if (typeof window !== "undefined") {
+      const userInfo = localStorage.getItem("userInfo");
+      console.log(userInfo);
+   }
+
    return (
       <Nav>
          <ul>

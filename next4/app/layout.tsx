@@ -1,18 +1,12 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import styles from "./page.module.css";
 import React from "react";
 import "./globals.css";
 
+const inter = Inter({ subsets: ["latin"] });
+
 // library
 import Recoil from "./store/Recoil";
-import { useRecoilValue } from "recoil";
-import { loginStore } from "./store/Recoil";
-
-// components
-import Header from "./components/Header";
-
-const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
    title: "Create Next App",
@@ -20,7 +14,10 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
-   console.log(useRecoilValue(loginStore));
+   // if (typeof window !== "undefined") {
+   //    const userInfo = localStorage.getItem("userInfo");
+   //    console.log(userInfo);
+   // }
 
    return (
       <html lang="en">
@@ -30,10 +27,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             sizes="any"
          />
          <body className={inter.className}>
-            <Header />
-            <main className={styles.main}>
-               <Recoil>{children}</Recoil>
-            </main>
+            <Recoil>{children}</Recoil>
          </body>
       </html>
    );
