@@ -1,10 +1,13 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 import Link from "next/link";
 import styled from "styled-components";
 import Image from "next/image";
-import styles from "../page.module.css";
+import styles from "../../app/styles/page.module.css";
+import { useParams, usePathname, useRouter } from "next/navigation";
+import { useRecoilState } from "recoil";
+import { loginStore } from "../store/Recoil";
 
 const Nav = styled.nav`
    ul {
@@ -22,10 +25,15 @@ const Nav = styled.nav`
 `;
 
 const Sidebar = () => {
-   // if (typeof window !== "undefined") {
-   //    const userInfo = localStorage.getItem("userInfo");
-   //    console.log(userInfo);
-   // }
+   // const router = useRouter();
+   const pathname: string | null = usePathname();
+   // const [isLogin, setIsLogin] = useRecoilState<boolean>(loginStore);
+
+   // useEffect(() => {
+   //    isLogin ? router.push("/") : router.push("/login");
+   //    console.log(isLogin);
+   //    // getData();
+   // }, [isLogin]);
 
    return (
       <Nav>
@@ -41,10 +49,20 @@ const Sidebar = () => {
                />
             </Link>
             <li>
-               <Link href="/upload">Upload</Link>
+               <Link
+                  href="/upload"
+                  style={pathname === "/upload" ? { color: "orange" } : { color: "white" }}
+               >
+                  Upload
+               </Link>
             </li>
             <li>
-               <Link href="/crop">Crop</Link>
+               <Link
+                  href="/crop"
+                  style={pathname === "/crop" ? { color: "orange" } : { color: "white" }}
+               >
+                  Crop
+               </Link>
             </li>
          </ul>
       </Nav>

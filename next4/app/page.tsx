@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function Home() {
+export default async function Home() {
    return (
       <>
          <h3>HelloWorld</h3>

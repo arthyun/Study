@@ -12,6 +12,6 @@ export default function Recoil({ children }: Props) {
 }
 
 export const loginStore = atom({
-   key: "",
+   key: "loginStore",
    default: false,
 });

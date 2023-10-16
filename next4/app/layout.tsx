@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import React from "react";
-import "./globals.css";
-import styles from "./page.module.css";
+import styles from "../app/styles/page.module.css";
+import "../app/styles/globals.css";
 
 // components
 import Header from "./components/Header";
@@ -18,11 +18,6 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
-   // if (typeof window !== "undefined") {
-   //    const userInfo = localStorage.getItem("userInfo");
-   //    console.log(userInfo);
-   // }
-
    return (
       <html lang="en">
          <link
