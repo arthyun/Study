@@ -1,80 +1,105 @@
 "use client";
-import axios from "axios";
+import axios, { AxiosResponse } from "axios";
 import Image from "next/image";
-import React, { FormEvent, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 const Files = () => {
-   const [file, setFile] = useState<File[]>([]);
-   const [path, setPath] = useState<string>("");
+   const [img, setImg] = useState<Blob | null>(null);
+   const [imgToBase64, setImgToBase64] = useState<string>("");
+   const imgRef = useRef<HTMLInputElement>(null);
+   // const [imgUrl, setImgUrl] = useState<string>("");
 
-   const encodeFileToBase64 = (fileBlob: Blob): Promise<void> => {
-      const reader = new FileReader();
-      const result = reader.readAsDataURL(fileBlob);
-      // console.log(result);
-      return new Promise((resolve) => {
-         reader.onload = () => {
-            setPath(reader.result as string);
-            resolve();
-         };
-      });
-   };
-
-   const onChangeFile = async (e: React.ChangeEvent<HTMLInputElement>): Promise<void> => {
-      if (e.target && e.target.files) {
-         const selectedFiles = Array.from(e.target.files);
-         setFile(selectedFiles);
-         encodeFileToBase64(e.target.files[0]);
+   const onChangeFile = (e: React.ChangeEvent<{ files: FileList | null }>) => {
+      if (e.target.files && e.target.files.length > 0) {
+         const file = e.target.files[0];
+         setImg((_pre) => file);
       }
    };
 
-   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
-      e.preventDefault();
-      const formData = new FormData();
-      formData.append("File", file[0]);
-      try {
-         const response = await fetch("http://localhost:3000/api/getFiles", {
-            method: "POST",
+   const imgRendering = () => {
+      //window FileReader 사용
+      const reader = new window.FileReader();
+      if (img) {
+         reader.readAsDataURL(img);
+         reader.onloadend = () => {
+            const base64 = reader.result;
+            if (base64) {
+               //base64를 string으로 변환하여 state 변경
+               setImgToBase64((_pre) => base64.toString());
+            }
+         };
+         reader.onerror = () => {
+            alert("upload error!!"); //실패시
+         };
+      }
+   };
+
+   useEffect(() => {
+      //useEffect cleanup 언마운트시 실행
+      return imgRendering();
+   }, [img]); //img가 바뀔때만 실행
+
+   //미리보기 리셋
+   const imgReset = () => {
+      setImg((_pre) => null);
+      setImgToBase64((_pre) => "");
+   };
+
+   // 전송
+   const send = async () => {
+      if (imgRef.current && imgRef.current.files && imgRef.current.files.length > 0) {
+         const formData = new FormData();
+         formData.append("img", imgRef.current.files[0]);
+         formData.append("title", "title");
+         const result: AxiosResponse<{ message: string }> = await axios.post("/api/getFiles", formData, {
             headers: {
                "Content-Type": "multipart/form-data",
             },
-            body: formData,
          });
-         const result = await response.json();
          console.log(result);
-         // return Response.json(result);
-      } catch (err) {
-         console.error(err);
+         //보내고 나면 리셋
+         imgReset();
       }
    };
 
+   console.log("첨부파일: ", img);
+   console.log("첨부경로: ", imgToBase64);
+
    return (
       <>
-         <form
-            style={{ margin: "15px 0" }}
-            onSubmit={onSubmit}
-         >
-            {path !== "" && (
+         <form style={{ margin: "15px 0" }}>
+            <label
+               style={{ display: "block", margin: "15px 15px 15px 0" }}
+               htmlFor="files"
+            >
+               파일 첨부하기
+            </label>
+            <input
+               id="files"
+               type="file"
+               ref={imgRef}
+               onChange={onChangeFile}
+            />
+            <button
+               type="button"
+               onClick={imgReset}
+            >
+               삭제하기
+            </button>
+         </form>
+         {/* imgToBase64 있을때만 미리보기와 send버튼이 활성화 */}
+         {imgToBase64 && (
+            <div>
                <Image
-                  src={path}
+                  src={imgToBase64} //base64를 직접 img src로 쓸 수 있다.
                   alt="preview-img"
                   width={322}
                   height={84}
                   priority
                />
-            )}
-            <label
-               style={{ display: "block", margin: "15px 15px 15px 0" }}
-               htmlFor="files"
-            >
-               이미지 파일 첨부하기
-            </label>
-            <input
-               id="files"
-               type="file"
-               onChange={onChangeFile}
-            />
-            <button type="submit">서버로 전송</button>
-         </form>
+               <button onClick={send}>submit</button>
+            </div>
+         )}
       </>
    );
 };
