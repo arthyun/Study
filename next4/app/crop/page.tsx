@@ -1,7 +1,12 @@
 import React from "react";
+import MainCropper from "./MainCropper";
 
-const page: React.FC = () => {
-   return <h3>Crop 페이지</h3>;
+const page = () => {
+   return (
+      <div>
+         <MainCropper />
+      </div>
+   );
 };
 
 export default page;
