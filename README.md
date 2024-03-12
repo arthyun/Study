@@ -10,28 +10,16 @@
 7. React/Redux로 로그인 기능을 구현해 보았다.
 8. 영화 데이터 받아와 출력하는 App (Next.js 활용)
 9. Twitter를 모방한 Nwitter App (React, Firebase 활용)
-<<<<<<< HEAD
 10. 여럿이 접속하여 채팅할 수 있는 App (express, ws 활용)
 11. MongoDB를 ejs로 연동하여 CRUD작성
-=======
 10. Profile 등록 및 확인 App (Vite, React, MongoDB 활용)
 11. 실시간 채팅 App (Websocket, Express, React 활용)
->>>>>>> 76123c3d3c22abb509a42c1b4cd4137b2c5fb8ee
 
 - 최신 @Reduxjs/toolkit의 createSlice()를 이용하여 store 간편하게 생성.
-  - redux3 폴더 참조하여 최신문법 익히기
-  - redux persist를 사용하지않고 원초적인 redux의 값을 local에 저장하여 새로고침 에러를 막아보았다.
-
-- Next.js 강의 듣고싶다. 너무 비싸다.
-
-<<<<<<< HEAD
+  ; redux3 폴더 참조하여 최신문법 익히기
+  ; redux persist를 사용하지않고 원초적인 redux의 값을 local에 저장하여 새로고침 에러를 막아보았다.
+- Next.js 강의
 - Firebase Checked
-
 - Styled Components Checked
-
 - Materiak UI Checked
-
 - Typescript Studying...
-=======
-- React-Query와 TypeScript를 잘 쓰고 싶다...
->>>>>>> 76123c3d3c22abb509a42c1b4cd4137b2c5fb8ee
