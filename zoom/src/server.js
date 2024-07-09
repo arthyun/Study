@@ -22,17 +22,26 @@ wss.on('connection', (socket) => {
   console.log('Connected to Browser ⭕️');
 
   // 페이지 접속시 접속자 확인을 위해 접속자 순서대로 배열에 추가함
+  // 페이지 접속시 최초 접속자의 닉네임을 미지정으로 분류해둠
   sockets.push(socket);
+  socket['nickname'] = 'Unknown';
 
   // 수신 이벤트 관련 (브라우저에서 메세지 전달받을때)
   socket.on('message', (message, isBinary) => {
-    // { type: '', payload: '' } 형태로 받아서 분기처리 예정
     message = isBinary ? message : message.toString(); // 메세지가 바이너리가 아닐때 변환해서 보내주어야함
+    // 문자열 형태로 받은 값을 JSON형태로 우선 변환
+    const msgJson = JSON.parse(message);
     // 접속중인 모든 사용자가 메세지를 보낼 수 있게함 (다시 브라우저로 메세지 전달)
-    sockets.forEach((socketChildren) => {
-      // 사용자 구분을 위해 json형태로 보내자
-      socketChildren.send(message);
-    });
+    switch (msgJson.type) {
+      case 'nickname':
+        socket['nickname'] = msgJson.payload;
+        break;
+      case 'message':
+        sockets.forEach((item) => item.send(`${socket.nickname}: ${msgJson.payload}`));
+        break;
+      default:
+        break;
+    }
   });
   socket.on('close', () => {
     console.log('Disconnected from the Browser ❌');

@@ -39,7 +39,7 @@ const handleNickSubmit = (e) => {
   e.preventDefault();
   const input = nickForm.querySelector('input');
   socket.send(mageMessage('nickname', input.value));
-  input.value = ''; // 제출 후 입력란 초기화
+  // input.value = ''; // 제출 후 입력란 초기화
 };
 nickForm.addEventListener('submit', handleNickSubmit);
 
