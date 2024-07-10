@@ -1,6 +1,7 @@
 import express from 'express';
 import http from 'http';
 import { Server } from 'socket.io';
+import { instrument } from '@socket.io/admin-ui';
 // import { WebSocketServer } from 'ws';
 
 // Http
@@ -13,7 +14,15 @@ app.get('/', (req, res) => res.render('home'));
 
 // 하나의 서버에서 http와 websocket 둘다 동작하게 만들기 (같은포트 사용)
 const httpServer = http.createServer(app);
-const wsServer = new Server(httpServer); // socket.io
+const wsServer = new Server(httpServer, {
+  cors: {
+    origin: ['https://admin.socket.io'],
+    credentials: true
+  }
+}); // socket.io
+instrument(wsServer, {
+  auth: false
+});
 // const wss = new WebSocketServer({ server }); // ws
 
 // 부가 함수들
@@ -29,14 +38,19 @@ const publicRooms = () => {
   });
   return publicRooms;
 };
+// 방에 접속한 인원 크기 구하기
+const countRoom = (roomName) => {
+  const { rooms } = wsServer.sockets.adapter;
+  return rooms.get(roomName)?.size;
+};
 
 // socket.io
 wsServer.on('connection', (socket) => {
   // // 최초 연결 확인
   // console.log(socket);
 
-  // // rooms, sids 확인
-  // console.log(wsServer.sockets.adapter);
+  // // rooms, sids 확인방법
+  // console.log(wsServer.sockets.adapter.rooms);
 
   // 닉네임 감지하여 소켓에 저장
   socket.on('nickname', (nickname) => (socket['nickname'] = nickname));
@@ -51,9 +65,10 @@ wsServer.on('connection', (socket) => {
     // 입력한 이름으로 방 참가
     socket.join(roomName);
     // 전달받은 함수는 브라우저에서 실행됨 (서버는 클라이언트 코드를 실행할 수 없음 보안위배)
-    callback();
+    const rooms = wsServer.sockets.adapter.rooms; // 접속자 수 확인용
+    callback(rooms.get(roomName)?.size);
     // 방의 모든 사용자에게 메세지를 보냄 (방이름이 아닌 id를 넣어서 보내면 개인적으로 보냄)
-    socket.to(roomName).emit('welcome', socket.nickname); // 방을 생성 후 누군가가 접속해야지 내게 보인다.
+    socket.to(roomName).emit('welcome', socket.nickname, countRoom(roomName)); // 방을 생성 후 누군가가 접속해야지 내게 보인다.
     // 방 전체에 변화 알림
     wsServer.sockets.emit('room_change', publicRooms());
   });
@@ -67,7 +82,7 @@ wsServer.on('connection', (socket) => {
   // 방 떠나중일때
   // socket.leave(roomName);
   socket.on('disconnecting', () => {
-    socket.rooms.forEach((room) => socket.to(room).emit('bye', socket.nickname));
+    socket.rooms.forEach((room) => socket.to(room).emit('bye', socket.nickname, countRoom(room) - 1));
   });
 
   // 완전히 떠났을때 방 전체에 변화 알림
@@ -75,6 +90,9 @@ wsServer.on('connection', (socket) => {
     wsServer.sockets.emit('room_change', publicRooms());
   });
 });
+
+// 서버 연결 확인
+httpServer.listen(3000, () => console.log('Listening on PORT 3000..'));
 
 // // ws library
 // const sockets = []; // 접속자 확인용
@@ -112,6 +130,3 @@ wsServer.on('connection', (socket) => {
 //   // // 연결시 브라우저로 보내는 초기 값
 //   // socket.send('Welcome to WebSocket Server!!!');
 // });
-
-// 서버 연결 확인
-httpServer.listen(3000, () => console.log('Listening on PORT 3000... http/socket.io'));

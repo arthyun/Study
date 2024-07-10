@@ -55,11 +55,11 @@ const handleMessageSubmit = (e) => {
 };
 
 // 방 참가시 최초 동작 기능
-const showRoom = () => {
+const showRoom = (count) => {
   welcome.hidden = true;
   room.hidden = false;
   const h3 = room.querySelector('h3');
-  h3.innerText = `Room is ${roomName}`;
+  h3.innerText = `Room is ${roomName} (${count})`;
   // 방에 접속 후 즉시 새로운 form에 이벤트 장착
   msgInput.focus();
   msgForm.addEventListener('submit', handleMessageSubmit);
@@ -76,17 +76,33 @@ const handleRoomSubmit = (e) => {
 roomNameForm.addEventListener('submit', handleRoomSubmit);
 
 // 서버로 부터 전달받은 이벤트들 감지 (첫번째 인자에 이벤트명을 기입하여 구분)
-socket.on('welcome', (userName) => {
+socket.on('welcome', (userName, count) => {
+  const h3 = room.querySelector('h3');
+  h3.innerText = `Room is ${roomName} (${count})`;
   addMessage(`${userName} Joined!`);
 });
-socket.on('bye', (userName) => {
+socket.on('bye', (userName, count) => {
+  const h3 = room.querySelector('h3');
+  h3.innerText = `Room is ${roomName} (${count})`;
   addMessage(`${userName} left!`);
 });
 socket.on('new_message', (msg) => {
   addMessage(msg);
 });
-socket.on('room_change', (data) => {
-  console.log(data); // 방 정보 얻음
+socket.on('room_change', (rooms) => {
+  // console.log(roomData); // 방 정보 얻음
+  // 활성화된 방 이름 표시하기
+  const roomList = welcome.querySelector('ul');
+  // 방을 떠났을때
+  if (rooms.length === 0) {
+    roomList.innerHTML = '';
+    return;
+  }
+  rooms.forEach((roomName) => {
+    const li = document.createElement('li');
+    li.innerText = roomName;
+    roomList.appendChild(li);
+  });
 });
 
 // ws library 연결
