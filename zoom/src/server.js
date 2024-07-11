@@ -25,74 +25,75 @@ instrument(wsServer, {
 });
 // const wss = new WebSocketServer({ server }); // ws
 
-// 부가 함수들
-const publicRooms = () => {
-  // 공개방을 얻으려면 rooms에서 sids에 존재하지 않는 방을 추출하면됌
-  const { rooms, sids } = wsServer.sockets.adapter;
-  const publicRooms = [];
-  // Map/Set 구조 분석
-  rooms.forEach((value, key) => {
-    if (sids.get(key) === undefined) {
-      publicRooms.push(key);
-    }
-  });
-  return publicRooms;
-};
-// 방에 접속한 인원 크기 구하기
-const countRoom = (roomName) => {
-  const { rooms } = wsServer.sockets.adapter;
-  return rooms.get(roomName)?.size;
-};
-
-// socket.io
-wsServer.on('connection', (socket) => {
-  // // 최초 연결 확인
-  // console.log(socket);
-
-  // // rooms, sids 확인방법
-  // console.log(wsServer.sockets.adapter.rooms);
-
-  // 닉네임 감지하여 소켓에 저장
-  socket.on('nickname', (nickname) => (socket['nickname'] = nickname));
-
-  // 어떤 이벤트중인지 감지
-  socket.onAny((event) => {
-    console.log(`Socket Event: ${event}`);
-  });
-
-  // 전체 동작 함수
-  socket.on('enter_room', (roomName, callback) => {
-    // 입력한 이름으로 방 참가
-    socket.join(roomName);
-    // 전달받은 함수는 브라우저에서 실행됨 (서버는 클라이언트 코드를 실행할 수 없음 보안위배)
-    const rooms = wsServer.sockets.adapter.rooms; // 접속자 수 확인용
-    callback(rooms.get(roomName)?.size);
-    // 방의 모든 사용자에게 메세지를 보냄 (방이름이 아닌 id를 넣어서 보내면 개인적으로 보냄)
-    socket.to(roomName).emit('welcome', socket.nickname, countRoom(roomName)); // 방을 생성 후 누군가가 접속해야지 내게 보인다.
-    // 방 전체에 변화 알림
-    wsServer.sockets.emit('room_change', publicRooms());
-  });
-
-  // 방에서 메세지 입력시
-  socket.on('new_message', (msg, room, callback) => {
-    socket.to(room).emit('new_message', `${socket.nickname}: ${msg}`);
-    callback();
-  });
-
-  // 방 떠나중일때
-  // socket.leave(roomName);
-  socket.on('disconnecting', () => {
-    socket.rooms.forEach((room) => socket.to(room).emit('bye', socket.nickname, countRoom(room) - 1));
-  });
-
-  // 완전히 떠났을때 방 전체에 변화 알림
-  socket.on('disconnect', () => {
-    wsServer.sockets.emit('room_change', publicRooms());
-  });
-});
-
 // 서버 연결 확인
 httpServer.listen(3000, () => console.log('Listening on PORT 3000..'));
+
+// 웹소켓 마무리 (이하)
+// // 부가 함수들
+// const publicRooms = () => {
+//   // 공개방을 얻으려면 rooms에서 sids에 존재하지 않는 방을 추출하면됌
+//   const { rooms, sids } = wsServer.sockets.adapter;
+//   const publicRooms = [];
+//   // Map/Set 구조 분석
+//   rooms.forEach((value, key) => {
+//     if (sids.get(key) === undefined) {
+//       publicRooms.push(key);
+//     }
+//   });
+//   return publicRooms;
+// };
+// // 방에 접속한 인원 크기 구하기
+// const countRoom = (roomName) => {
+//   const { rooms } = wsServer.sockets.adapter;
+//   return rooms.get(roomName)?.size;
+// };
+
+// // socket.io
+// wsServer.on('connection', (socket) => {
+//   // // 최초 연결 확인
+//   // console.log(socket);
+
+//   // // rooms, sids 확인방법
+//   // console.log(wsServer.sockets.adapter.rooms);
+
+//   // 닉네임 감지하여 소켓에 저장
+//   socket.on('nickname', (nickname) => (socket['nickname'] = nickname));
+
+//   // 어떤 이벤트중인지 감지
+//   socket.onAny((event) => {
+//     console.log(`Socket Event: ${event}`);
+//   });
+
+//   // 전체 동작 함수
+//   socket.on('enter_room', (roomName, callback) => {
+//     // 입력한 이름으로 방 참가
+//     socket.join(roomName);
+//     // 전달받은 함수는 브라우저에서 실행됨 (서버는 클라이언트 코드를 실행할 수 없음 보안위배)
+//     const rooms = wsServer.sockets.adapter.rooms; // 접속자 수 확인용
+//     callback(rooms.get(roomName)?.size);
+//     // 방의 모든 사용자에게 메세지를 보냄 (방이름이 아닌 id를 넣어서 보내면 개인적으로 보냄)
+//     socket.to(roomName).emit('welcome', socket.nickname, countRoom(roomName)); // 방을 생성 후 누군가가 접속해야지 내게 보인다.
+//     // 방 전체에 변화 알림
+//     wsServer.sockets.emit('room_change', publicRooms());
+//   });
+
+//   // 방에서 메세지 입력시
+//   socket.on('new_message', (msg, room, callback) => {
+//     socket.to(room).emit('new_message', `${socket.nickname}: ${msg}`);
+//     callback();
+//   });
+
+//   // 방 떠나중일때
+//   // socket.leave(roomName);
+//   socket.on('disconnecting', () => {
+//     socket.rooms.forEach((room) => socket.to(room).emit('bye', socket.nickname, countRoom(room) - 1));
+//   });
+
+//   // 완전히 떠났을때 방 전체에 변화 알림
+//   socket.on('disconnect', () => {
+//     wsServer.sockets.emit('room_change', publicRooms());
+//   });
+// });
 
 // // ws library
 // const sockets = []; // 접속자 확인용
