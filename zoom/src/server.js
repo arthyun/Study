@@ -47,6 +47,10 @@ wsServer.on('connection', (socket) => {
   socket.on('answer', (answer, roomName) => {
     socket.to(roomName).emit('answer', answer);
   });
+  // iceCandidate를 수신하는 이벤트 (타겟은 모든방임)
+  socket.on('ice', (ice, roomName) => {
+    socket.to(roomName).emit('ice', ice);
+  });
 });
 
 // 서버 연결 확인

@@ -13,7 +13,6 @@ const call = document.getElementById('call');
 call.hidden = true; // 초기 비디오 박스 안보이게 처리
 
 let roomName; // 방이름 저장 변수
-let myPeerConnection; // RTC Connection
 
 // 방 입장 후 미디어 동작 실행
 const initCall = async () => {
@@ -37,6 +36,10 @@ welcomeForm.addEventListener('submit', handleWelcomeSubmit);
 /* Socket Code */
 // 1. A에서 동작
 socket.on('welcome', async () => {
+  // 데이터 채널 사용법 (파일 및 텍스트 주고 받을수 있음)
+  myDataChannel = myPeerConnection.createDataChannel('chat');
+  myDataChannel.addEventListener('message', console.log);
+  console.log('made data channel');
   // 1. 방 입장시 offer를 생성해줌
   const offer = await myPeerConnection.createOffer();
   // 2. offer를 가지고 연결을 생성해준다.
@@ -49,6 +52,12 @@ socket.on('welcome', async () => {
 
 // 2. B에서 동작
 socket.on('offer', async (offer) => {
+  // 데이터 채널 수신
+  myPeerConnection.addEventListener('datachannel', (event) => {
+    myDataChannel = event.channel;
+    myDataChannel.addEventListener('message', console.log);
+  });
+  console.log('received the offer');
   // 1. 상대 브라우저에서 실행 (A로 부터 받은 정보를 B가 저장하고 세팅함)
   myPeerConnection.setRemoteDescription(offer);
   // 2. 상대에게 보내줄 응답을 만들고 저장
@@ -56,18 +65,49 @@ socket.on('offer', async (offer) => {
   myPeerConnection.setLocalDescription(answer);
   // 3. 상대에게 answer를 보내줌
   socket.emit('answer', answer, roomName);
+  console.log('sent the answer');
 });
 
 // 3. 다시 A에서 동작
 socket.on('answer', (answer) => {
+  console.log('received the answer');
   // 1. 상대 브라우저에서 실행 (B로 부터 받은 정보를 A가 저장하고 세팅함)
   myPeerConnection.setRemoteDescription(answer);
 });
 
+// 4. A, B 모두 iceCandidate 수신
+socket.on('ice', (ice) => {
+  console.log('received candidate');
+  myPeerConnection.addIceCandidate(ice);
+});
+
 /* webRTC Code */
+const handleIce = (iceData) => {
+  // A, B 서로 candidate 데이터를 주고 받아야한다.
+  console.log('sent candidate');
+  socket.emit('ice', iceData.candidate, roomName);
+};
+
+const handleAddStream = (data) => {
+  console.log('got an event from my peer');
+  const peerFace = document.getElementById('peerFace');
+  peerFace.srcObject = data.stream;
+  // peerFace.srcObject = data.streams[0]; // addstream 안됄때
+};
+
 const makeConnection = () => {
   // 커넥션 생성 후 나의 비디오/오디오 정보를 담아서 보냄
+  // 기기 서로의 네트웍을 찾아서 만나게 하려면 STUN 서버 운용 필요 (동일 와이파이라면 필요없음)
   myPeerConnection = new RTCPeerConnection();
+  // {
+  // iceServers: {
+  //   urls: ['stun:stun.l.google.com:19302', 'stun:stun1.l.google.com:19302', 'stun:stun2.l.google.com:19302', 'stun:stun3.l.google.com:19302', 'stun:stun4.l.google.com:19302']
+  // }
+  //   }
+  // 커넥션 생성과 동시에 icecandidate 실행
+  myPeerConnection.addEventListener('icecandidate', handleIce);
+  myPeerConnection.addEventListener('addstream', handleAddStream);
+  // myPeerConnection.addEventListener('track', handleAddStream); // addstream 안됄때
   myStream.getTracks().forEach((track) => myPeerConnection.addTrack(track, myStream));
 };
 
@@ -75,6 +115,8 @@ const makeConnection = () => {
 let myStream;
 let muted = false;
 let cameraOff = false;
+let myPeerConnection; // RTC Connection
+let myDataChannel; // RTC DataChannel
 
 const getCameras = async () => {
   try {
@@ -153,6 +195,13 @@ const handleCameraChange = async (e) => {
   } else {
     myStream.getAudioTracks().forEach((track) => (track.enabled = true));
   }
+  // 카메라 변경을 감지하고 상대에게 새로운 스트림을 보내야할때
+  if (myPeerConnection) {
+    const videoTrack = myStream.getVideoTracks();
+    const videoSender = myPeerConnection.getSenders().find((sender) => sender.track.kind === 'video');
+    videoSender.replaceTrack(videoTrack);
+  }
+
   return await getMedia(e.target.value);
 };
 
