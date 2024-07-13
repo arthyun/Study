@@ -28,16 +28,24 @@ instrument(wsServer, {
 // webRTC
 wsServer.on('connection', (socket) => {
   // 전체 동작 함수
-  socket.on('join_room', (roomName, callback) => {
+  socket.on('join_room', (roomName) => {
     // 입력한 이름으로 방 참가
     socket.join(roomName);
+    socket.to(roomName).emit('welcome');
     // 전달받은 함수는 브라우저에서 실행됨 (서버는 클라이언트 코드를 실행할 수 없음 보안위배)
     // const rooms = wsServer.sockets.adapter.rooms; // 접속자 수 확인용
-    callback();
     // 방의 모든 사용자에게 메세지를 보냄 (방이름이 아닌 id를 넣어서 보내면 개인적으로 보냄)
-    socket.to(roomName).emit('welcome', socket.nickname, countRoom(roomName)); // 방을 생성 후 누군가가 접속해야지 내게 보인다.
+    // socket.to(roomName).emit('welcome', socket.nickname, countRoom(roomName)); // 방을 생성 후 누군가가 접속해야지 내게 보인다.
     // // 방 전체에 변화 알림
     // wsServer.sockets.emit('room_change', publicRooms());
+  });
+  // 클라이언트에서 전달받은 offer를 모든 방에 뿌려줌
+  socket.on('offer', (offer, roomName) => {
+    socket.to(roomName).emit('offer', offer);
+  });
+  // 클라이언트에서 전달받은 answer를 모든 방에 뿌려줌
+  socket.on('answer', (answer, roomName) => {
+    socket.to(roomName).emit('answer', answer);
   });
 });
 

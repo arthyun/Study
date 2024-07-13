@@ -1,7 +1,6 @@
 // socket.io 연결
 const socket = io();
 
-/* webRTC */
 // 선택자
 const myFace = document.getElementById('myFace');
 const muteBtn = document.getElementById('mute');
@@ -14,28 +13,63 @@ const call = document.getElementById('call');
 call.hidden = true; // 초기 비디오 박스 안보이게 처리
 
 let roomName; // 방이름 저장 변수
+let myPeerConnection; // RTC Connection
 
 // 방 입장 후 미디어 동작 실행
-const startMedia = async () => {
+const initCall = async () => {
   welcome.hidden = true;
   call.hidden = false;
   await getMedia();
+  makeConnection(); // peerConnection 연결부
 };
 
 // 방 입장
-const handleWelcomeSubmit = (e) => {
+const handleWelcomeSubmit = async (e) => {
   e.preventDefault();
   const input = welcomeForm.querySelector('input');
-  socket.emit('join_room', input.value, startMedia);
+  await initCall(); // 아래 socket에서 호출시 peerConnection 에러 발생
+  socket.emit('join_room', input.value);
   roomName = input.value;
   input.value = '';
 };
 welcomeForm.addEventListener('submit', handleWelcomeSubmit);
 
-/* socket.io */
-socket.on('welcome', () => {
-  console.log('someon joined');
+/* Socket Code */
+// 1. A에서 동작
+socket.on('welcome', async () => {
+  // 1. 방 입장시 offer를 생성해줌
+  const offer = await myPeerConnection.createOffer();
+  // 2. offer를 가지고 연결을 생성해준다.
+  myPeerConnection.setLocalDescription(offer);
+  console.log(offer);
+  console.log('sent the offer');
+  // 3. 만들어진 연결을 소켓을 통해 상대에게 보냄
+  socket.emit('offer', offer, roomName);
 });
+
+// 2. B에서 동작
+socket.on('offer', async (offer) => {
+  // 1. 상대 브라우저에서 실행 (A로 부터 받은 정보를 B가 저장하고 세팅함)
+  myPeerConnection.setRemoteDescription(offer);
+  // 2. 상대에게 보내줄 응답을 만들고 저장
+  const answer = await myPeerConnection.createAnswer();
+  myPeerConnection.setLocalDescription(answer);
+  // 3. 상대에게 answer를 보내줌
+  socket.emit('answer', answer, roomName);
+});
+
+// 3. 다시 A에서 동작
+socket.on('answer', (answer) => {
+  // 1. 상대 브라우저에서 실행 (B로 부터 받은 정보를 A가 저장하고 세팅함)
+  myPeerConnection.setRemoteDescription(answer);
+});
+
+/* webRTC Code */
+const makeConnection = () => {
+  // 커넥션 생성 후 나의 비디오/오디오 정보를 담아서 보냄
+  myPeerConnection = new RTCPeerConnection();
+  myStream.getTracks().forEach((track) => myPeerConnection.addTrack(track, myStream));
+};
 
 /* 카메라, 마이크 컨트롤 */
 let myStream;
