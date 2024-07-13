@@ -9,13 +9,17 @@ html(lang="en")
         header
             h1 ZOOM
         main
+            div#welcome
+                form
+                    input(type="text" placeholder="Room name", required)
+                    button Enter Room
             //- playsinline -> 모바일에서 카메라 사용시 전체화면이 안돼게 해줌
-            div#myStream
-                video#myFace(autoplay, playsinline, width="400", height='400')
-                button#mute Mute
-                button#camera Turn Camera Off
-                select#cameras
-                    option(value="device") Face Camera
+            div#call
+                div#myStream
+                    video#myFace(autoplay, playsinline, width="400", height='400')
+                    button#mute Mute
+                    button#camera Turn Camera Off
+                    select#cameras
             //- div#welcome
             //-     form#name
             //-         input(type="text" placeholder="Nick name" required)

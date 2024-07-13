@@ -1,12 +1,43 @@
 // socket.io 연결
 const socket = io();
 
-// webRTC
+/* webRTC */
+// 선택자
 const myFace = document.getElementById('myFace');
 const muteBtn = document.getElementById('mute');
 const cameraBtn = document.getElementById('camera');
 const camerasSelect = document.getElementById('cameras');
+const welcome = document.getElementById('welcome');
+const welcomeForm = welcome.querySelector('form');
+const call = document.getElementById('call');
 
+call.hidden = true; // 초기 비디오 박스 안보이게 처리
+
+let roomName; // 방이름 저장 변수
+
+// 방 입장 후 미디어 동작 실행
+const startMedia = async () => {
+  welcome.hidden = true;
+  call.hidden = false;
+  await getMedia();
+};
+
+// 방 입장
+const handleWelcomeSubmit = (e) => {
+  e.preventDefault();
+  const input = welcomeForm.querySelector('input');
+  socket.emit('join_room', input.value, startMedia);
+  roomName = input.value;
+  input.value = '';
+};
+welcomeForm.addEventListener('submit', handleWelcomeSubmit);
+
+/* socket.io */
+socket.on('welcome', () => {
+  console.log('someon joined');
+});
+
+/* 카메라, 마이크 컨트롤 */
 let myStream;
 let muted = false;
 let cameraOff = false;
@@ -16,11 +47,16 @@ const getCameras = async () => {
     // 최초 연결되어 있는 모든 기기 확인 후 비디오 기기만 추출
     const devices = await navigator.mediaDevices.enumerateDevices();
     const cameras = devices.filter((device) => device.kind === 'videoinput');
+    const currentCamera = myStream.getVideoTracks()[0]; // 현재 사용중인 카메라명 확인
     // select를 통해 연결되어 있는 다른 카메라를 선택할 수 있게함
     cameras.forEach((camera) => {
       const option = document.createElement('option');
       option.value = camera.deviceId;
       option.innerText = camera.label;
+      // select 박스에 있는 리스트중 현재 사용중인 카메라로 보여주고 싶을때
+      if (currentCamera.label === camera.label) {
+        option.selected = true;
+      }
       camerasSelect.appendChild(option);
     });
   } catch (error) {
@@ -29,22 +65,28 @@ const getCameras = async () => {
 };
 
 // 최초 실행문
-const getMedia = async () => {
+const getMedia = async (deviceId) => {
+  const initialConstrains = {
+    audio: true,
+    video: { facingMode: 'user' }
+  };
+  const cameraConstrains = {
+    audio: true,
+    video: { deviceId: { exact: deviceId } }
+  };
   try {
     // 첫번째 동작
-    myStream = await navigator.mediaDevices.getUserMedia({
-      audio: true,
-      video: true
-    });
+    myStream = await navigator.mediaDevices.getUserMedia(deviceId ? cameraConstrains : initialConstrains);
     console.log(myStream);
     myFace.srcObject = myStream;
-    // 두번째 동작
-    await getCameras();
+    // 두번째 동작 (최초 한번만 실행되게)
+    if (!deviceId) {
+      await getCameras();
+    }
   } catch (error) {
     console.log(error);
   }
 };
-getMedia();
 
 // 조건에 맞게 음소거 및 카메라 끄기/켜기
 const handleMuteClick = () => {
@@ -69,8 +111,20 @@ const handleCameraClick = () => {
     cameraOff = true;
   }
 };
+// 카메라 선택에 의한 변경 감지
+const handleCameraChange = async (e) => {
+  // 카메라가 바뀌더라도 음소거 형태 유지하기
+  if (muted) {
+    myStream.getAudioTracks().forEach((track) => (track.enabled = false));
+  } else {
+    myStream.getAudioTracks().forEach((track) => (track.enabled = true));
+  }
+  return await getMedia(e.target.value);
+};
+
 muteBtn.addEventListener('click', handleMuteClick);
 cameraBtn.addEventListener('click', handleCameraClick);
+camerasSelect.addEventListener('input', handleCameraChange);
 
 // 웹소켓 마무리 (이하)
 // // 선택자
