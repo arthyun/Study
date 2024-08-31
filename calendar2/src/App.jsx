@@ -2,38 +2,76 @@
 import { useEffect, useRef, useState } from "react";
 import styles from "./assets/styles/App.module.scss";
 import dayjs from "dayjs";
+import "dayjs/locale/ko";
 
 export default function App() {
   let now = dayjs(new Date()).locale("ko");
-  const initialCurrentDate = useRef(now);
+  const initialCurrentDate = useRef(now); // 달력 이동해도 초기 오늘일자 기억용
   const days = ["일", "월", "화", "수", "목", "금", "토"];
-
   const [today, setToday] = useState(now);
   const [currentMonth, setCurrentMonth] = useState(0); // 현재 월
   const [daysInMonth, setDaysInMonth] = useState(0); // 이번달 일수
 
+  // 이전 월
   const prevMonth = () => {
     setToday((prev) => prev.subtract(1, "month"));
   };
 
+  // 다음 월
   const nextMonth = () => {
     setToday((prev) => prev.add(1, "month"));
   };
 
+  // 일자 뿌려주기
   const printBody = () => {
-    const isInitial =
-      initialCurrentDate.current.month() + 1 === today.month() + 1;
-
     let bodys = [];
+    let emptyStartDays = [];
+    let emptyEndDays = [];
+
+    const isSame = today.isSame(initialCurrentDate.current); // 오늘날 체크용
+    const isAfter = today.isAfter(today.subtract(1, "M")); // 오늘날과 이전달이 같은지
+    const isBefore = today.isBefore(today.add(1, "M")); // 오늘날과 이전달이 같은지
+
+    // 어느 요일에 시작하고 끝나는지 찾기
+    const isStart = today.startOf("M").day(); // 이번달 시작 요일
+    const isEnd = today.endOf("M").day(); // 이번달 마지막 요일
+
+    // 시작일이 일요일이 아닐때
+    if (isStart !== 0) {
+      const beforeEndDate = today.subtract(1, "month").endOf("M").date(); // 이전달 마지막 날
+      const isStartCnt = beforeEndDate - isStart;
+      for (let i = 1; i <= isStart; i++) {
+        emptyStartDays.push(isStartCnt + i);
+      }
+      // 최종 배열 앞에 붙여주기
+      bodys = [...emptyStartDays];
+    }
+
+    // 끝나는일이 토요일이 아닐때
+    if (isEnd !== 6) {
+      const endCnt = 6 - isEnd; // 7일 => 0~6 6칸 기준 = 6 - 이번달 총일수
+      // emptyEndDays = new Array(endCnt).fill(0);
+      for (let k = 1; k <= endCnt; k++) {
+        emptyEndDays.push(k);
+      }
+    }
+
+    // 최종 뿌려주기
     for (let i = 1; i <= daysInMonth; i++) {
       bodys.push(i);
     }
-    return bodys.map((body) => {
+
+    // 최종 배열 뒤에 붙여주기
+    bodys = [...bodys, ...emptyEndDays];
+
+    return bodys.map((body, index) => {
       return (
         <p
-          key={body}
+          key={index}
           className={
-            isInitial && initialCurrentDate.current.date() === body
+            index > isStart &&
+            isSame &&
+            initialCurrentDate.current.date() === body
               ? styles.current_date
               : ""
           }
@@ -52,9 +90,6 @@ export default function App() {
   useEffect(() => {
     changeDate();
   }, [today]);
-
-  // console.log(today.day()); // 현재 요일
-  // console.log(today.date()); // 현재 일자
 
   return (
     <div className={styles.app}>
