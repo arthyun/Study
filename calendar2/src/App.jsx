@@ -1,5 +1,4 @@
-/* eslint-disable no-unused-vars */
-import { useEffect, useRef, useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import styles from "./assets/styles/App.module.scss";
 import dayjs from "dayjs";
 import "dayjs/locale/ko";
@@ -11,6 +10,24 @@ export default function App() {
   const [today, setToday] = useState(now);
   const [currentMonth, setCurrentMonth] = useState(0); // 현재 월
   const [daysInMonth, setDaysInMonth] = useState(0); // 이번달 일수
+  const [bodys, setBodys] = useState([]); // bodys 상태 추가
+  const [daysOfWeek, setDaysOfWeek] = useState([]); // 각 주의 데이터 배열
+
+  // 주차 계산
+  const selectedWeeks = (index) => {
+    // console.log(bodys);
+    switch (index) {
+      case 7:
+        return setDaysOfWeek(bodys.slice(0, index));
+      case 14:
+      case 21:
+      case 28:
+      case 35:
+        return setDaysOfWeek(bodys.slice(index - 7, index));
+      default:
+        return;
+    }
+  };
 
   // 이전 월
   const prevMonth = () => {
@@ -22,77 +39,79 @@ export default function App() {
     setToday((prev) => prev.add(1, "month"));
   };
 
-  // 일자 뿌려주기
-  const printBody = () => {
-    let bodys = [];
+  // 일자 배열 생성
+  const generateBodys = () => {
+    let bodysArray = [];
     let emptyStartDays = [];
     let emptyEndDays = [];
 
-    const isSame = today.isSame(initialCurrentDate.current); // 오늘날 체크용
-    const isAfter = today.isAfter(today.subtract(1, "M")); // 오늘날과 이전달이 같은지
-    const isBefore = today.isBefore(today.add(1, "M")); // 오늘날과 이전달이 같은지
-
-    // 어느 요일에 시작하고 끝나는지 찾기
     const isStart = today.startOf("M").day(); // 이번달 시작 요일
     const isEnd = today.endOf("M").day(); // 이번달 마지막 요일
 
-    // 시작일이 일요일이 아닐때
+    // 시작일이 일요일이 아닐 때
     if (isStart !== 0) {
       const beforeEndDate = today.subtract(1, "month").endOf("M").date(); // 이전달 마지막 날
       const isStartCnt = beforeEndDate - isStart;
       for (let i = 1; i <= isStart; i++) {
         emptyStartDays.push(isStartCnt + i);
       }
-      // 최종 배열 앞에 붙여주기
-      bodys = [...emptyStartDays];
+      bodysArray = [...emptyStartDays];
     }
 
-    // 끝나는일이 토요일이 아닐때
+    // 끝나는 일이 토요일이 아닐 때
     if (isEnd !== 6) {
-      const endCnt = 6 - isEnd; // 7일 => 0~6 6칸 기준 = 6 - 이번달 총일수
-      // emptyEndDays = new Array(endCnt).fill(0);
+      const endCnt = 6 - isEnd;
       for (let k = 1; k <= endCnt; k++) {
         emptyEndDays.push(k);
       }
     }
 
-    // 최종 뿌려주기
+    // 이번달의 날짜를 추가
     for (let i = 1; i <= daysInMonth; i++) {
-      bodys.push(i);
+      bodysArray.push(i);
     }
 
-    // 최종 배열 뒤에 붙여주기
-    bodys = [...bodys, ...emptyEndDays];
+    // 최종 배열 뒤에 빈 날 추가
+    bodysArray = [...bodysArray, ...emptyEndDays];
 
-    return bodys.map((body, index) => {
-      return (
-        <p
-          key={index}
-          className={
-            index > isStart &&
-            isSame &&
-            initialCurrentDate.current.date() === body
-              ? styles.current_date
-              : ""
-          }
-        >
-          {body}
-        </p>
-      );
-    });
-  };
-
-  const changeDate = () => {
+    // 현재 월과 일 수를 업데이트
     setCurrentMonth(today.month() + 1);
     setDaysInMonth(today.daysInMonth());
+
+    return bodysArray;
   };
 
   useEffect(() => {
-    changeDate();
-  }, [today]);
+    // bodys를 생성하여 상태로 저장
+    setBodys(generateBodys());
+    // if (bodys.length > 5) {
+    //   selectedWeeks(7);
+    // }
+  }, [currentMonth, today]);
 
   return (
     <div className={styles.app}>
+      <div className={styles.calendar_btn_group}>
+        {bodys.map((item, index) => {
+          if ((index + 1) % 7 === 0) {
+            return (
+              <span key={index} onClick={() => selectedWeeks(index + 1)}>
+                {index + 1 === 7
+                  ? 1
+                  : index + 1 === 14
+                  ? 2
+                  : index + 1 === 21
+                  ? 3
+                  : index + 1 === 28
+                  ? 4
+                  : 5}
+                주차
+              </span>
+            );
+          }
+        })}
+      </div>
+
       <div className={styles.calendar_wrap}>
         <div className={styles.calendar_header}>
           <div className={styles.calendar_date}>
@@ -110,18 +129,32 @@ export default function App() {
           </div>
         </div>
         <div className={styles.calendar_days}>
-          {days.map((days) => {
-            return (
-              <div
-                key={days}
-                className={days === "토" || days === "일" ? styles.holiday : ""}
-              >
-                {days}
-              </div>
-            );
-          })}
+          {days.map((day, i) => (
+            <div
+              key={day}
+              className={day === "토" || day === "일" ? styles.holiday : ""}
+            >
+              {day}
+              {daysOfWeek[i]}
+            </div>
+          ))}
         </div>
-        <div className={styles.calendar_body}>{printBody()}</div>
+        <div className={styles.calendar_body}>
+          {bodys.map((body, index) => (
+            <p
+              key={index}
+              className={
+                today.isSame(initialCurrentDate.current) &&
+                body === initialCurrentDate.current.date() &&
+                index < initialCurrentDate.current.endOf("M").date()
+                  ? styles.current_date
+                  : ""
+              }
+            >
+              {body}
+            </p>
+          ))}
+        </div>
       </div>
     </div>
   );
