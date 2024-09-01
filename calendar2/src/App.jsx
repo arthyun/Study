@@ -8,13 +8,13 @@ export default function App() {
   const initialCurrentDate = useRef(now); // 달력 이동해도 초기 오늘일자 기억용
   const days = ["일", "월", "화", "수", "목", "금", "토"];
   const [today, setToday] = useState(now);
-  const [currentMonth, setCurrentMonth] = useState(0); // 현재 월
-  const [daysInMonth, setDaysInMonth] = useState(0); // 이번달 일수
+  const [currentMonth, setCurrentMonth] = useState(now.month() + 1); // 현재 월
+  const [daysInMonth, setDaysInMonth] = useState(now.daysInMonth()); // 이번달 일수
   const [bodys, setBodys] = useState([]); // bodys 상태 추가
   const [daysOfWeek, setDaysOfWeek] = useState([]); // 각 주의 데이터 배열
 
   // 주차 계산
-  const selectedWeeks = (index) => {
+  const selectedWeeks = (bodys, index) => {
     // console.log(bodys);
     switch (index) {
       case 7:
@@ -32,11 +32,17 @@ export default function App() {
   // 이전 월
   const prevMonth = () => {
     setToday((prev) => prev.subtract(1, "month"));
+    // 현재 월과 일 수를 업데이트
+    setCurrentMonth(today.subtract(1, "month").month() + 1);
+    setDaysInMonth(today.subtract(1, "month").daysInMonth());
   };
 
   // 다음 월
   const nextMonth = () => {
     setToday((prev) => prev.add(1, "month"));
+    // 현재 월과 일 수를 업데이트
+    setCurrentMonth(today.add(1, "month").month() + 1);
+    setDaysInMonth(today.add(1, "month").daysInMonth());
   };
 
   // 일자 배열 생성
@@ -74,20 +80,16 @@ export default function App() {
     // 최종 배열 뒤에 빈 날 추가
     bodysArray = [...bodysArray, ...emptyEndDays];
 
-    // 현재 월과 일 수를 업데이트
-    setCurrentMonth(today.month() + 1);
-    setDaysInMonth(today.daysInMonth());
+    if (daysOfWeek.length === 0) {
+      selectedWeeks(bodysArray, 7);
+    }
 
-    return bodysArray;
+    return setBodys(bodysArray);
   };
 
   useEffect(() => {
-    // bodys를 생성하여 상태로 저장
-    setBodys(generateBodys());
-    // if (bodys.length > 5) {
-    //   selectedWeeks(7);
-    // }
-  }, [currentMonth, today]);
+    generateBodys();
+  }, [today]);
 
   return (
     <div className={styles.app}>
@@ -95,7 +97,7 @@ export default function App() {
         {bodys.map((item, index) => {
           if ((index + 1) % 7 === 0) {
             return (
-              <span key={index} onClick={() => selectedWeeks(index + 1)}>
+              <span key={index} onClick={() => selectedWeeks(bodys, index + 1)}>
                 {index + 1 === 7
                   ? 1
                   : index + 1 === 14
@@ -134,8 +136,7 @@ export default function App() {
               key={day}
               className={day === "토" || day === "일" ? styles.holiday : ""}
             >
-              {day}
-              {daysOfWeek[i]}
+              {daysOfWeek[i]}&nbsp;({day})
             </div>
           ))}
         </div>
